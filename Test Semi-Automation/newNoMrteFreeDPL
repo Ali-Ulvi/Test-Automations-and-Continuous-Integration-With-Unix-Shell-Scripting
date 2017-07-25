@@ -1,0 +1,26 @@
+#! /usr/bin/bash
+
+#AUT Productions
+#produce Number
+
+ 
+msisdn0=$(cat nom |head -1)
+msisdn=$(expr $msisdn0 + 1)
+echo $msisdn > nom
+msisdn=0$msisdn
+
+
+ 
+echo trying to install the number 
+if [[ -z "$1" ]]
+then
+gold_operation_handler install $msisdn TP_00149 2>&1|grep ERROR && gold_operation_handler install $msisdn TP_00149 2>&1|grep ERROR && gold_operation_handler install $msisdn TP_00149 2>&1|grep ERROR && exit
+else
+gold_operation_handler install $msisdn TP_00$1 2>&1|grep ERROR && gold_operation_handler install $msisdn TP_00$1 2>&1|grep ERROR && gold_operation_handler install $msisdn TP_00$1 2>&1|grep ERROR && exit
+fi
+	echo $msisdn
+  
+ 
+ 
+ 
+

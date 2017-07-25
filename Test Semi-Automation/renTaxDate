@@ -1,0 +1,113 @@
+#! /usr/bin/bash
+ 
+ 
+cleanup()
+# example cleanup function
+{
+echo " ctrl+c?"
+
+   for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+rm pid.${sec}
+sleep 3
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+msisdn=$1
+gun=$2
+price=$3
+AVEA_DIR=$ORGADATA/avea
+if [[ $# -ne 2&&$# -ne 3 ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN yenilemeGunu yenilemeUcreti "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 08 1.49"
+
+	exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+#ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)         
+aid=$(msisdn_to_accountid $msisdn )
+ropName=PP_Tax_99901
+
+echo "AccountID:"$aid
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+#echo "#d    $   = :AccountID '$aid'  " | idbm_adb -s CreTrigger
+#echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+
+	kalanPara1=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g|perl -nl -MPOSIX -e 'print ceil($_);') 
+   
+ sec=$(date +%Y%m%d%H%M%S)
+ bundleid=$(grep $ropName $ORGADATA/cnf/cre/config_19700101000000.xml|  grep -oP "(?<=<bundle id=\")[^\"]+"   )
+ echo bundleid:$bundleid #490 
+ ruleid=$(echo "#s  :RuleID $  and = :AccountID '$aid' = :BundleID '$bundleid'   " | idbm_adb -s CreTrigger|grep -v END|sed s/\'//g)
+echo ruleid:$ruleid 
+
+ 
+#eksikUcret=$(echo  "$price-0.0001"|bc -l) 
+later=$(mu_date -31)"000000"
+
+
+	
+ 	echo -e "******----------------RENEW TEST EDILIYO--------------------******${NC}"
+	#echo -e "${red}******--------------------------------------------------------------******${NC}"
+ today_isodate=$(ots_date -S `date +%'Y'%'m'%'d'000000` +31d)
+  echo "SMS OHPQ'lar tail'lendi"
+ 
+  gece=`date +%'Y'%'m'%'d'000000`
+
+  echo -e "${red2}cre_batch kosuluyor"
+#$ORGAROOT/run/bin/cre_batch -e $today_isodate -r 70,$ruleid  -DID BAT.manually  -a $aid > /dev/null 2>&1
+
+today_isodate=$(ots_date -S `date +%'Y'%'m'${gun}000000` +1m )
+echo $today_isodate
+echo press enter to cont
+read a
+# cre_batch -e $today_isodate -DID BAT.manually
+#sudashi stayl:
+cre_batch  -D -e $today_isodate -W 300 -a $aid
+ sleep 3
+ 	 echo kalan:
+	echo $kalanPara
+	
+	kalanPara=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g|perl -nl -MPOSIX -e 'print ceil($_);') 
+ 
+if [[ $kalanPara -ne `expr $kalanPara1 - $price` ]]
+then
+	echo -e "\e[7m Kayit ucreti yanlis.  ${NC}"
+	 echo kalan:
+	echo $kalanPara
+fi
+
+mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+if [[ $mrteid -eq 2 ]] 
+    then 
+	ssh mrte1@localhost "source .profile;subsquery $msisdn b || subsquery $msisdn b"   
+	else
+	subsquery $msisdn b || subsquery $msisdn b
+	
+fi 
+echo "#s :ID :Value :Start :End  $ and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance
+
+
+

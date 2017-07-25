@@ -1,0 +1,153 @@
+#! /usr/bin/bash
+ 
+ #All rights reserved AUT Productions
+msisdn=$1
+bonusID=$2
+ testBilgi="$0 $@"
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+  echo -en Merhaba\\n\\n $1 '\n\nIyi Calismalar\n\nAUT\nKafein CI Solutions\n\n' > tmp$msisdn
+
+cat output$msisdn >> tmp$msisdn
+ scp tmp$msisdn mrte1@10.248.68.122:/tmp
+ ssh mrte1@10.248.68.122 "source .profile; cat /tmp/tmp$msisdn| mailx -s \"$testBilgi $(cat .servisIDler$msisdn.txt|grep [0-9]|egrep -v '^#' |xargs echo)\" $EMAIL_LIST"
+#ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+if [[ $# -ne 2  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullan?m: $0 MSISDN bonusID   "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05019144950 2537"
+    doMail "illegal number of parameters Kullanim: $0 MSISDN bonusID" 
+	exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+     
+	 
+	 sec=$(date +%Y%m%d%H%M%S)
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+bonusName=$(  grep -oP "BLB_.*0${bonusID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "bonusName:"$bonusName
+
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+
+ sleep 3
+  sec2=$(date +%Y%m%d%H%M%S)
+
+  sleep 3
+  sec3=$(date +%Y%m%d%H%M%S)
+echo gold_operation_handler bonus $msisdn $bonusName 1234.0 $sec $sec3
+gold_operation_handler bonus $msisdn $bonusName 1234.0 $sec $sec3
+#echo "#u  :End $ and  = :AccountID '$aid' = :Value '1234' &  '$sec' " | idbm_adb -s CreBalance  
+    echo "#u  :LastThrCheck $      = :AccountID '$aid'   &  '$sec2' "
+ echo "#u  :LastThrCheck $      = :AccountID '$aid'   &  '$sec2' " | idbm_adb -s CreAccount
+echo $sec $sec2 $sec3
+
+echo LastThrCheck:
+echo "#s  :LastThrCheck $ = :AccountID '$aid'  " | idbm_adb -s CreAccount
+#OUPMclient -Ds -M THR.check 
+ 
+# rte_showdb -l $aid
+
+#tail -f -n 0 /rte/orgadata/mrte?/OHPQ/*dpi*/data.*&
+#	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/*dpi*/data.* > dpiOHPQHarvest&
+	echo $! >> pid.$sec
+	sleep 2
+	echo $ORGAROOT/si/scripts/gcp.pl -w -n BAL.rmn -e $(date +%Y%m%d%H%M%S) 
+chmod +x $ORGAROOT/si/scripts/gcp.pl
+	$ORGAROOT/si/scripts/gcp.pl -w -n BAL.rmn -e $(date +%Y%m%d%H%M%S)  > gcp.pl.output.txt 2>&1
+
+checkBGB_DATA() {
+    bns=$1
+	r=$(/usr/bin/python checkBGB_DATA.py $bns |tail -1)
+	if [[ "$r" != "Balance is there" ]];then
+		echo "CRE-Config.xml'deki BGB_DATA_ALL'a $bns Eklenmemis !!!"
+		doMail "CRE-Config.xml'deki BGB_DATA_ALL'a $bns Eklenmemis !!!"
+	fi
+}
+
+checkPocr() {
+    bns=$1
+	r=$(/usr/bin/python ./checkPocr.py $bns |tail -1)
+	echo $r
+	if [[ "$r" != "efd_config.xml matched idx_pocr.xsl matched" ]];then
+		
+		echo "pocr'a $bns Eklenmemis !!!"
+		doMail "pocr'a $bns Eklenmemis !!!"
+	fi
+}
+
+#checkBGB_DATA $bonusName  iptal oldu galiba bu pls ask sol
+echo checkPocr $bonusName
+checkPocr $bonusName
+
+ echo sleep30sec
+ sleep 30
+ echo  " Sleeping 30 seconds Finished "
+
+	for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+ bonusID=$(printf "%05d\n" $bonusID) 
+ rm pid.$sec
+ echo
+ echo -e "$red2 GREP RESULT:"
+ echo
+egrep '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId>(<ns1:GUID/>|<ns1:GUID>.*</ns1:GUID>)</ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>P'RE_9${msisdn}_B_${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>' dpiOHPQHarvest
+ 
+ echo
+ 
+
+
+ if [[ $(egrep '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId>(<ns1:GUID/>|<ns1:GUID>.*</ns1:GUID>)</ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>P'RE_9${msisdn}_B_${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>' dpiOHPQHarvest|wc -l) -eq 0  ]] 
+    then 
+	echo -e "$red2 DPI FAIL!!!!!!!!!!!!!!!!"
+	echo -e "OHPQ record not found$NC"
+	echo 'Beklenen: <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId>(<ns1:GUID/>|<ns1:GUID>.*</ns1:GUID>)</ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>P'RE_9${msisdn}_B_${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>' 
+    doMail "DPI OHPQ record not found.${bonusID} bonus expire oldugunda DPI trm istegi atilmali."
+else 
+ echo "Mission is ***SUCCESS***"
+fi
+
+echo
+cre=$ORGADATA/cnf/cre/config_19700101000000.xml
+if [ $(egrep  '<threshold allow_negative="no" balances="'$bonusName'" (class="BAS" )?id="[0-9]+''" (intermediate="yes" )?name="TH_'$bonusName'" relative_levels="no">' $cre |wc -l) -ne 1 ] ;then
+	echo "<threshold not Found: TH_$bonusName !!"
+	doMail "<threshold not Found: TH_$bonusName !!"
+fi
+checkThrBns() {
+    thr=$1
+	bns=$2
+	r=$(/usr/bin/python /tmp/ulvi/checkThrBns.py $thr $bns $cre|tail -1)
+	if [[ "$r" != "found" ]];then
+		echo "$bns not Found in <threshold name=$thr !!!"
+		doMail "$bns not Found in <threshold name=$thr !!!"
+	fi
+}
+checkThrBns TH_BLB_DATA_ALL $bonusName
+echo bonus is assumed as normal data bonus. not social.
+checkThrBns TH_DATA_ALL_NPM_WITHOUT_SOCIAL_MEDIA $bonusName
+checkThrBns TH_DATA_ALL_NPM $bonusName
+echo -e $NC
+ 
+

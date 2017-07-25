@@ -1,0 +1,23 @@
+#! /usr/bin/bash
+
+msisdn=$1
+aid=$(msisdn_to_accountid $msisdn )
+ortam=ayni
+if [[ $(echo $aid|grep ERR|wc -l) = 1 ]]
+then
+ortam=farkli
+aid=$(ssh mrte2@localhost "source .profile 2>&1;msisdn_to_accountid $msisdn")
+fi
+if [[ "$2" = c ]]
+then
+echo cleaning prev_index
+rm .prev_ohpqs
+fi
+rm ohpqChanges.txt
+$ORGADATA/avea/work/Utilities/get_ohpq_diff/get_ohpq_diff.py . "$msisdn|$aid" 2>&1 > aa.$(whoami)
+ vim +'set foldmethod=indent' aa.$(whoami) <<END
+:wq! ohpqChanges.txt
+END
+chmod 777 ohpqChanges.txt
+mv ohpqChanges.txt ohpqChanges.$(whoami).$msisdn.txt
+ls -lrt |tail

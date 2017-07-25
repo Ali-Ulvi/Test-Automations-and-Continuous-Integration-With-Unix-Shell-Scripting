@@ -1,0 +1,6 @@
+#### sim_comlayer -f MOSMS_1 -D #########################
+InitClient reg_ngcp_data_01@/rte/orgadata/mrte1/cnf/shared/CommunicationParameters.cfg
+SendFile /tmp/ulvi/call_simulation/gprs.req.start
+WaitFile /tmp/ulvi/call_simulation/gprs.rsp.start
+SendFile /tmp/ulvi/call_simulation/gprs.req.end
+WaitFile /tmp/ulvi/call_simulation/gprs.rsp.end

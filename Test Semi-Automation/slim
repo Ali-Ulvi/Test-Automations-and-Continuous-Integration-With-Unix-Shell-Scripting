@@ -1,0 +1,15 @@
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+
+

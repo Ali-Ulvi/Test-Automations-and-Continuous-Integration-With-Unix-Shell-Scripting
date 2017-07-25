@@ -1,0 +1,61 @@
+OUPMclient -K EFD.cbf_?? USR2
+OUPMclient -K EFD.pohs USR2
+OUPMclient -K EFD.subs USR2
+OUPMclient -K EFD.ncg USR2
+OUPMclient -K EFD.npm USR2
+OUPMclient -K PEG.brf_0? USR2
+OUPMclient -K NCG.01 USR2
+OUPMclient -K EFD.outn USR2
+OUPMclient -K REG.ngcp_data_01 USR2
+sleep 15
+OUPMclient -K REG.ngcp_data_02 USR2
+sleep 15
+OUPMclient -K REG.ngcp_data_03 USR2
+sleep 15
+OUPMclient -K REG.ngcp_data_04 USR2
+sleep 15
+OUPMclient -K REG.ngcp_data_05 USR2
+sleep 15
+OUPMclient -K REG.ngcp_data_06 USR2
+sleep 15
+OUPMclient -K REG.ngcp_data_07 USR2
+sleep 15
+OUPMclient -K REG.ngcp_data_08 USR2
+sleep 15
+OUPMclient -K REG.ngcp_data_09 USR2
+sleep 15
+
+OUPMclient -K EFD.cre_01 USR2
+OUPMclient -K EFD.cre_02 USR2
+OUPMclient -K EFD.cre_03 USR2
+OUPMclient -K EFD.cre_04 USR2
+OUPMclient -K EFD.cre_05 USR2
+OUPMclient -K EFD.cre_06 USR2
+OUPMclient -K EFD.cre_07 USR2
+OUPMclient -K EFD.cre_08 USR2
+OUPMclient -K EFD.cre_09 USR2
+OUPMclient -K EFD.cre_10 USR2
+
+OUPMclient -K EFD.sms_01 USR2
+OUPMclient -K EFD.sms_02 USR2
+OUPMclient -K EFD.sms_03 USR2
+OUPMclient -K EFD.sms_04 USR2
+OUPMclient -K EFD.sms_05 USR2
+OUPMclient -K EFD.sms_06 USR2
+OUPMclient -K EFD.sms_07 USR2
+OUPMclient -K EFD.sms_08 USR2
+OUPMclient -K EFD.sms_09 USR2
+OUPMclient -K EFD.sms_10 USR2
+
+OUPMclient -K EFD.eocn_01 USR2
+OUPMclient -K EFD.eocn_02 USR2
+OUPMclient -K EFD.eocn_03 USR2
+OUPMclient -K EFD.eocn_04 USR2
+OUPMclient -K EFD.eocn_05 USR2
+OUPMclient -K EFD.eocn_06 USR2
+OUPMclient -K EFD.eocn_07 USR2
+OUPMclient -K EFD.eocn_08 USR2
+OUPMclient -K EFD.eocn_09 USR2
+OUPMclient -K EFD.eocn_10 USR2
+
+echo restart komutlari kosuldu. Logda restartin hata almadigina bakiniz.

@@ -1,0 +1,182 @@
+#! /usr/bin/bash
+
+#AUT Solutions
+#produce Numbers till one exists in the same mrte with the script
+
+tarif=$1
+ENDPOINT="http://10.248.68.129:10003/installSubscription"
+install()
+# run to install subscriber via SOAP
+{
+curl --silent \
+     --data \
+     @- \
+     --header 'Content-Type: application/soap+xml; charset=utf-8' \
+     --user-agent "" \
+     ${ENDPOINT} <<EOF | xmllint --format -
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avea="http://oslee.orga.com/bsg/ra/ws/avea">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<avea:InstallSubscriptionRequest>
+			<MiddlewareTransactionId>MidTrans_2811017355555555555555555555539</MiddlewareTransactionId>
+			<opChannel>BPL_WLI</opChannel>
+			<IMSI>2856${VALUE}</IMSI>
+			<MSISDN>${VALUE}</MSISDN>
+			<amount>9999999</amount>
+			<language>tr</language>
+			<operator>ISTIM</operator>
+			<tariffPlanName>$1</tariffPlanName>
+			<PackagesName>PP_NWS_3G_00005</PackagesName>
+			<attributesValue>
+				<entry>
+					<key>ICCID</key>
+					<value>
+						<valueString>859028603${VALUE}</valueString>
+					</value>
+				</entry>
+				<entry>
+					<key>PIN</key>
+					<value>
+						<valueString>1234</valueString>
+					</value>
+				</entry>
+				<entry>
+					<key>PUK</key>
+					<value>
+						<valueString>12345678</valueString>
+					</value>
+				</entry>
+				<entry>
+					<key>PIN2</key>
+					<value>
+						<valueString>4321</valueString>
+					</value>
+				</entry>
+				<entry>
+					<key>PUK2</key>
+					<value>
+						<valueString>87654321</valueString>
+					</value>
+				</entry>
+				<entry>
+					<key>NOTIFICATION_SMS</key>
+					<value>
+						<boolean>true</boolean>
+					</value>
+				</entry>
+				<entry>
+					<key>NOTIFICATION_EOCN</key>
+					<value>
+						<boolean>true</boolean>
+					</value>
+				</entry>
+				<entry>
+					<key>IS_DISABLED</key>
+					<value>
+						<integer>0</integer>
+					</value>
+				</entry>
+				<entry>
+					<key>IS_MNP</key>
+					<value>
+						<boolean>false</boolean>
+					</value>
+				</entry>
+				<entry>
+					<key>IS_POST2PRE</key>
+					<value>
+						<boolean>false</boolean>
+					</value>
+				</entry>
+				<entry>
+					<key>IS_RESTORED</key>
+					<value>
+						<boolean>false</boolean>
+					</value>
+				</entry>
+				<entry>
+					<key>NUM_CHANGES_MSISDN</key>
+					<value>
+						<integer>0</integer>
+					</value>
+				</entry>
+				<entry>
+					<key>IS_DATA_ALLOWED</key>
+					<value>
+						<integer>3</integer>
+					</value>
+				</entry>
+				<entry>
+					<key>NUM_CHANGES_TARIFF</key>
+					<value>
+						<integer>0</integer>
+					</value>
+				</entry>
+				<entry>
+					<key>USAGE_TAX</key>
+					<value>
+						<integer>0</integer>
+					</value>
+				</entry>
+				<entry>
+					<key>INITIAL_TAX</key>
+					<value>
+						<integer>0</integer>
+					</value>
+				</entry>
+				<entry>
+					<key>SPECIAL_TAX</key>
+					<value>
+						<integer>0</integer>
+					</value>
+				</entry>
+			</attributesValue>
+			<accountNumber>${VALUE}</accountNumber>
+		</avea:InstallSubscriptionRequest>
+	</soapenv:Body>
+</soapenv:Envelope>
+EOF
+}
+
+
+if [ -z "${1}" ]; then
+    echo $0:	TARIFEYI VERINIZ ORNEK:TP_00147
+	exit
+fi
+
+while true; do 
+msisdn0=$(cat /tmp/CI/no |head -1)
+msisdn=$(expr $msisdn0 + 1)
+echo $msisdn > /tmp/CI/no
+msisdn=0$msisdn
+VALUE=$msisdn #replica alias
+
+gold_operation_handler terminate $msisdn 2  2>&1|grep ERROR # || sleep 3
+
+install $tarif
+
+aid=$(msisdn_to_accountid $msisdn )
+
+if [[ $(echo $aid|grep ERR|wc -l) = 1 ]]
+then
+     
+    echo trying again
+else
+	sleep 1
+	if [[ "$tarif" != "TP_00147" ]]
+	then
+	gold_operation_handler reload $msisdn 9999999
+		sleep 6
+	 gold_operation_handler package $msisdn  PP_NWS_ROAM_00003 ACT
+	sleep 2
+	fi
+	echo $msisdn
+    exit #!!!!!!!
+ 
+fi
+done
+
+
+
+
+

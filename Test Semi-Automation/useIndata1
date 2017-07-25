@@ -1,0 +1,87 @@
+#! /usr/bin/bash
+  
+ #Copyright: AUT Productions
+msisdn=$1
+vol=$2
+other=$3
+ 
+  
+	 
+cleanup()
+# example cleanup function
+{
+echo " ctrl+c?"
+echo
+
+  egrep "$aid|$msisdn|MCPCDR-$cnt" /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*/data*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0*/data* |grep "<CallDuration>$vol</CallDuration>"|grep "<OtherParty>$other</OtherParty>"|grep "<ServedParty>$msisdn</ServedParty>"|tail -1 > ind 
+  
+    /usr/local/bin/grep -o '<ServedParty>[^\s]*</ServedParty>'  ind
+
+ 
+   /usr/local/bin/grep -o '<OtherParty>[^\s]*</OtherParty>'  ind
+      /usr/local/bin/grep -o '<CallDuration>[^\s]*</CallDuration>'  ind
+	   /usr/local/bin/grep -o '<duration>[^\s]*</duration><allowed>[^\s]*</allowed>'  ind
+	   
+	         /usr/local/bin/grep -o '"charge"/><start>[^\s]*</start>'  ind
+	   /usr/local/bin/grep -o 'delta_source="[0-9.]*"'  ind
+	   echo Bunlarin toplami kadar ucretlendi:
+	   echo -e '\e[1;35m'
+	 /usr/local/bin/grep -o 'charged_target="[0-9.]*" code="[^\s]*"'  ind
+	  echo -e '\e[0m'
+
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+
+if [[ $# -ne 3 && $# -ne 4  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN  saniye digerNo [-s] "
+	echo "-s means silent and returning back to caller"
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05019144950 60  08888121341"
+
+	exit
+fi
+
+
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+sec=$(date +%Y%m%d%H%M%S)
+cnt=$(cat /tmp/ulvi/counterindata)
+aid=$(msisdn_to_accountid $msisdn )
+ sed "s|05030124017|$msisdn|" /tmp/ulvi/cdr/MCPCDR-2802,1411974557_19745_1697091.cdr.11880indata1   > tmpdata2
+sed "s|DURATION|$vol|" tmpdata2 > tmp2
+sed "s|11880|$other|" tmp2 > tmp3
+sed "s|START|$sec|" tmp3 > $ORGADATA/peg/brf_01/ready/DATA/MCPCDR-${cnt},1411974557_19745_1697091.cdr
+rm tmpdata2 tmp2 tmp3
+cnt=$(expr $cnt + 1)
+echo $cnt > /tmp/ulvi/counterindata
+
+if [[ $# -ne 4    ]] 
+    then 
+	find $ORGADATA/log/ /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0* | egrep 'RTE0|data.0' | egrep -v 'CRELOG|logger|gz'  | xargs tail -f -n 0 | egrep "$aid|$msisdn|MCPCDR-$cnt" 
+	#dead area
+	sleep 120
+	 egrep "$aid|$msisdn|MCPCDR-$cnt" /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*/data*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0*/data* |grep $3|grep $2|tail -1 > ind 
+	 /usr/local/bin/grep -oP 'delta_target="[0-9.]*"'  ind
+	#grep -o 'delta_target=".*"' logindata1
+	
+fi
+
+	 
+

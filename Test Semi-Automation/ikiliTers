@@ -1,0 +1,22 @@
+#! /usr/bin/bash
+  
+
+msisdn=$1
+
+if [[ $# -ne 1   ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN "
+	
+	echo "$0 05019144950 "
+
+	exit
+fi
+
+
+msisdn1=$(echo $msisdn|sed "s|\(.\)\(.\)\(.\)\(.\)\(.\)\(.\)\(.\)\(.\)\(.\)\(.\)\(.\)|\2\1\4\3\6\5\8\7|g")
+msisdn2=$(echo $msisdn| sed 's/\(.*\)\(.\)\(.\)\(.\)/\3\2F\4/')
+echo $msisdn1$msisdn2
+
+	 
+

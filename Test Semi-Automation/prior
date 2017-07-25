@@ -1,0 +1,49 @@
+#! /usr/bin/bash
+  
+msisdn=$1
+serviceID=$2
+ 
+AVEA_DIR=$ORGADATA/avea
+if [[ $# -ne 2 ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN serviceID   "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 650"
+	 
+ 
+	exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)   
+bundleid=$(grep $ropName $ORGADATA/cnf/cre/config_19700101000000.xml|  grep -oP "(?<=<bundle id=\")[^\"]+"   )
+echo bundleid:$bundleid    
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+echo "#d   $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+
+
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+
+gold_operation_handler package $msisdn $ropName  INACT   > /dev/null 2>&1
+gold_operation_handler package $msisdn $ropName  ACT   2>&1 |grep ERROR
+
+tonight=$(mu_date -1)"000000"
+
+
+echo "#u  :NextTriggerDate $  and = :AccountID '$aid' = :BundleID '$bundleid' & '$tonight' " | idbm_adb -s CreTrigger
+ 
+ sec=$(date +%Y%m%d%H%M%S)
+ 
+echo "pls check bonus priorities (90 for SMS all_dest)"
+echo
+for bonus in `echo "#s :ID   $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance|grep -v END| sed "s/'//g" |sort|uniq`
+do
+	grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX
+done
+ 

@@ -1,0 +1,16 @@
+<input>
+	<id>192.168.3.172;18057464;11200922352235</id>
+	<requestId>41da322c-2d98-4cb5-93f7-ce1125cb511a:11200922352235</requestId>
+	<operation type="charge" />
+	<reservation type="start" />
+	<account ton="int" npi="isdn">ANUM</account>
+	<start>CALLSTART</start>
+	<event_data origin_id="scp">
+		<trafficCase type="mtc" />
+		<teleServiceCode type="voi" />
+		<location>
+			<vlr ton="int" npi="nsidn">LAC_E164:90551111111</vlr>
+		</location>
+		<otherParty ton="nat" npi="isdn">BNUM</otherParty>
+	</event_data>
+</input>

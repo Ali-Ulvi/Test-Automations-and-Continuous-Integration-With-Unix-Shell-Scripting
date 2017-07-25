@@ -1,0 +1,151 @@
+#! /usr/bin/bash
+
+# ci layer by AUT C8H10N4O2 
+ 
+msisdn=$1
+ilkMsisdn=$1
+work_dir=/tmp/CI
+cd $work_dir
+
+testBilgi="$0 $@"
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+  echo -en Merhaba\\n\\n $1 '\n\nIyi Calismalar\n\nAUT\nKafein CI Solutions\n\n' > tmp$ilkMsisdn
+
+cat output$ilkMsisdn|egrep -v '^\*' >> tmp$ilkMsisdn
+ scp tmp$ilkMsisdn mrte1@10.248.68.122:/tmp
+ ssh mrte1@10.248.68.122 "source .profile; cat /tmp/tmp$ilkMsisdn| mailx -s \"$testBilgi $(cat servisID_Fiyat.txt|grep [0-9]|egrep -v '^#' |xargs echo)\" $EMAIL_LIST"
+#ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+grep [0-9] servisID_Fiyat.txt|egrep -v '^#' > .servisIDler.txt
+
+grep '[a-zA-Z]' yenilemeSMSleri.txt |egrep -v '^#' >.yenilemeSMSleri.txt
+#smslerin bas ve sonlarinda fazla bosluk varsa silinir. bu muhtemelen testerin visiodan kopyalama hatasidir.:
+sed 's/^ //' .yenilemeSMSleri.txt|sed 's/ $//'   > tmp
+#cp tmp .yenilemeSMSleri.txt
+sed "s|30 gun boyunca|<TARIH> saat <SAAT>'a kadar|g" tmp > .yenilemeSMSleri.txt
+
+if [[ $(wc -l .servisIDler.txt |awk '{print $1}') -gt 10 ]]
+then
+echo ayni anda en fazla 10 servis test edilebiliyor.
+doMail "ayni anda en fazla 10 servis test edilebiliyor. inputta verilen:$(wc -l .servisIDler.txt |awk '{print $1}')  TESTE BASLANAMADI."
+exit 1
+fi
+
+if [[ $(( $(wc -l .servisIDler.txt |awk '{print $1}') * 4 )) -ne $(wc -l .yenilemeSMSleri.txt |awk '{print $1}') ]]
+then
+echo input sayilari tutmadi. exiting.
+doMail "yenilemeSMSleri.txt dosyasindaki sms sayisi servisID_Fiyat.txt dosyasindaki servis sayisinin 4 kati olmalý. $(( $(wc -l .servisIDler.txt |awk '{print $1}') * 4 )) -ne $(wc -l .yenilemeSMSleri.txt |awk '{print $1}') TESTE BASLANAMADI."
+exit 1
+fi
+
+
+
+if [[ $(egrep 'ð|ü|ý|þ|ç|ö|Ö|Ç|Þ|Ý|Ð|Ü|’' .yenilemeSMSleri.txt|wc -l) -ne 0 ]]
+then
+echo Turkce Karakterli veya ters tirnak isaretli  satirlar:
+egrep 'ð|ü|ý|þ|ç|ö|Ö|Ç|Þ|Ý|Ð|Ü|’' .yenilemeSMSleri.txt
+echo
+echo yenilemeSMSleri.txt de Turkce karakterler veya ters tirnak isareti var. Bunlar ingilizce karsiliklariyla degistiriliyor.
+doMail "yenilemeSMSleri.txt de Turkce karakterler veya ters tirnak isareti var. Bunlar ingilizce veya normal kesme isareti karsiliklariyla otomatik degistiriliyor. Developer da ayni seyi yapmamissa metinler eslesmeyeceginden scriptten hata mailleri gelecektir. sms9333 Turkce ve UTF-8 desteklemediginden Turkce karakter vs. kullanilmamali."
+fi 
+
+cat .yenilemeSMSleri.txt| tr 'ðüýþçöÖÇÞÝÐÜ’' "guiscoocsigu'" > tmp$msisdn
+mv tmp$msisdn .yenilemeSMSleri.txt
+
+split -l 4 -d .yenilemeSMSleri.txt yenilemeSMSleri_
+filecnt=0
+while read serviceid_fiyat
+do
+serviceid=$(echo "$serviceid_fiyat"|awk '{print $1}')
+fiyat=$(echo "$serviceid_fiyat"|awk '{print $2}')
+counter=0
+if [ ! -z "$fiyat" ]
+then
+
+	while read sms
+	do
+		if [ ! -z "$sms" ]
+		then
+		
+			if [[ $(( $counter % 4 )) -eq 3 ]]
+			then
+			
+				sms29gunSonra=$sms
+				#changing msisdn due to smsdelay WA bugs
+				msisdn1=$(./newNo |tail -1)
+				echo $msisdn1|grep ERROR || msisdn=$msisdn1 || echo could not create msisdn. using the old one
+				
+				#first i check renFail and trm due to Orga deep defects
+				echo sleep 5
+				sleep 5
+				echo '***-------------------------------------***----------------------------------------***'
+				echo ./renFail $msisdn $serviceid $fiyat "$smsRenewFail"   2>&1 |tee -a output$msisdn
+				./renFail $msisdn $serviceid  $fiyat "$smsRenewFail" 2>&1 |tee -a output$msisdn
+								echo sleep 5
+				sleep 5
+				echo '***-------------------------------------***----------------------------------------***'
+				echo ./trm $msisdn $serviceid "$sms29gunSonra"   2>&1 |tee -a output$msisdn
+				./trm $msisdn $serviceid "$sms29gunSonra" 2>&1 |tee -a output$msisdn
+				
+				echo '***-------------------------------------***----------------------------------------***'
+                                echo sleep 5
+                                sleep 5
+				echo ./renew $msisdn $serviceid $fiyat "$smsRenew"  2>&1 |tee -a output$msisdn
+				./renew $msisdn $serviceid  $fiyat "$smsRenew" 2>&1 |tee -a output$msisdn
+								echo sleep 5
+				sleep 5
+				echo '***-------------------------------------***----------------------------------------***'
+				echo ./renReloadinGrace $msisdn $serviceid $fiyat "$smsRenew"  2>&1 |tee -a output$msisdn
+				./renReloadinGrace $msisdn $serviceid  $fiyat "$smsRenew" 2>&1 |tee -a output$msisdn
+								echo sleep 5
+				sleep 5
+				echo '***-------------------------------------***----------------------------------------***'
+				echo ./1day $msisdn $serviceid "$sms1day"  $fiyat 2>&1 |tee -a output$msisdn
+				./1day $msisdn $serviceid "$sms1day" $fiyat 2>&1 |tee -a output$msisdn
+				sleep 1
+				echo '***-------------------------------------***----------------------------------------***'
+				echo ./iptalKayit $msisdn $serviceid $fiyat 2>&1 |tee -a output$msisdn
+				./iptalKayit  $msisdn $serviceid $fiyat 2>&1 |tee -a output$msisdn
+				counter=$(( $counter + 1 ))
+				
+				
+			else
+				case "$(( $counter % 4 ))" in
+					0)  sms1day=$sms
+					;;
+					1)  smsRenew=$sms
+					;;
+					2)  smsRenewFail=$sms
+					;;
+			esac
+			counter=$(( $counter + 1 ))
+			fi
+		else #sms bos satirsa
+			doMail "grepe ragmen bos satir detected in smses. ignoring.. this may cause a problem please check input files format and line numbers"
+			continue
+		fi
+	done < yenilemeSMSleri_0$filecnt
+	echo filecnt $filecnt
+	filecnt=$(expr $filecnt + 1)
+	
+else #fiyat bos satirsa
+doMail "fiyat kismi bos in serviceIDs. ignoring line.. servisID_Fiyat.txt dosyasinda yanlis format. "
+continue
+
+fi
+done < .servisIDler.txt
+rm yenilemeSMSleri_*  
+
+  doMail "Yenileme SMSleri Test kosumu tamamlandi. $ilkMsisdn $msisdn"
+  

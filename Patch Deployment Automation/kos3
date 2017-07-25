@@ -1,0 +1,25 @@
+sleep 9999
+./installConfigPatch 89_V1
+
+if [[ $(egrep "Socket timed out.  Waited" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED 11. redeploying
+        echo ./installConfigPatch 89_V1
+        ./installConfigPatch 89_V1
+fi
+cd /tmp/deploy
+ ./deploy.sh
+if [[ $(egrep "CFG-DEP-" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED 1. redeploying
+        echo ./deploy.sh
+        ./deploy.sh
+fi
+cd /tmp/patch
+./installConfigPatch 89_V1
+if [[ $(egrep "Socket timed out.  Waited" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED 11. redeploying
+        echo ./installConfigPatch 89_V1
+        ./installConfigPatch 89_V1
+fi

@@ -1,0 +1,56 @@
+Start Wed Oct 5 16:15:32 EEST 2016
+|${MY_TARIFF_MSISDN_1}|internet     |4|102401|INTERNET |BLP_Main|0.04|
+./datausage.whereverRoamDisc 5070007454 102401 28603 0.04 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |11|102400|INTERNET |BLP_Main|0.02|
+./datausage.whereverRoamDisc 5070007454 102400 28603 0.02 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |4|102401|INTERNET |BLP_Main|0.04|
+./datausage.whereverRoamDiscSosyal 5070007454 102401 28603 0.04 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |11|102400|INTERNET |BLP_Main|0.02|
+./datausage.whereverRoamDiscSosyal 5070007454 102400 28603 0.02 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |4|102401|INTERNET |BLP_Main|0.04|
+./datausage.whereverRoamDiscSosyal2 5070007454 102401 28603 0.04 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |11|102400|INTERNET |BLP_Main|0.02|
+./datausage.whereverRoamDiscSosyal2 5070007454 102400 28603 0.02 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |4|102401|INTERNET |BLP_Main|0.04|
+./datausage.whereverRoamDiscSosyal2Wap 5070007454 102401 28603 0.04 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |11|102400|INTERNET |BLP_Main|0.02|
+./datausage.whereverRoamDiscSosyal2Wap 5070007454 102400 28603 0.02 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |4|102401|INTERNET |BLP_Main|0.04|
+./datausage.whereverRoamDiscSosyalWap 5070007454 102401 28603 0.04 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |11|102400|INTERNET |BLP_Main|0.02|
+./datausage.whereverRoamDiscSosyalWap 5070007454 102400 28603 0.02 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |4|102401|INTERNET |BLP_Main|0.04|
+./datausage.whereverRoamDiscWap 5070007454 102401 28603 0.04 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |11|102400|INTERNET |BLP_Main|0.02|
+./datausage.whereverRoamDiscWap 5070007454 102400 28603 0.02 2247
+
+|${MY_TARIFF_MSISDN_1}|internet          |15      |102400|INTERNET |BLP_Main|0.0088|
+./datausage.whereverRoamDiscWhatsapp 5070007454 102400 28603 0.0088 2247
+
+|${MY_TARIFF_MSISDN_1}|internet          |15      |102401|INTERNET |BLP_Main|0.0176|
+./datausage.whereverRoamDiscWhatsapp 5070007454 102401 28603 0.0176 2247
+
+|${MY_TARIFF_MSISDN_1}|internet          |15      |102400|INTERNET |BLP_Main|0.0088|
+./datausage.whereverRoamDiscWhatsappWap 5070007454 102400 28603 0.0088 2247
+
+|${MY_TARIFF_MSISDN_1}|internet          |15      |102401|INTERNET |BLP_Main|0.0176|
+./datausage.whereverRoamDiscWhatsappWap 5070007454 102401 28603 0.0176 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |4|102401|INTERNET |BLP_Main|0.04|
+./datausage.whereverRoamDiscWifi 5070007454 102401 28603 0.04 2247
+
+|${MY_TARIFF_MSISDN_1}|internet     |11|102400|INTERNET |BLP_Main|0.02|
+./datausage.whereverRoamDiscWifi 5070007454 102400 28603 0.02 2247
+
+BITTI Wed Oct 5 16:19:04 EEST 2016

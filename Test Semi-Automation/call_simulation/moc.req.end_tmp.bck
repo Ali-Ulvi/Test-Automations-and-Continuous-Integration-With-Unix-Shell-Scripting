@@ -1,0 +1,28 @@
+<input>
+	<id>01001010655334294967295</id>
+	<requestId>01-00010-0000065533-00003</requestId>
+	<operation type="charge"/>
+	<reservation type="end"/>
+	<account ton="int" npi="isdn" imsi="286038888894745">ANUM</account>
+	<start>CALLSTART</start>
+	<event_data origin_id="scp">
+		<trafficCase type="moc">0</trafficCase>
+		<teleServiceCode type="voi">0</teleServiceCode>
+		<location>
+			<msc ton="int" npi="isdn">LAC_E164:905059910009</msc>
+		</location>
+		<otherParty ton="int" npi="isdn">BNUM</otherParty>
+		<callRefNo>42</callRefNo>
+		<MNPOpKeys>d01:d02:d03</MNPOpKeys>
+		<announcementPlayed>4711</announcementPlayed>
+		<setUpResult>1</setUpResult>
+		<callDuration>CDURATION</callDuration>
+		<vpn vpr="corp" event_class="inte"/>
+		<cdr_TicketType>single</cdr_TicketType>
+		<cdr_PreRated>true</cdr_PreRated>
+		<cdr_Instructions>0x0005</cdr_Instructions>
+		<cdr_KeyInfo>SK=50,AC=12,RC=456</cdr_KeyInfo>
+		<cdr_MscCallRef>7788000008:10</cdr_MscCallRef>
+		<serviceType>VOICE</serviceType>
+	</event_data>
+</input>

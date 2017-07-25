@@ -1,0 +1,5 @@
+sleep 32400
+cp servisID_Fiyat.txt.bayram servisID_Fiyat.txt
+cp yenilemeSMSleri.txt.bayram yenilemeSMSleri.txt
+ cp 80100SMSleri.txt.bayram 80100SMSleri.txt
+ ./startCI

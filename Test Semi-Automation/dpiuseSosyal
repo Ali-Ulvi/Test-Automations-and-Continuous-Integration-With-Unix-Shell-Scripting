@@ -1,0 +1,70 @@
+#! /usr/bin/bash
+ 
+ #All rights reserved AUT Productions
+msisdn=$1
+bonusID=$2
+ 
+if [[ $# -ne 2  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN bonusID   "
+	echo "ornek kullanim:"
+	echo "$0 05019144950 2537"
+
+	exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+     
+	 
+	 
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+bonusName=$(  grep -oP "BLB_.*0${bonusID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "bonusName:"$bonusName
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+ sec=$(date +%Y%m%d%H%M%S)
+gold_operation_handler bonus $msisdn $bonusName 1234.0
+ echo "#s    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+msisdn5=$(echo $msisdn|sed 's/0\(.*\)/\1/' )
+bash datausageSosyal $msisdn5 1234 silentforce
+
+tail -f -n 0 /rte/orgadata/mrte?/OHPQ/*dpi*/data.*&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/*dpi*/data.* > dpiOHPQHarvest&
+	echo $! >> pid.$sec
+	
+ echo sleep20sec
+ sleep 20
+ echo -e "$red2 Sleeping 20 seconds Finished - Press Enter To Finish Logging $NC"
+ echo "#s    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+ read a
+	for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+ rm pid.$sec
+ echo
+ echo -e "$red2 GREP RESULT:"
+ echo
+egrep '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId><ns1:GUID>.*</ns1:GUID></ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>PRE_9'${msisdn}'_B_[0]{0,1}0'${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>' dpiOHPQHarvest
+ 
+ echo
+ 
+ if [[ $(egrep '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId><ns1:GUID>.*</ns1:GUID></ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>PRE_9'${msisdn}'_B_[0]{0,1}0'${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>' dpiOHPQHarvest|wc -l) -eq 0  ]] 
+    then 
+	echo -e "$red2 DPI FAIL!!!!!!!!!!!!!!!!"
+	echo -e "OHPQ record not found$NC"
+	echo 'Beklenen:  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId><ns1:GUID>.*</ns1:GUID></ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>PRE_9'${msisdn}'_B_[0]{0,1}0'${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>'
+else 
+ echo "Mission is ***SUCCESS***"
+fi
+
+echo -e $NC
+
+
+ 
+ 

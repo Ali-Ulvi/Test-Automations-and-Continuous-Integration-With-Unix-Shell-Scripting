@@ -1,0 +1,83 @@
+#! /usr/bin/bash
+ 
+#AUTech
+
+testBilgi="$0 $@"
+
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+ if [[ $# -ne 2&&$# -ne 3 ]] 
+    then 
+        echo "illegal number of parameters"
+        echo "Kullanim: $0 msisdn ROP gun "
+        echo "ornek kullanim:"
+        echo ""
+        echo "$0  05551155111 PP_woopsy_500dk_07777 "
+ 
+        
+        exit
+fi
+msisdn=$1
+rop=$2 
+gun=$3
+file=rop$msisdn
+
+[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]||[ ! -z "$(subsquery $msisdn p 2>&1 > $file;cat $file)" ]
+
+
+while ! grep -q productName $file  ; do
+    echo checkRop loop
+        subsquery $msisdn p 2>&1 > $file
+done
+
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+if [[ ${#gun} -ne 0 ]]
+then
+if [[ ${#gun} -ne 8 ]]
+    then
+    bugun=$(date +%Y-%m-%dT)
+    end=$(mu_date -$gun|sed "s|\(....\)\(..\)\(..\)|\1-\2-\3|g")  
+else
+    end=$(echo $gun|sed "s|\(....\)\(..\)\(..\)|\1-\2-\3|g")
+fi
+end=${end}T23:59:59
+fi
+
+if [[ $(egrep "$rop" $file|grep ACTIVE/STD/STD|wc -l) -ne 1 ]]
+then
+cat $file
+echo rop yok
+doMail  "abonede rop bulunamadi $rop"
+echo BASARISIZ
+exit
+fi
+
+if [[ ${#gun} -ne 0 ]]
+then
+if [[ $(egrep "$rop" $file|grep $end|grep ACTIVE/STD/STD|wc -l) -ne 1 ]]
+then
+cat $file
+echo rop tarihi yanlis
+doMail  "abonede rop tarihi yanlis $rop"
+echo BASARISIZ
+exit
+fi
+fi
+
+echo BASARILI
+

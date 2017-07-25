@@ -1,0 +1,225 @@
+#! /usr/bin/bash
+  
+msisdn=$1
+serviceID=$2
+ 
+
+sms=$3
+fiyat=$4
+AVEA_DIR=$ORGADATA/avea
+
+
+testBilgi="$0 $@"
+work_dir=/tmp/ulvi/CI
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+  echo -en Merhaba\\n\\n $1 '\n\nIyi Calismalar\n\nAUT\nKafein CI Solutions\n\nLoglar:\n' > tmp$msisdn
+  echo ${0}Log$msisdn
+cat output$msisdn|egrep -v '^\*' >> tmp$msisdn 
+ scp tmp$msisdn mrte1@10.248.68.122:/tmp > /dev/null
+ ssh mrte1@10.248.68.122 "source .profile; cat /tmp/tmp$msisdn| mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+#ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+if [[ $# -ne 4 ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN serviceID  sms fiyat"
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 650 sayinMüsterimiz.."
+	  doMail "illegal number of parameters. Kullaným: $0 MSISDN serviceID 'smsMetni'    örnek: $0 05011011111 650  \\\"degerli musterimiz..\\\" 33" 
+
+	exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+check()
+# run to check recurringProductXml after filling file called recur 
+{
+if [[ $(egrep "$1" recurXml|wc -l) -ne 1 ]]
+then
+echo "RecurringXMLde yanlis. olmasi gereken: $1"
+doMail "RecurringXMLde yanlis. olmasi gereken: $1"
+fi
+}
+mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)   
+bundleid=$(grep $ropName $ORGADATA/cnf/cre/config_19700101000000.xml|  grep -oP "(?<=<bundle id=\")[^\"]+"   )
+echo bundleid:$bundleid    
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+echo ropName:$ropName
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+
+/tmp/ulvi/killAllPacks $msisdn
+
+#gold_operation_handler package $msisdn $ropName  INACT   > /dev/null 2>&1
+echo selling:
+gold_operation_handler package $msisdn $ropName  ACT   2>&1 |egrep ERROR\|SUCCESS
+
+tonight=$(mu_date -1)"000000"
+
+echo "#u  :NextTriggerDate $  and = :AccountID '$aid' = :BundleID '$bundleid' & '$tonight' " | idbm_adb -s CreTrigger
+ 
+ sec=$(date +%Y%m%d%H%M%S)
+  
+ 
+
+
+isUATevn=$(grep loghost /etc/hosts| grep 10.248.68.122|wc -l)
+ if [[ $isUATevn -eq 0 ]] 
+    then 
+	 echo CheckMinPriceAgile:
+	 satir=$(ssh bas@10.248.68.128 "grep -n 0${serviceID} /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|cut -d: -f1")
+	ssh bas@10.248.68.128 "tail   +$satir  /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|head -45"
+	ssh bas@10.248.68.128 "tail   +$satir  /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|head -52" > recur
+
+	else
+	echo CheckMinPriceUAT:
+	satir=$(ssh bas@10.248.68.123 "grep -n 0${serviceID} /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|cut -d: -f1")
+	ssh bas@10.248.68.123 "tail   +$satir  /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|head -45"
+	ssh bas@10.248.68.123 "tail   +$satir  /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|head -52" > recur
+fi
+	ilk=$(grep -n  "recurringOperations " recur|head -1 |cut -d: -f1)
+	ikinci=$(grep -n  "recurringOperations " recur|tail -1 |cut -d: -f1)
+	fark=$(expr $ikinci - $ilk)
+	echo fark: $fark
+	head -$fark recur > recurXml
+	 if [[ $fark -eq 0 ]] 
+    then 
+	cp recur recurXml
+	fi
+	
+	check "<minPriceToCreate>$fiyat(\.0|\.00|\.000000)?</minPriceToCreate>"
+
+  check "<minPriceToRenew>$fiyat(\.0|\.00|\.000000)?</minPriceToRenew>"
+      check "<gracePeriod>\+00Y\+00M\+29D</gracePeriod>"
+      check "<followDebitRenewal>true</followDebitRenewal>"
+      check "<keepFollowDebitOnActivation>true</keepFollowDebitOnActivation>"
+      check "<autoRenewable>false</autoRenewable>"
+      check "<Priority>10</Priority>"
+     # check "<dependentPackage>none</dependentPackage>"
+      check "<Communities/>"
+      check "<DeleteIfNewTariffNotAllowed>true</DeleteIfNewTariffNotAllowed>"
+	
+echo
+echo -e "${red2}RopBalRem WA calistiriliyor. this may take a while"
+echo
+echo "pls check bonus priorities while waiting (90 for SMS all_dest)"
+echo
+for bonus in `echo "#s :ID   $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance|grep -v END| sed "s/'//g" |sort|uniq`
+do
+	grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX
+	
+	if [[ $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX|grep  "pocket_grace_time=\"1\""|wc -l) -ne 1 ]]
+	then
+	doMail "pocket_grace_time 1 olmali. $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX)"
+	fi
+	
+	#priority checker. sorry for verbose code	
+	if [[ $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX|grep 'type="SMS"'|wc -l) -eq 1 ]]
+	then
+		if [[ $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX|grep 'priority="90"'|wc -l) -ne 1 ]]
+		then
+		 echo "SMS bonusu her yone ise prioritysi 90 olmali. $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX )"
+		 doMail "SMS bonusu her yone ise prioritysi 90 olmali. $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX )"
+		fi
+	elif [[ $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX|grep 'type="Bytes"'|wc -l) -eq 1 ]]
+	then
+		if [[ $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX|grep 'priority="50"'|wc -l) -ne 1 ]]
+		then
+		 echo "Data bonusu prioritysi 50 olmali. $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX )"
+		 doMail "Data bonusu prioritysi 50 olmali. $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX )"
+		 oneMonth0=$(mu_date -31)"000000"
+		 echo checking BLC_GenericData_DiscountPromoBonus_00452 existence
+		 if [[ `echo "#s :ID   $ and and and and = :AccountID '$aid' = :Value '1' = :End '$oneMonth0' != :ID '3' = :ID '519' " | idbm_adb -s CreBalance|grep -v END` != "'519' " ]]
+		 then
+		 subsquery $msisdn b||subsquery $msisdn b||subsquery $msisdn b||subsquery $msisdn b||subsquery $msisdn b
+		 echo "Paket alimda, paket asim bonusu yani BLC_GenericData_DiscountPromoBonus_00452 verilmeli"
+		 doMail "Paket alimda, paket asim bonusu yani BLC_GenericData_DiscountPromoBonus_00452 verilmeli"
+		 fi
+		fi
+	elif [[ $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX|grep 'type="Seconds"'|wc -l) -eq 1 ]]
+	then
+		if [[ $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX|grep 'priority="50"'|wc -l) -ne 1 ]]
+		then
+		 echo "Ses bonusu her yone ise prioritysi 50 olmali. $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX )"
+		 doMail "Ses bonusu her yone ise  prioritysi 50 olmali. $(grep -i priority $ORGADATA/cnf/cre/config_19700101000000.xml|grep id=\"$bonus\"|grep -v CHARGE|grep -v cost_function|grep -v AUX )"
+		fi
+	fi
+	
+done
+echo
+
+ bash $ORGADATA/avea/work/RopAndBalanceReminderSMS/app/rop_and_balance_reminder_sms.sh
+ 
+smsFile=$(ls -1t $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files | head -1 )
+echo "Grep sonucu:"
+grep $msisdn $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile
+
+ logGrep=$(egrep "9$msisdn;9333;000;\s?\s?\s?$sms\.?\s?\s?\s?\s?;;\$" $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile|wc -l)
+ 
+ if [[ $logGrep -eq 0 ]] 
+    then 
+	 echo -e "\e[7m  generated_sms_files'a istenen gelmedi  ${NC}"
+	 
+doMail "istenen 1 gün önce smsi gelmedi.    "
+	
+fi
+
+logGrep=$(egrep "9$msisdn;" $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile|wc -l)
+
+if [[ $logGrep -gt 1 ]] 
+    then 
+	 echo   "generated_sms_files'a 1den fazla sms geldi"
+	 
+doMail "cat $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile a 1den fazla sms geldi"
+	
+fi
+  
+
+#smsDelay OHPQsunu bosaltmak icin:
+
+OUPMclient -Q smsdelay_spreader_01 >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01   >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01       >> /dev/null       2>&1
+sleep 5
+OUPMclient -Q sms_delay_01  >> /dev/null       2>&1
+
+mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+
+if [[ $mrteid -eq 2 ]] 
+    then 
+	ssh mrte1@localhost 'source .profile;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01 ;sleep 5;OUPMclient -Q sms_delay_01'   > /dev/null       2>&1
+	else
+	ssh mrte2@localhost 'source .profile;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01 ;sleep 5;OUPMclient -Q sms_delay_01' > /dev/null       2>&1
+	
+fi
+
+OUPMclient -Q smsdelay_spreader_01 >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01   >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01       >> /dev/null       2>&1
+sleep 5
+OUPMclient -Q sms_delay_01  >> /dev/null       2>&1
+sleep 6
+

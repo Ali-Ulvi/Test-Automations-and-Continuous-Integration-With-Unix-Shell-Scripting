@@ -1,0 +1,29 @@
+#! /usr/bin/bash
+
+ sec=$(date +%Y%m%d%H%M%S)
+ 
+tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.smsdelay_0?-WA.smsdelay_spreader_0?/data.* > EFD.smsdelay_0?-WA.smsdelay_spreader_0?.smsohpqdata&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/WA.smsdelay_spreader_0?-WA.smsdelay_0?/data.* > WA.smsdelay_spreader_0?-WA.smsdelay_0?.smsohpqdata&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.smsdelay_0?-EFD.sms9333_0?/data.* > EFD.smsdelay_0?-EFD.sms9333_0?.smsohpqdata&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.sms9333_0?-EVD.sms9333_0?/data.* > EFD.sms9333_0?-EVD.sms9333_0?.smsohpqdata&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.sms_0?-EFD.smsdelay_0?/data.* > EFD.sms_0?-EFD.smsdelay_0?.smsohpqdata&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.all-EFD.sms_0?/data.* > EFD.all-EFD.sms_0?.smsohpqdata&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/*sms*/data.* > allsms.ohpqdata&
+	echo $! >> pid.$sec
+	
+	read a
+	for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+ rm pid.$sec
+ #egrep "$1" *.smsohpqdata
+ sed -n "/$1/p" allsms.ohpqdata 
+ 

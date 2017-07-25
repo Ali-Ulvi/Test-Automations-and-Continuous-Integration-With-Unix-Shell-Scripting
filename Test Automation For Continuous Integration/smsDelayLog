@@ -1,0 +1,10 @@
+20160818 184530:I:START
+20160818 184530:I:Processing the records for 20160818
+20160818 184531:I:0:PP_Dolu3GBNonNTService_01382:05070002329 has been notified about package renewal.
+20160818 184531:I:Moved the SMSDELAY_OutputFile_01_20160818184530.dat to backup for 20160818
+20160818 184531:I:Finished processing the records for 20160818
+20160818 184531:I:The Notifications for 20160818 has been put to  OHPQ/EFD.smsdelay_01-EFD.sms9333_01
+20160818 184531:I:END
+20160818 184549:I:START
+20160818 184549:I:No Notification for 20160818 has been found. So, processing will not be performed!
+20160818 184549:I:END

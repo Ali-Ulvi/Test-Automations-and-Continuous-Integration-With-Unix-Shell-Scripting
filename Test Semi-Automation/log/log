@@ -1,0 +1,99 @@
+#!/bin/bash
+
+cleanup()
+# example cleanup function
+{
+echo " ctrl+c?"
+
+   for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+rm pid.${sec}
+ls -lrt  
+date
+sleep 1
+
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+
+
+op_date=$(date +%Y%m%d)
+sec=$(date +%Y%m%d%H%M%S)
+
+
+
+#alias l='ls -lrt'
+tail -F -n 0 /rte/orgadata/mrte2/log/OUPMRTELOG_${op_date}.[0-9]*[^gz] > mrte2OUPMLog.txt &
+echo $! > pid.$sec   
+tail -F -n 0 /rte/orgadata/mrte1/log/OUPMRTELOG_${op_date}.[0-9]*[^gz] > mrte1OUPMLog.txt&
+echo $! >> pid.$sec   
+ ssh bas@10.248.68.128 '/usr/local/bin/tail -F -n 0 /bas/orgadata/bas/log/bascs_01_02/BASLOG' > bascs_01_02_BASLOG.txt&
+echo $! >> pid.$sec   
+ ssh bas@10.248.68.128 '/usr/local/bin/tail -F -n 0 /bas/orgadata/bas/log/bascs_01_01/BASLOG' > bascs_01_01_BASLOG.txt&
+echo $! >> pid.$sec 
+ssh bsg@10.248.68.129 '/usr/local/bin/tail -F -n 0 /export/home/bsg/BSG_HOME/data/log/diag.log ' > bsgLog.txt&
+echo $! >> pid.$sec   
+
+echo " press Enter when finish.  "  
+read tmp
+   echo " Are you sure? press Enter for yes"  
+ read tmp
+ 
+        
+   for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+rm pid.${sec}
+date
+ls -lrt *.txt
+
+gzip -c bascs_01_01_BASLOG.txt > bascs_01_01_BASLOG.zip 
+gzip -c bascs_01_02_BASLOG.txt > bascs_01_02_BASLOG.zip 
+gzip -c bsgLog.txt > bsgLog.zip 
+rm /tmp/out.mail
+if [ -s bascs_01_01_BASLOG.txt ]
+then
+uuencode bascs_01_01_BASLOG.zip bascs_01_01_BASLOG.zip > /tmp/out.mail
+else
+uuencode bascs_01_01_BASLOG.txt bascs_01_01_BASLOG.txt > /tmp/out.mail
+fi
+
+if [ -s bascs_01_02_BASLOG.txt ]
+then
+ uuencode bascs_01_02_BASLOG.zip bascs_01_02_BASLOG.zip >> /tmp/out.mail
+else
+ uuencode bascs_01_02_BASLOG.txt bascs_01_02_BASLOG.txt >> /tmp/out.mail
+fi
+
+if [ -s bsgLog.txt ]
+then
+ uuencode bsgLog.zip bsgLog.zip >> /tmp/out.mail
+else
+ uuencode bsgLog.txt bsgLog.txt >> /tmp/out.mail
+fi
+ 
+  uuencode mrte1OUPMLog.txt mrte1OUPMLog.txt >> /tmp/out.mail
+    uuencode mrte2OUPMLog.txt mrte2OUPMLog.txt >> /tmp/out.mail
+ 
+ 
+
+#tar -zcvf Agile.logs.in.Winrar.tar.gz bascs_01_01_BASLOG.txt bascs_01_02_BASLOG.txt mrte1OUPMLog.txt mrte2OUPMLog.txt bsgLog.txt  >/dev/null 2&>1
+/usr/bin/scp /tmp/out.mail mrte1@10.248.68.122:/tmp >/dev/null 2>&1
+/usr/bin/ssh mrte1@10.248.68.122 "  mailx -s '$1: Loglar Ektedir' aliulvi.talipoglu@partner.turktelekom.com.tr $2 < /tmp/out.mail " >/dev/null 2>&1
+

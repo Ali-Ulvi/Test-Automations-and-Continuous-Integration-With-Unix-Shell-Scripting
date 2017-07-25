@@ -1,0 +1,197 @@
+#! /usr/bin/bash
+
+cat /tmp/ulvi/no | while read line                                         
+do
+zone=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1   |awk '{print $2;}')
+c=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1 |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1"
+       
+        fi
+		
+c=$(grep "^\^O:0E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1 |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1"
+       
+        fi
+
+c=$(grep "^\^O:90E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1 |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:90E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1"
+       
+        fi
+		
+c=$(grep "^\^O:0$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1 |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/ngcp/vas/zones/indata1"
+       
+        fi		
+	##	2
+c=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/ngcp/vas/zones/indata1 |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/ngcp/vas/zones/indata1"
+       
+        fi
+		
+c=$(grep "^\^O:0E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/ngcp/vas/zones/indata1 |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/ngcp/vas/zones/indata1"
+       
+        fi
+
+c=$(grep "^\^O:90E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/ngcp/vas/zones/indata1 |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:90E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/ngcp/vas/zones/indata1"
+       
+        fi
+c=$(grep "^\^O:0$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/ngcp/vas/zones/indata1 |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/ngcp/vas/zones/indata1"
+       
+        fi
+		
+##3
+c=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/moc"
+       
+        fi
+		
+c=$(grep "^\^O:0E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/moc"
+       
+        fi
+
+c=$(grep "^\^O:90E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:90E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/moc"
+       
+        fi
+c=$(grep "^\^O:0$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/moc"
+       
+        fi
+		
+	##4
+c=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/moc"
+       
+        fi
+		
+c=$(grep "^\^O:0E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/moc"
+       
+        fi
+
+c=$(grep "^\^O:90E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:90E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/moc"
+       
+        fi
+c=$(grep "^\^O:0$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/moc"
+       
+        fi	
+		
+		##5 inss7moc
+		c=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/inss7moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/inss7moc"
+       
+        fi
+		
+c=$(grep "^\^O:0E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/inss7moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/inss7moc"
+       
+        fi
+
+c=$(grep "^\^O:90E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/inss7moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:90E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/inss7moc"
+       
+        fi
+c=$(grep "^\^O:0$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/inss7moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/inss7moc"
+       
+        fi
+		
+	## 
+c=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/inss7moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/inss7moc"
+       
+        fi
+		
+c=$(grep "^\^O:0E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/inss7moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/inss7moc"
+       
+        fi
+
+c=$(grep "^\^O:90E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/inss7moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:90E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/inss7moc"
+       
+        fi
+c=$(grep "^\^O:0$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/inss7moc |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/inss7moc"
+       
+        fi	
+		##5 cf
+		c=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/cf |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/cf"
+       
+        fi
+		
+c=$(grep "^\^O:0E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/cf |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/cf"
+       
+        fi
+
+c=$(grep "^\^O:90E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/cf |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:90E0[0-9]1$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/cf"
+       
+        fi
+c=$(grep "^\^O:0$line\.\*\$\s"  /rte/orgadata/mrte1/cnf/reg/scp/zones/cf |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0$line\.\*$ in /rte/orgadata/mrte1/cnf/reg/scp/zones/cf"
+       
+        fi
+		
+	## 
+c=$(grep "^\^O:E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/cf |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/cf"
+       
+        fi
+		
+c=$(grep "^\^O:0E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/cf |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/cf"
+       
+        fi
+
+c=$(grep "^\^O:90E0\[0-9]1$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/cf |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:90E0[0-9]1$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/cf"
+       
+        fi
+c=$(grep "^\^O:0$line\.\*\$\s"  /rte/orgadata/mrte2/cnf/reg/scp/zones/cf |grep $zone |wc -l)
+if [ "$c" != "1" ];then
+                echo "missing: ^O:0$line\.\*$ in /rte/orgadata/mrte2/cnf/reg/scp/zones/cf"
+       
+        fi	
+		
+done	
+ echo finito

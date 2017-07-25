@@ -1,0 +1,23 @@
+#servisID_Fiyat.txt dosyasindaki servislerle ayni sirada yenileme smsleri girilmelidir.
+#smslerin sirasi su sekilde olmalidir
+#ilk servisin Renewaldan 1 gun önce gidecek SMSi
+#ilk servisin Renewal SMSi
+#ilk servisin Renewal Fail SMSi
+#ilk servisin Auto-Renewal Bakiye Yetersizliði Sebebiyle 29 Günün Sonunda Gerceklesmediðinde SMSi
+#ikinci servisin Renewaldan 1 gun önce gidecek SMSi
+#ikinci servisin Renewal SMSi
+#ikinci servisin Renewal Fail SMSi
+#ikinci servisin Auto-Renewal Bakiye Yetersizliði Sebebiyle 29 Günün Sonunda Gerceklesmediðinde SMSi
+#bu sekilde servis sayisi x 4 tane sms girilir. Dosyadaki bos satirlar ve # ile baslayan satirlar ihmal edilir.
+#Turkce karakterler ya da ters tirnak isareti ingilizcesiyle otomatik degistirilir. 
+#Tarih saat ekleme projesi scripte dahil edilmistir. DD/MM/YYYY saat HH:MI seklinde SMS girilir.
+
+Super Firsat Extra Paketinin kullanim suresi yarin dolacak, bakiyen varsa 28 TL karsiliginda yenilenecek. Iptal etmek icin IPTAL SUPERFIRSATEXTRA yazip 4545'e gonderebilirsin.
+Super Firsat Extra Paketin 28 TL karsiliginda yenilendi. DD/MM/YYYY saat HH:MI’a kadar yurtici her yone 500 dakika, her yone 5000 SMS ve 3 GB internetini kullanmaya baslayabilirsin :)
+Super Firsat Extra Paketinin yenilenebilmesi icin hattinda en az 28 TL olmasi gerekiyor. 29 gun icinde yukleme yaparsan paketin otomatik olarak tanimlanacak.
+Hattinda 28 TL olmadigi icin Super Firsat Extra Paketin yeniden hattina tanimlanamadi.
+Super Firsat Extra Paketinin kullanim suresi yarin dolacak, bakiyen varsa 30 TL karsiliginda yenilenecek. Iptal etmek icin IPTAL SUPERFIRSATEXTRA  yazip 4545'e gonderebilirsin.
+Super Firsat Extra Paketin 30 TL karsiliginda yenilendi.DD/MM/YYYY saat HH:MI’a kadar yurtici her yone 500 dakika, her yone 5000 SMS ve 3 GB internetini kullanmaya baslayabilirsin :)
+Super Firsat Extra Paketinin yenilenebilmesi icin hattinda en az 30 TL olmasi gerekiyor. 29 gun icinde yukleme yaparsan paketin otomatik olarak tanimlanacak.
+Hattinda 30 TL olmadigi icin Super Firsat Extra Paketin yeniden hattina tanimlanamadi. 
+

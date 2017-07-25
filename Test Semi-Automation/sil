@@ -1,0 +1,14 @@
+#! /usr/bin/bash
+
+rm silindi
+
+ 
+
+sed "/$1/d" silincek > silindi   
+
+diff silincek silindi
+
+ 
+
+cp silindi silincek
+

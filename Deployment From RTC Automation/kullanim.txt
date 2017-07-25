@@ -1,0 +1,1 @@
+cat /rte/orgadata/mrte1/avea/work/AveaRtcScmTools/scripts/rtc_refresh_gold_config.properties

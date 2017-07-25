@@ -1,0 +1,8 @@
+
+	  echo ./renew 05012211155 1115 25
+ ./renew 05012211155 1115 25
+ echo ./trm 05012211155 1115 25
+ ./trm 05012211155 1115 25
+  echo ./renReloadinGrace 05012211155 1115 25
+  ./renReloadinGrace 05012211155 1115 25
+  

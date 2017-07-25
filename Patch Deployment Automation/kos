@@ -1,0 +1,4 @@
+./returnToPrevPatchWithDeploy
+./installConfigPatch 89_V1
+#cd /tmp/CI
+#./startCI

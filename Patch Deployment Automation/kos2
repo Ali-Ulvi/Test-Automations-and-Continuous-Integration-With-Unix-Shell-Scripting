@@ -1,0 +1,78 @@
+sleep 39900
+cd /tmp/deploy
+ ./deploy.sh
+if [[ $(egrep "CFG-DEP-" out.txt|wc -l) -ne 0 ]]
+then
+	echo FATALITY REACHED 1. redeploying  
+	echo ./deploy.sh
+	./deploy.sh
+fi
+
+if [[ $(egrep "CFG-DEP-" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED 1. redeploying  
+        echo ./deploy.sh.usr2.sh
+        ./deploy.sh.usr2.sh
+fi
+if [[ $(egrep "CFG-DEP-" out.txt|wc -l) -ne 0 ]]
+then
+	echo FATALITY REACHED 2. exiting  
+	exit
+fi
+cd /tmp/patch
+./returnToPrevPatchWithDeploy
+if [[ $(egrep "CFG-DEP-" out.txt|wc -l) -ne 0 ]]
+then
+	echo FATALITY REACHED x. ./returnToPrevPatchWithDeploy again  
+	echo ./returnToPrevPatchWithDeploy
+	./returnToPrevPatchWithDeploy
+fi
+cd /tmp/deploy
+ ./deploy.sh.usr2.sh
+if [[ $(egrep "Socket timed out.  Waited" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED usr. redeploying usr
+        echo ./deploy.sh.usr2.sh
+        ./deploy.sh.usr2.sh
+fi
+
+if [[ $(egrep "Socket timed out.  Waited" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED usr 2. redeploying usr
+        echo ./deploy.sh.usr2.sh
+        ./deploy.sh.usr2.sh
+fi
+
+if [[ $(egrep "Socket timed out.  Waited" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED usr 2.1. redeploying usr
+        echo ./deploy.sh.usr2.sh
+        ./deploy.sh.usr2.sh
+fi
+
+if [[ $(egrep "Socket timed out.  Waited" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED usr 3. redeploying old method
+        echo ./deploy.sh
+        ./deploy.sh
+fi
+sleep 420
+if [[ $(egrep "CFG-TFS-00009|CFG-DEP-|Error preparing deployment|Error transmitting" out.txt|wc -l) -ne 0 ]]
+then
+	echo FATALITY REACHED 3. redeploying using old method
+	echo ./deploy.sh
+	./deploy.sh
+fi
+if [[ $(egrep "CFG-DEP-" out.txt|wc -l) -ne 0 ]]
+then
+        echo FATALITY REACHED 4. redeploying  
+        echo ./deploy.sh
+        ./deploy.sh
+fi
+ bash  tumPaketSil 05011021230
+gold_operation_handler package 05011021230  1304 ACT
+gold_operation_handler package 05011021230  1305 ACT
+gold_operation_handler package 05011021230  1303 ACT
+ gold_operation_handler package 05011021230  1303 INACT
+ gold_operation_handler package 05011021230  1304 INACT
+ gold_operation_handler package 05011021230  1305 INACT

@@ -1,0 +1,151 @@
+#! /usr/bin/bash
+ 
+ 
+testBilgi="$0 $@"
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+  echo -en Merhaba\\n\\n $1 '\n\nIyi Calismalar\n\nAUT\nKafein CI Solutions\n\nLoglar:\n' > tmp$msisdn
+  echo ${0}Log$msisdn
+cat output$msisdn|egrep -v '^\*' >> tmp$msisdn 
+
+ scp tmp$msisdn mrte1@10.248.68.122:/tmp
+ ssh mrte1@10.248.68.122 "source .profile; cat /tmp/tmp$msisdn| mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+#ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+if [[ $# -ne 4 && $# -ne 5  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullanim: $0 MSISDN ROPID bonusid bonustipi sms  "
+	echo "ornek kullanimlar:"
+	echo "$0 05011011111 650 1801  data  helloSms"
+	echo "$0 05011011111 650 1801  dk hello "
+		echo "$0 05011011111 650 1801  sms helloSubscriber"
+ 
+
+  
+	exit
+fi
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple   
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+msisdn=$1
+serviceID=$2
+bonusID=$3 #BONUS ID
+calltype=$4
+sms=$5
+
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+
+bonusName=$(  grep -oP "BLB_.*0${bonusID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "bonusName:"$bonusName
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "ROPName:"$ropName
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+gold_operation_handler package $msisdn $serviceID  INACT   > /dev/null 2>&1
+sleep 1
+gold_operation_handler package $msisdn $serviceID  ACT   2>&1 |grep ERROR
+sleep 1
+gold_operation_handler reload $msisdn 1000   2>&1 |grep ERROR
+sleep 5
+goldID=$(grep $bonusName $ORGADATA/cnf/cre/config_19700101000000.xml| grep -oP '(?<=<balance allow_negative="no" has_pockets="yes" id=")[^"]+')
+later=$(mu_date -31)"000000"
+ sonuc=$( echo "#s  :Value :End :Start $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'   " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+
+bonusAmount=$(echo $sonuc|cut   -f1 -d' ')
+end=$(echo $sonuc|cut   -f2 -d' ')
+start=$(echo $sonuc|cut   -f3 -d' ')
+
+if [[ -n $bonusAmount ]]
+then
+	echo "Bonus amount: $bonusAmount " #$start $end
+else
+	echo "Bonus ID ya da Amount bulunamadi. Thanks for using."
+		doMail  "Bonus ID ya da Amount bulunamadi. Thanks for using."
+	exit
+fi
+sec=$(date +%Y%m%d%H%M%S)
+tail -F -n 0 /rte/orgadata/mrte?/OHPQ/EFD.sms9333_0?-EVD.sms9333_0?/data.* > evdSMS9333$msisdn&
+	echo $! >> pid80.$sec
+if [[ "$calltype" = "data" ]]
+then
+	 echo "#u  :Value  $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'  & '1048579' " | idbm_adb -s CreBalance
+	 ./start93LogFor.sh $$	
+gold_operation_handler bonus $msisdn $bonusName -10 $start $end 2>&1 |grep ERROR
+else
+	
+echo "#u  :Value  $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'  & '1' " | idbm_adb -s CreBalance
+./start93LogFor.sh $$	
+gold_operation_handler bonus $msisdn $bonusName -1 $start $end 2>&1 |grep ERROR
+fi
+
+ 
+echo "SMS9333 loglarina bakiniz 107 veya 108 ip'de.SMS9333te Loglari gormek icin komut:"
+		echo "tail -93 /argela/APSA/deploy/logs/APSA_CORE_H107_I0.log | grep ${msisdn}"
+		echo "tail -93 /argela/APSA/deploy/logs/APSA_CORE_H108_I0.log | grep ${msisdn}"
+		echo "#s  :Value   $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'  " | idbm_adb -s CreBalance 
+		
+		sleep 9
+
+smsid=`egrep -v '==|^$|><MSGID>3</MSGID>|<MSGID>4</MSGID>|<MSGID>1833</MSGID>|<MSGID>18..</MSGID>'  evdSMS9333$msisdn|grep $msisdn|grep -oP "(?<=<MSGID>)[^<]+"|tail -1`
+		 for job in `cat pid80.${sec}`
+do
+    /usr/bin/kill -9 $job 2>&1 > /dev/null
+
+done
+rm pid80.${sec}
+echo $smsid
+#
+echo -e "${red}******--------------OHPQ'daki MSGID'nin DBdeki OUTBOUND_SMS_RULES kaydi:--------------------******${NC}"
+result=$(sqlplus -s APSATl/apsatl234@"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=sms9333t_cluster)(PORT=1529))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=VAS93T)))"  << EOF
+		set heading off
+
+		select *  from apsatl.OUTBOUND_SMS_RULES where MESSAGE_ID=${smsid} or MESSAGE_ID=${smsid};
+		EXIT;
+		EOF)
+				echo -e "\e[7m$result"
+		echo "$result" > OUTBOUND_SMS_RULES
+echo -e "${red}******--------------------------------------------------------------******${NC}"
+
+echo -e "${red}******--------------OHPQ'daki MSGID'nin SMS metni:--------------------******${NC}"
+		result=$(sqlplus -s APSATl/apsatl234@"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=sms9333t_cluster)(PORT=1529))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=VAS93T)))"  << EOF
+		set heading off
+		select distinct sms_text from apsatl.sms_text where sms_id=${smsid};
+		EXIT;
+		EOF)
+	echo -e "\e[7m$result"
+echo -e "${red}******--------------------------------------------------------------******${NC}"
+
+./close93LogFor.sh $$
+echo Checking SMS9333 logs
+./check93.sh $$ $msisdn "$sms" #|tee   93sonuc$$
+echo $testBilgi >> analyzer$msisdn
+#grep "OutgoingSms to Msisdn :9$msisdn" 93sonuc$$ >> analyzer$msisdn
+./check93.analyzer.sh $$ $msisdn "$sms" >> analyzer$msisdn
+echo --- >> analyzer$msisdn
+./check93.sh $$ $msisdn "$sms" |tail -1 > 93sonuc$$
+
+
+if [[ $(cat 93sonuc$$) != 'BASARILI' ]] 
+    then 
+	 echo -e "Beklenen %100 SMSi gelmedi: $0 $* "
+	 doMail "Beklenen %100 SMSi gelmedi. "
+	
+fi
+
+rm 93sonuc$$ evdSMS9333$msisdn
+./clean93LogFor.sh $$
+

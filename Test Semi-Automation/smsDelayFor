@@ -1,0 +1,14 @@
+#! /usr/bin/bash
+
+while (true)
+do
+OUPMclient -Q smsdelay_spreader_01 >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01   >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01       >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q sms_delay_01  >> /dev/null       2>&1
+sleep 2
+done
+

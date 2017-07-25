@@ -1,0 +1,33 @@
+#servisID_Fiyat.txt dosyasindaki servislerle ayni sirada yenileme smsleri girilmelidir.
+#smslerin sirasi su sekilde olmalidir
+#ilk servisin Renewaldan 1 gun önce gidecek SMSi
+#ilk servisin Renewal SMSi
+#ilk servisin Renewal Fail SMSi
+#ilk servisin Auto-Renewal Bakiye Yetersizliði Sebebiyle 29 Günün Sonunda Gerceklesmediðinde SMSi
+#ikinci servisin Renewaldan 1 gun önce gidecek SMSi
+#ikinci servisin Renewal SMSi
+#ikinci servisin Renewal Fail SMSi
+#ikinci servisin Auto-Renewal Bakiye Yetersizliði Sebebiyle 29 Günün Sonunda Gerceklesmediðinde SMSi
+#bu sekilde servis sayisi x 4 tane sms girilir. Dosyadaki bos satirlar ve # ile baslayan satirlar ihmal edilir.
+#Turkce karakterler ya da ters tirnak isareti ingilizcesiyle otomatik degistirilir. 
+#Tarih saat ekleme projesi scripte dahil edilmistir. DD/MM/YYYY saat HH:MI seklinde SMS girilir.
+Her Yone 600 Dakika Paketinizin kullanim suresi yarin dolacak ve bakiyeniz yeterliyse 16 TL karsiliginda yenilenecektir. Iptal etmek icin IPTAL HY600 yazip 5555'e gonderebilirsiniz.
+Her Yone 600 Dakika Paketiniz, 16 TL'ye tanimlanmistir. Yurt ici her yone 600 dakikayi 30 gun boyunca kullanabilirsiniz. *122# yi tuslayarak kalan kullanim haklarinizi ogrenebilirsiniz.
+Her Yone 600 Dakika Paketinizin tanimlanmasi icin hattinizda en az 16 TL olmalidir. 29 gun icinde hattinizda yeterli TL bulundugunda paketiniz otomatik olarak yenilenecektir.
+Hattinizda 16 TL olmadigi icin Her Yone 600 Dakika Paketiniz tanimlanamamistir. Paketi tekrar alabilmek icin yeterli yukleme yaptiktan sonra  HY600 yazip 5555'e gonderebilirsiniz.
+Her Yone 750 Dakika Paketinizin kullanim suresi yarin dolacak ve bakiyeniz yeterliyse 18 TL karsiliginda yenilenecektir. Iptal etmek icin IPTAL HY750 yazip 5555'e gonderebilirsiniz.
+Her Yone 750 Dakika Paketiniz, 18 TL'ye tanimlanmistir. Yurt ici her yone 750 dakikayi 30 gun boyunca kullanabilirsiniz. *122# yi tuslayarak kalan kullanim haklarinizi ogrenebilirsiniz.
+Her Yone 750 Dakika Paketinizin tanimlanmasi icin hattinizda en az 18 TL olmalidir. 29 gun icinde hattinizda yeterli TL bulundugunda paketiniz otomatik olarak yenilenecektir.
+Hattinizda 18 TL olmadigi icin Her Yone 750 Dakika Paketiniz tanimlanamamistir. Paketi tekrar alabilmek icin yeterli yukleme yaptiktan sonra  HY750 yazip 5555'e gonderebilirsiniz.
+Her Yone 1000 Dakika Paketinizin kullanim suresi yarin dolacak ve bakiyeniz yeterliyse 20 TL karsiliginda yenilenecektir. Iptal etmek icin IPTAL HY1000 yazip 5555'e gonderebilirsiniz.
+Her Yone 1000 Dakika Paketiniz, 20 TL'ye tanimlanmistir. Yurt ici her yone 1000 dakikayi 30 gun boyunca kullanabilirsiniz. *122# yi tuslayarak kalan kullanim haklarinizi ogrenebilirsiniz.
+Her Yone 1000 Dakika Paketinizin tanimlanmasi icin hattinizda en az 20 TL olmalidir. 29 gun icinde hattinizda yeterli TL bulundugunda paketiniz otomatik olarak yenilenecektir.
+Hattinizda 20 TL olmadigi icin Her Yone 1000 Dakika Paketiniz tanimlanamamistir. Paketi tekrar alabilmek icin yeterli yukleme yaptiktan sonra  HY1000 yazip 5555'e gonderebilirsiniz.
+Her Yone 1000 SMS Paketinizin kullanim suresi yarin dolacak ve bakiyeniz yeterliyse 10 TL karsiliginda yenilenecektir. Iptal etmek icin IPTAL HY1000SMS yazip 5555'e gonderebilirsiniz.
+Her Yone 1000 SMS Paketiniz,10 TL'ye tanimlanmistir. Yurt ici her yone 1000 SMSi 30 gun boyunca kullanabilirsiniz. *122# yi tuslayarak kalan kullanim haklarinizi ogrenebilirsiniz.
+Her Yone 1000 SMS Paketinizin tanimlanmasi icin hattinizda en az 10 TL olmalidir. 29 gun icinde hattinizda yeterli TL bulundugunda paketiniz otomatik olarak yenilenecektir.
+Hattinizda 10 TL olmadigi icin Her Yone 1000 SMS Paketiniz tanimlanamamistir. Paketi tekrar alabilmek icin yeterli yukleme yaptiktan sonra  HY1000SMS yazip 5555'e gonderebilirsiniz.
+Her Yone 2000 SMS Paketinizin kullanim suresi yarin dolacak ve bakiyeniz yeterliyse 11 TL karsiliginda yenilenecektir. Iptal etmek icin IPTAL HY2000 yazip 5555'e gonderebilirsiniz.
+Her Yone 2000 SMS Paketiniz,11 TL'ye tanimlanmistir. Yurt ici her yone 2000 SMSi 30 gun boyunca kullanabilirsiniz. *122# yi tuslayarak kalan kullanim haklarinizi ogrenebilirsiniz.
+Her Yone 2000 SMS Paketinizin tanimlanmasi icin hattinizda en az 11 TL olmalidir. 29 gun icinde hattinizda yeterli TL bulundugunda paketiniz otomatik olarak yenilenecektir.
+Hattinizda 11 TL olmadigi icin Her Yone 2000 SMS Paketiniz tanimlanamamistir. Paketi tekrar alabilmek icin yeterli yukleme yaptiktan sonra  HY2000 yazip 5555'e gonderebilirsiniz.

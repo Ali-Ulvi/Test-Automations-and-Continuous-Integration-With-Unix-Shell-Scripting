@@ -1,0 +1,18 @@
+bundleid:362
+AccountID:{ERROR: AccountID not found for MSISDN /home}
+I:END:0
+I:END:0
+Abonenin paketi yok ya da sistemden cekilemedi. 2.si ise daha sonra tekrar deneyiniz.
+Paketler cekiliyor:
+Subscriber does not exist!
+main: 2016-08-02 08:21:50,523   ERROR com.avea.operation.GoldOperationHandlerMain: BSG_10003:Wrong Input KeyValue is expected as positive numeric!
+I:END:0
+CheckMinPriceAgile:
+
+[1;35mRopBalRem WA calistiriliyor. this may take a while
+
+pls check bonus priorities while waiting (90 for SMS all_dest)
+
+
+RopBalRemSms:0208 082158:I:rop_and_balance_reminder_sms.sh has started running.
+Grep sonucu:

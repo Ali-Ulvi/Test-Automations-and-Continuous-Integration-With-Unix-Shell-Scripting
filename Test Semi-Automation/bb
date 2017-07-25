@@ -1,0 +1,3 @@
+#! /usr/bin/bash
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_01 domain-properties  '&
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_02 domain-properties  '&

@@ -1,0 +1,99 @@
+#! /usr/bin/bash
+ 
+if [[ $# -ne 4 && $# -ne 3  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN ROPID bonusid bonustipi "
+	echo "ornek kullanimlar:"
+	echo "$0 05011011111 650 1801  data"
+	echo "$0 05011011111 650 1801  dk"
+	echo "$0 05011011111 650 1801  "
+
+  
+	exit
+fi
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple   
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+msisdn=$1
+serviceID=$2
+bonusID=$3 #BONUS ID
+calltype=$4
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+
+bonusName=$(  grep -oP "BLB_.*0${bonusID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "bonusName:"$bonusName
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "ROPName:"$ropName
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+gold_operation_handler package $msisdn $ropName  INACT   > /dev/null 2>&1
+gold_operation_handler package $msisdn $ropName  ACT   2>&1 |grep ERROR
+ 
+goldID=$(grep $bonusName $ORGADATA/cnf/cre/config_19700101000000.xml| grep -oP '(?<=<balance allow_negative="no" has_pockets="yes" id=")[^"]+')
+later=$(mu_date -31)"000000"
+ sonuc=$( echo "#s  :Value :End :Start $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'   " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+
+bonusAmount=$(echo $sonuc|cut   -f1 -d' ')
+end=$(echo $sonuc|cut   -f2 -d' ')
+start=$(echo $sonuc|cut   -f3 -d' ')
+
+if [[ -n $bonusAmount ]]
+then
+	echo "Bonus amount: $bonusAmount " #$start $end
+else
+	echo "Bonus ID ya da Amount bulunamadý. Thanks for using."
+	exit
+fi
+sec=$(date +%Y%m%d%H%M%S)
+tail -F -n 0 /rte/orgadata/mrte?/OHPQ/EFD.sms9333_0?-EVD.sms9333_0?/data.* > evdSMS9333&
+	echo $! >> pid.$sec
+if [[ "$calltype" = "data" ]]
+then
+	 echo "#u  :Value  $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'  & '2097159' " | idbm_adb -s CreBalance
+gold_operation_handler bonus $msisdn $bonusName -10 $start $end 2>&1 |grep ERROR
+else
+	
+echo "#u  :Value  $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'  & '1' " | idbm_adb -s CreBalance
+gold_operation_handler bonus $msisdn $bonusName -1 $start $end 2>&1 |grep ERROR
+fi
+
+ 
+echo "SMS9333 loglarýna bakýnýz 107 veya 108 ip'de.SMS9333te Loglarý gormek icin komut:"
+		echo "tail -93 /argela/APSA/deploy/logs/APSA_CORE_H107_I0.log | grep ${msisdn}"
+		echo "tail -93 /argela/APSA/deploy/logs/APSA_CORE_H108_I0.log | grep ${msisdn}"
+		echo "#s  :Value   $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'  " | idbm_adb -s CreBalance 
+		
+		sleep 10
+
+smsid=`egrep -av '==|^$|><MSGID>3</MSGID>|<MSGID>4</MSGID>|<MSGID>1833</MSGID>|<MSGID>18..</MSGID>'  evdSMS9333|grep $msisdn|grep -oP "(?<=<MSGID>)[^<]+"|tail -1`
+		 for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 2&>1 > /dev/null
+
+done
+rm pid.${sec}
+echo $smsid
+#
+echo -e "${red}******--------------OHPQ'daki MSGID'nin DBdeki OUTBOUND_SMS_RULES kaydi:--------------------******${NC}"
+result=$(sqlplus -s APSATl/apsatl234@"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=sms9333t_cluster)(PORT=1529))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=VAS93T)))"  << EOF
+		set heading off
+
+		select *  from apsatl.OUTBOUND_SMS_RULES where MESSAGE_ID=${smsid} or MESSAGE_ID=${smsid};
+		EXIT;
+		EOF)
+				echo -e "\e[7m$result"
+		echo "$result" > OUTBOUND_SMS_RULES
+echo -e "${red}******--------------------------------------------------------------******${NC}"
+
+echo -e "${red}******--------------OHPQ'daki MSGID'nin SMS metni:--------------------******${NC}"
+		result=$(sqlplus -s APSATl/apsatl234@"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=sms9333t_cluster)(PORT=1529))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=VAS93T)))"  << EOF
+		set heading off
+		select distinct sms_text from apsatl.sms_text where sms_id=${smsid};
+		EXIT;
+		EOF)
+	echo -e "\e[7m$result"
+echo -e "${red}******--------------------------------------------------------------******${NC}"
+

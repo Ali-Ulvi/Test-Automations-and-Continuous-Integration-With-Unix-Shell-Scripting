@@ -1,0 +1,315 @@
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550000|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550011|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550011|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550011|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550011|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550011|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550011|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550045|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550045|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550045|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550045|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550045|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550045|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550055|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550055|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550055|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550055|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550055|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550055|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550202|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550202|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550202|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550202|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550202|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550202|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550606|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550606|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550606|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550606|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550606|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550606|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550015|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550015|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550015|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882550015|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882550015|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882550015|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557070|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557070|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557070|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557070|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557070|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557070|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557200|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557200|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557200|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557200|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557200|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557200|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557373|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557373|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557373|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557373|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557373|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557373|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557575|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557575|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557575|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557575|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557575|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557575|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557700|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557700|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557700|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557700|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557700|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557700|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557777|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557777|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557777|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557777|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557777|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557777|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557879|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557879|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557879|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882557879|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882557879|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882557879|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554040|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554040|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554040|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554040|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554040|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554040|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554041|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554041|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554041|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554041|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554041|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554041|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554100|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554100|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554100|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554100|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554100|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554100|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554444|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554444|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554444|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554444|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554444|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554444|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554500|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554500|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554500|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554500|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554500|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554500|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554646|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554646|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554646|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554646|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554646|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554646|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+
+|voice call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554848|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554848|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554848|61|VASSERVIS1120|BLP_Main|22.4|
+
+
+|indata1 call                                                                     |
+|aparty                           |bparty     |duration|zone    |balance |cost  |
+|${MSISDN_PAKET_1021_TARIFFID_72} |08882554848|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_120}|08882554848|61|VASSERVIS1120|BLP_Main|22.4|
+|${MSISDN_PAKET_1021_TARIFFID_190}|08882554848|61|VASSERVIS1120|BLP_Main|22.4|
+
+

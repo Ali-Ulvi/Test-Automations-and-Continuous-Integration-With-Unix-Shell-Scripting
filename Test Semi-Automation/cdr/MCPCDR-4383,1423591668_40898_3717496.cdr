@@ -1,0 +1,2 @@
+@{MSC_ID@=24008@;TicketType@=1@;ServiceType@=CDRGPRS@;SubServiceType@=105/1@;QuotaType@=3@;ServedParty@=5013160602@;OtherParty@=wap@;CallStart@=20150429010522@;CallDuration@=49@;CallReference@=NA@;ServedLocation@=24008@;OtherLocation@=wap@}	v3
+@{MSC_ID@=24008@;TicketType@=1@;ServiceType@=CDRGPRS@;SubServiceType@=1101/11@;QuotaType@=3@;ServedParty@=5013160602@;OtherParty@=wap@;CallStart@=20150429010522@;CallDuration@=1000@;CallReference@=NA@;ServedLocation@=24008@;OtherLocation@=wap@}	v3

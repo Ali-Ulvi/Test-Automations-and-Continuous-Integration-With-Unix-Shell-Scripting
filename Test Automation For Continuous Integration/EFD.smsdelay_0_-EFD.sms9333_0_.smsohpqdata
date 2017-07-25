@@ -1,0 +1,14 @@
+==> /rte/orgadata/mrte1/OHPQ/EFD.smsdelay_01-EFD.sms9333_01/data.000000 <==
+
+==> /rte/orgadata/mrte1/OHPQ/EFD.smsdelay_02-EFD.sms9333_02/data.000000 <==
+
+==> /rte/orgadata/mrte1/OHPQ/EFD.smsdelay_03-EFD.sms9333_03/data.000000 <==
+
+==> /rte/orgadata/mrte1/OHPQ/EFD.smsdelay_04-EFD.sms9333_04/data.000000 <==
+
+==> /rte/orgadata/mrte1/OHPQ/EFD.smsdelay_05-EFD.sms9333_05/data.000000 <==
+
+==> /rte/orgadata/mrte2/OHPQ/EFD.smsdelay_01-EFD.sms9333_01/data.000000 <==
+0000000338<notification type="MAIN_BALANCE_THRESHOLD"><data msisdn="05070002329" subsystem="CRE.pe_01_01" op_date="2016-09-18T00:00:00+03:00" type="99989" threshold="TH_Reminder_SMS" last_call_date="" deactivation_date="" expiry_date="" debit="0" tariff_plan="TP_00149" disabled="0.0" sms_flag="true" mnp_flag="false" language="tr"/></notification>$(#)0000022625
+0000000343<notification notf_type="PRS" type="7742"><data msisdn="05070002329" accountID="337662" subsystem="$CRE.pe_01_01" op_date="2016-09-18T00:00:00+03:00" package="PP_Dolu3GBNonNTService_01382" debit="0.0" expire_date="2016-10-19T00:00:00+03:00" tariff_plan="TP_00149" disabled="0.0" sms_flag="true" mnp_flag="false" language="tr"/></notification>
+$(#)0000022626

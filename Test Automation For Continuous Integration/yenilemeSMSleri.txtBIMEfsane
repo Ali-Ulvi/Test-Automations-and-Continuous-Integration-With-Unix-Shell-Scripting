@@ -1,0 +1,17 @@
+#servisID_Fiyat.txt dosyasindaki servislerle ayni sirada yenileme smsleri girilmelidir.
+#smslerin sirasi su sekilde olmalidir
+#ilk servisin Renewaldan 1 gun önce gidecek SMSi
+#ilk servisin Renewal SMSi
+#ilk servisin Renewal Fail SMSi
+#ilk servisin Auto-Renewal Bakiye Yetersizliði Sebebiyle 29 Günün Sonunda Gerceklesmediðinde SMSi
+#ikinci servisin Renewaldan 1 gun önce gidecek SMSi
+#ikinci servisin Renewal SMSi
+#ikinci servisin Renewal Fail SMSi
+#ikinci servisin Auto-Renewal Bakiye Yetersizliði Sebebiyle 29 Günün Sonunda Gerceklesmediðinde SMSi
+#bu sekilde servis sayisi x 4 tane sms girilir. Dosyadaki bos satirlar ve # ile baslayan satirlar ihmal edilir.
+#Turkce karakterler ya da ters tirnak isareti ingilizcesiyle otomatik degistirilir. 
+#Tarih saat ekleme projesi scripte dahil edilmistir. DD/MM/YYYY saat HH:MI seklinde SMS girilir.
+BIMcell EFSANE 6GB Paketinizin kullanim suresi yarin dolacaktir. Bakiyeniz yeterliyse paketiniz 33TL karsiliginda otomatik olarak yenilenecektir. Iptal etmek icin IPTAL EFSANE6GB yazip 4551'e gonderebilirsiniz.
+BIMcell Efsane 6GB Paketiniz 33TL'ye yenilenmistir. 30 gun boyunca gecerli yurtici heryone 900 dakika, 6 GB cepten internet ve BIMcell’lilerle sinirsiz konusma hakkinizi DD/MM/YYYY saat HH:MI’a kadar kullanabilirsiniz.
+Hattinizda 33TL veya uzerinde bakiye olmadigi icin BIMcell EFSANE 6GB Paketiniz yenilenemedi. 29 gun icinde hattinizda yeterli TL bulundugunda paketiniz otomatik olarak yenilenecektir.
+Hattinizda 33 TL olmadigi icin BIMcell EFSANE 6GB Paketiniz tanimlanamamistir. Paketi tekrar alabilmek icin yeterli yukleme yaptiktan sonra kayýt talebinizi tekrar iletebilirsiniz.

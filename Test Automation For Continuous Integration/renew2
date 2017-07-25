@@ -1,0 +1,440 @@
+#! /usr/bin/bash
+ 
+ #legal notice: standart 30 gunluk yenilemeli paketler icindir sadece.
+ #rights:AUT
+cleanup()
+# example cleanup function
+{
+echo " ctrl+c?"
+
+   for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+./close93LogFor.sh $$
+./clean93LogFor.sh $$
+
+rm pid.${sec} bonuslar$$ bonuslarAll$$ flags$$ flags2$$ anchors2$$ anchors$$ altmis$$ otuz$$ notOtuz$$ notOtuzNotAltmis$$ bonuslarRenew$$
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+msisdn=$1
+serviceID=$2
+price=$3
+sms=$4
+AVEA_DIR=$ORGADATA/avea
+
+work_dir=/tmp/ulvi/CI
+testBilgi="$0 $@"
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+  echo -en Merhaba\\n\\n $1 '\n\nIyi Calismalar\n\nAUT\nKafein CI Solutions\n\nLoglar:\n' > tmp$msisdn
+  echo ${0}Log$msisdn
+cat output$msisdn |egrep -v '^\*'>> tmp$msisdn 
+ scp tmp$msisdn mrte1@10.248.68.122:/tmp
+ ssh mrte1@10.248.68.122 "source .profile; cat /tmp/tmp$msisdn| mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+#ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+
+if [[ $# -ne 4 ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullanim: $0 MSISDN serviceID yenilemeUcreti 'sms metni'"
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 650 17 'degerli musterimiz'"
+doMail "illegal number of parameters. Kullanim: $0 MSISDN serviceID yenilemeUcreti 'smsMetni'    örnek: $0 05011011111 650 17 \\\"degerli musterimiz..\\\"" 
+	exit
+fi
+
+
+sec=$(date +%Y%m%d%H%M%S)
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)         
+aid=$(msisdn_to_accountid $msisdn )
+
+
+echo "AccountID:"$aid
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+#echo "#d    $   = :AccountID '$aid'  " | idbm_adb -s CreTrigger
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+
+#gold_operation_handler package $msisdn $ropName  INACT   > /dev/null 2>&1
+/tmp/ulvi/killAllPacks $msisdn
+gold_operation_handler package $msisdn $ropName  ACT   2>&1 |grep ERROR
+kalanPara=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g|perl -nl -MPOSIX -e 'print ceil($_);') 
+ subsquery $msisdn b || subsquery $msisdn b || subsquery $msisdn b
+ bundleid=$(grep $ropName $ORGADATA/cnf/cre/config_19700101000000.xml|  grep -oP "(?<=<bundle id=\")[^\"]+"   )
+ echo bundleid:$bundleid  
+ ruleid=$(echo "#s  :RuleID $  and = :AccountID '$aid' = :BundleID '$bundleid'   " | idbm_adb -s CreTrigger|grep -v END|sed s/\'//g)
+echo ruleid:$ruleid
+if [[ $kalanPara -ne `expr 1000 - $price` ]]
+then
+	echo -e "\e[7m Kayit ucreti yanlis.  ${NC}"
+	 doMail "Kayit ucreti yanlis. "
+	echo $kalanPara
+fi
+
+ 
+#eksikUcret=$(echo  "$price-0.0001"|bc -l) 
+later=$(mu_date -31)"000000"
+later360=$(mu_date -361)"000000"
+
+
+			echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '$price'  " | idbm_adb -s CreBalance
+ 
+
+echo "#s :ID :Value :Start :End  $ and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > bonuslarAll$$
+
+#yenileme sonrasi end date bos bonus sayisi yani anchor bonus sayisi degismesin. boylece farkli bir bonus verilmedigi kontrolu otomatized
+
+echo "#s :ID :Value :Start :End  $ and and and and and  = :AccountID '$aid' = :End '' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > anchors$$
+
+anchorCount1=$(cat anchors$$|wc -l)
+
+egrep -v "$( ots_date -S `date +%'Y'%'m'%'d'000000` +1Y +1d )|$later360|20310101000000" bonuslarAll$$ > bonuslar$$
+
+#bonus1=$(echo $bonuslar|head -1|awk '{print $1" " $2" "$4}')  #|sed s/\'//g
+oneMonth0=$(mu_date -31)"000000"
+#30olmayanlarin - 60 olanlarin sayisi degismesin  where end!30 and !60 yani 30gunluk olmayanlar yenilenmesin sayisi ayni kalsin
+#30olmayanlar:
+echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :End '$oneMonth0' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > notOtuz$$
+
+notOtuzCount1=$(cat notOtuz$$|wc -l)
+
+#end date kontrolleri. 
+while read line
+do
+bonusEnd=`echo $line|awk '{print $4}'`
+
+if [[ "$bonusEnd" != "$later" ]]
+then
+doMail "Paket alimda Bonus EndDate yanlis: $bonusEnd"
+fi
+
+done < bonuslar$$
+oneMonth=$(mu_date -31)"000010"
+later2=$(mu_date -62)"000000"
+#flags lasting more than 1 month will be saved to a file to check that they are not renewed.
+echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' > :End '$oneMonth' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance|grep -v END|sort|sed s/\'//g > flags$$
+
+
+
+#egrep -v "$later360|20310101000000" bonuslarAll$$ > bonuslarRenew$$
+
+#ilk 30 günlük bonus sayisi = yenileme sonrasi 60 gününde bitenlern sayisi olsun
+
+echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' = :End '$oneMonth0' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > otuz$$
+
+otuzCount1=$(cat otuz$$|wc -l)
+	
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.smsdelay_0?-WA.smsdelay_spreader_0?/data.* > EFD.smsdelay_0?-WA.smsdelay_spreader_0?.smsohpqdata&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/WA.smsdelay_spreader_0?-WA.smsdelay_0?/data.* > WA.smsdelay_spreader_0?-WA.smsdelay_0?.smsohpqdata.smsohpqdata &
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.smsdelay_0?-EFD.sms9333_0?/data.* > EFD.smsdelay_0?-EFD.sms9333_0?.smsohpqdata &
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.sms9333_0?-EVD.sms9333_0?/data.* > evdSMS9333&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/*sms*/data.* > allsms.ohpqdata&
+	echo $! >> pid.$sec
+	
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/BAS-EFD.bas/data.* > BAS-EFD.bas.smsohpqdata&
+	echo $! >> pid.$sec
+	
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.smsdelay_0?-WA.smsdelay_spreader_0?/data.*&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/WA.smsdelay_spreader_0?-WA.smsdelay_0?/data.*&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.smsdelay_0?-EFD.sms9333_0?/data.*&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.sms9333_0?-EVD.sms9333_0?/data.*  &
+	echo $! >> pid.$sec
+
+
+	
+ 	echo -e "******----------------RENEW TEST EDILIYO--------------------******${NC}"
+	#echo -e "${red}******--------------------------------------------------------------******${NC}"
+ today_isodate=$(ots_date -S `date +%'Y'%'m'%'d'000000` +31d)
+  echo "SMS OHPQ'lar tail'lendi"
+
+ echo -e "${red2}cre_batch kosuluyor"
+$ORGAROOT/run/bin/cre_batch -e $today_isodate -r 70,$ruleid  -DID BAT.manually  -a $aid > /dev/null 2>&1
+kalanPara=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g|perl -nl -MPOSIX -e 'print ceil($_);') 
+if [[ $kalanPara -ne 0 ]]
+then
+	echo -e "\e[7m Yenileme ucreti yanlis.  ${NC}"
+	echo $kalanPara
+	doMail "Yenileme ucreti yanlis ya da yenilenmedi. "
+fi
+mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+if [[ $mrteid -eq 2 ]] 
+    then 
+	ssh mrte1@localhost "source .profile;subsquery $msisdn b || subsquery $msisdn b || subsquery $msisdn b"   
+	else
+	subsquery $msisdn b || subsquery $msisdn b
+	
+fi
+#gold_operation_handler reload $msisdn 1000   2>&1|grep ERROR
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+echo "#s :ID :Value :Start :End  $ and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance
+
+sec2=$(date +%Y%m%d%H%M%S)
+echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' > :Start '$sec2' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > bonuslarRenew$$
+
+
+#egrep -v "$later360|20310101000000" bonuslarAll$$ > bonuslarRenew$$
+
+#yenileme sonrasi end date bos bonus sayisi yani anchor bonus sayisi degismesin.
+
+echo "#s :ID :Value :Start :End  $ and and and and and  = :AccountID '$aid' = :End '' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > anchors2$$
+
+anchorCount2=$(cat anchors2$$|wc -l)
+
+if [[ "$anchorCount2" != "$anchorCount1" ]]
+then
+doMail "Paket Yenilemede Extra Anchor Bonus verildi"
+fi
+
+
+#ilk 30 günlük bonus sayisi = yenileme sonrasi 60 gününde bitenlern sayisi olsun
+twoMonth0=$(mu_date -62)"000000"
+echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' = :End '$twoMonth0' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > altmis$$
+
+altmisCount1=$(cat altmis$$|wc -l)
+
+if [[ "$altmisCount1" != "$otuzCount1" ]]
+then
+doMail "Paket Yenilemede 2 kati olmasi gereken Tarih ya da bonus sayisi yanlis. Manuel kosup kontrol ediniz"
+fi
+
+
+#30olmayanlarin - 60 olanlarin sayisi degismesin  where end!30 and !60 yani 30gunluk olmayanlar yenilenmesin sayisi ayni kalsin
+#30olmayanlar:
+echo "#s :ID :Value :Start :End  $ and and and and and and and = :AccountID '$aid' != :End '$oneMonth0' != :End '$twoMonth0' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > notOtuzNotAltmis$$
+
+notOtuzNotAltmisCount=$(cat notOtuzNotAltmis$$|wc -l)
+
+
+if [[ "$notOtuzNotAltmisCount" != "$notOtuzCount1" ]]
+then
+doMail "Paket Yenilemede 30gunluk olmayanlar yenilenmemeli. Bonus Sayisi tutmadi Manuel kosup kontrol ediniz."
+fi
+
+
+#end date kontrolleri. 
+while read line
+do
+bonusEnd=`echo $line|awk '{print $4}'`
+bonusStart=`echo $line|awk '{print $3}'`
+if [[ "$bonusEnd" != "$later2" ]]
+then
+doMail "Paket Yenilemede Bonus EndDate yanlis: $bonusEnd"
+fi
+
+if [[ "$bonusStart" != "$later" ]]
+then
+doMail "Paket Yenilemede Bonus Start Date yanlis: $bonusEnd"
+fi
+
+bonusIdsi=`echo $line|awk '{print $1}'`
+bonusValue=`echo $line|awk '{print $2}'`
+
+alisBonusuVal=$(grep $bonusIdsi bonuslar$$ |awk '{print $2}')
+echo debug this amonts: $bonusValue ve $alisBonusuVal
+if [[ "$bonusValue" != "$alisBonusuVal" ]]
+then
+doMail "Paket Yenilemede Bonus Amount yanlis: $bonusValue is not equal to $alisBonusuVal"
+fi
+
+done < bonuslarRenew$$
+
+yenilemeCount=$(cat bonuslarRenew$$|wc -l) 
+alisCount=$(cat bonuslar$$|wc -l) 
+
+if [[ "$yenilemeCount" != "$alisCount" ]]
+then
+doMail "Paket Yenilemede Gelen Bonus Sayisi yanlis: $yenilemeCount. olmasi gereken: $alisCount "
+fi
+
+
+#ayni bonuslar gelmismi
+while read line
+do
+bonusIDsi=`echo $line|awk '{print $1}'`
+varMi=$(egrep "^$bonusIDsi " bonuslarRenew$$|wc -l)
+if [[ "$varMi" != "1" ]]
+then
+doMail "Yenilemede eksik Bonus: $bonusIDsi"
+fi
+
+done < bonuslar$$
+
+
+twoMonth=$(mu_date -62)"000000"
+#flags lasting more than 1 month will be saved to a file to check that they are not renewed.
+echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' > :End '$twoMonth' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance|grep -v END|sort|sed s/\'//g > flags2$$
+
+sort flags2$$ > tmp
+mv tmp flags2$$
+
+sort flags$$ > tmp
+mv tmp flags$$
+
+fark=$(diff flags$$ flags2$$|wc -l)
+
+if [[ "$fark" != "0" ]]
+then
+echo "Flag yenilendi. Alternative rule eksik olabilir.  "
+doMail "Flag yenilendi. Alternative rule eksik olabilir.  "
+fi
+
+echo -e "${red2}SMS'in kendiliginden gitmedigini görmek için 11 saniye bekliyoruz. SMS9333 loglarina bir sey gelmemeli.${NC}"
+sleep 11
+echo -e "${red2}11 saniye bitti. SMS_DELAY WA calistiriliyor"
+#log harvesting:
+rm smsDelayLog
+logFile=$(ls -1t $ORGADATA/avea/work/SMS_DELAY/log/$(date +%Y%m)/smsdelay*log|head -1)
+tail -f -n 0 $logFile > smsDelayLog &
+echo $! >> pid.$sec
+
+./start93LogFor.sh $$	
+OUPMclient -Q smsdelay_spreader_01 >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01   >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01       >> /dev/null       2>&1
+sleep 5
+OUPMclient -Q sms_delay_01  >> /dev/null       2>&1
+
+
+if [[ $mrteid -eq 2 ]] 
+    then 
+	ssh mrte1@localhost 'source .profile;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01 ;sleep 5;OUPMclient -Q sms_delay_01'   > /dev/null       2>&1
+	else
+	ssh mrte2@localhost 'source .profile;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01 ;sleep 5;OUPMclient -Q sms_delay_01' > /dev/null       2>&1
+	
+fi
+
+OUPMclient -Q smsdelay_spreader_01 >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01   >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01       >> /dev/null       2>&1
+sleep 5
+OUPMclient -Q sms_delay_01  >> /dev/null       2>&1
+sleep 6
+ for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+ rm pid.$sec
+echo "SMS_DELAY Log:"
+ echo ""
+
+ grep "I:0:$ropName:$msisdn has been notified about package renewal." smsDelayLog
+ echo ""
+ logGrep=$(grep "I:0:$ropName:$msisdn has been notified about package renewal." smsDelayLog|wc -l)
+ 
+ if [[ $logGrep -eq 0 ]] 
+    then 
+	 echo -e "\e[7m  SMS_DELAY WA Loguna gereken gelmedi  ${NC}"
+	 doMail "SMS_DELAY WA Loguna gereken gelmedi . "
+fi
+
+
+
+smsid=`egrep -v '==|^$|><MSGID>3</MSGID>|><MSGID>4</MSGID>'  evdSMS9333|grep $msisdn|grep -oP "(?<=<MSGID>)[^<]+"|tail -1`
+echo $smsid
+echo -e "${red}******--------------OHPQ'daki MSGID'nin DBdeki OUTBOUND_SMS_RULES kaydi:--------------------******${NC}"
+result=$(sqlplus -s APSATl/apsatl234@"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=sms9333t_cluster)(PORT=1529))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=VAS93T)))"  << EOF
+		set heading off
+
+		select *  from apsatl.OUTBOUND_SMS_RULES where sms_id=${smsid} or MESSAGE_ID=${smsid};
+		EXIT;
+		EOF)
+				echo -e "\e[7m$result"
+		 
+echo -e "${red}******--------------------------------------------------------------******${NC}"
+
+echo -e "${red}******--------------OHPQ'daki MSGID'nin SMS metni:--------------------******${NC}"
+		result=$(sqlplus -s APSATl/apsatl234@"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=sms9333t_cluster)(PORT=1529))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=VAS93T)))"  << EOF
+		set heading off
+		select distinct sms_text from apsatl.sms_text where sms_id=${smsid};
+		EXIT;
+		EOF)
+	echo -e "\e[7m$result"
+echo -e "${red}******--------------------------------------------------------------******${NC}"
+
+rm BASDB
+sleep 5
+read pp < $AVEA_DIR/dbLogin  
+#for UAT#  sqlplus -s >> BASDB  bastst2/bas123@10.248.68.124:1529/BAS2T << EOF
+#for Agile#  sqlplus -s >> BASDB  bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+sqlplus -s >> BASDB  bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+whenever sqlerror exit sql.sqlcode
+set feedback off;
+set head off;
+set pagesize 0;
+set linesize 1000
+
+select b.lc_state|| '|' || to_char(B.LC_DATE_FROM,'YYYYMMDDHH24MISS')|| '|' ||to_char(B.LC_DATE_TO,'YYYYMMDDHH24MISS') from SOLD_COMPONENT_TBL a, LC_SOLD_COMPONENT_TBL b where a.account_fk=${aid} and  A.SOLD_COMPONENT_ID=B.SOLD_COMPONENT_FK and a.SOLD_COMPONENT_NAME like '%0${serviceID}%'  and b.LC_STATE='ACT' and B.LC_DATE_TO>sysdate;
+
+EXIT;
+EOF
+
+ 
+actTO=$(grep ACT BASDB|cut -d'|' -f3)
+ 
+
+if [[ $actTO -ne '22000101000000' ]] 
+    then 
+	 echo -e "\e[7m  ACT TO_DATE 2200 degil: $actTO  ${NC}"
+	doMail "ACT TO_DATE 2200 degil: $actTO "
+fi
+
+./close93LogFor.sh $$
+echo Checking SMS9333 logs
+./check93.sh $$ $msisdn "$sms" 61
+
+./check93.sh $$ $msisdn "$sms" 61 |tail -1 > 93sonuc$$
+
+if [[ $(cat 93sonuc$$) != 'BASARILI' ]] 
+    then 
+	 echo -e "\e[7m  Beklenen Yenileme SMSi gelmedi: $0 $* ${NC}"
+	 doMail "Beklenen Yenileme SMSi gelmedi. "
+	
+fi
+
+rm 93sonuc$$
+./clean93LogFor.sh $$
+rm  bonuslar$$ bonuslarAll$$ flags$$ flags2$$ anchors2$$ anchors$$ altmis$$ otuz$$ notOtuz$$ notOtuzNotAltmis$$ bonuslarRenew$$
+

@@ -1,0 +1,45 @@
+#! /usr/bin/bash
+  
+ #Tested by AUT
+
+msisdn=$1
+#vol=$2
+other=$2
+ 
+if [[ $# -ne 2 && $# -ne 3  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN    digerNo [-s] "
+	echo "-s means silent and returning back to caller"
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05019144950  08888121341"
+
+	exit
+fi
+
+
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+sec=$(date +%Y%m%d%H%M%S)
+cnt=$(cat countersms)
+aid=$(msisdn_to_accountid $msisdn )
+ sed "s|SERVISAYAR|$msisdn|" /tmp/ulvi/cdr/MCPCDR-3940,1422440912_105599703_9428007729.autoicin.cdr   > tmp2
+#sed "s|DURATION|$vol|" tmpdata2 > tmp2
+sed "s|905552553664|$other|" tmp2 > tmp3
+sed "s|20150128010449|$sec|" tmp3 > $ORGADATA/peg/brf_01/ready/DATA/MCPCDR-${cnt},1422440912_105599703_9428007729.cdr 
+
+cnt=$(expr $cnt + 1)
+echo $cnt > countersms
+
+if [[ $# -ne 3    ]] 
+    then 
+	find $ORGADATA/log/ /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0* | egrep 'RTE0|data.0' | egrep -v 'CRELOG|logger|gz'  | xargs tail -f -n 0 | egrep "$aid|$msisdn|MCPCDR-$cnt"
+	 #egrep "$aid|$msisdn|MCPCDR-$cnt" /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*/data*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0*/data*  |/usr/local/bin/grep -oP 'delta_target=".*"'
+	#grep -o 'delta_target=".*"' logindata1
+	
+fi
+
+	 

@@ -1,0 +1,47 @@
+#! /usr/bin/bash
+ 
+#AUThor
+
+ if [[ $# -ne 3&&$# -ne 4 ]] 
+    then 
+        echo "illegal number of parameters"
+        echo "Kullaným: $0 ID msisdn sms [gun]"
+        echo "ornek kullanim:"
+        echo ""
+        echo "$0 $$ 0501135135 'Degerli musterimiz, daha cok harcayiniz.'"
+         echo "$0 $$ 0501135135 'Degerli musterimiz, daha cok harcayiniz.' 60"
+        exit
+fi
+pid=$1
+msisdn=$2
+sms=$3 
+gun=$4
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+#SMSlere tarih saat ekleme project start
+tarih=$(mu_date -30)
+ if [[ $# -eq 4 ]] 
+    then 
+tarih=$(mu_date -$gun)
+echo tarih $tarih
+fi	
+gun=$(echo $tarih|sed 's/\(.*\)\(..\)/\2/')
+ay=$(echo $tarih|sed 's/\(.*\)\(..\)../\2/')
+yil=$(echo $tarih|sed 's/\(.*\)\(..\)../\1/')
+saat=23:59
+tarih2=$gun\/$ay\/$yil
+sms=$(echo "$sms"|sed "s|<TARIH>|$tarih2|g"|sed "s|<SAAT>|$saat|g" |sed "s|HH:MI|$saat|g"|sed "s|DD\/MM\/YYYY|$tarih2|g"|sed "s|’|'|g"|sed 's/^ //'|sed 's/ $//'|sed 's/\.$//'|sed "s|*|\\\*|g"|sed "s|\.|\\\.|g")
+#project finished
+
+if [[ $(grep "OutgoingSms to Msisdn :9${msisdn}smsText :" sms9333Log.$pid.$(date +%Y%m%d)*|egrep "smsText :\s?\s?\s?$sms\.?\s?\s?\s?\s?"|wc -l) -ne 1 ]]
+then
+grep ${msisdn} sms9333Log.$pid.$(date +%Y%m%d)*
+echo BULUNAMADI
+else
+#grep ${msisdn} sms9333Log.$pid.$(date +%Y%m%d)*
+grep "OutgoingSms to Msisdn :9${msisdn}smsText :" sms9333Log.$pid.$(date +%Y%m%d)*|egrep "smsText :\s?\s?\s?$sms\.?\s?\s?\s?\s?"
+echo BASARILI
+fi
+

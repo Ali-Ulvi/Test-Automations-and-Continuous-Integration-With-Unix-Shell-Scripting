@@ -1,0 +1,15 @@
+<answer>
+	<id>c:ANUM:r0:mms::::ANUM:05104608</id>
+	<session_id>c:ANUM:r0:mms::::ANUM:05104608</session_id>
+	<reservation>end</reservation>
+	<resource>
+		<service_type>MOMMS</service_type>
+		<content_id/>
+		<validity_time>0</validity_time>
+		<resultCode>0</resultCode>
+		<granted_resources>
+			<service_specific_units>1</service_specific_units>
+		</granted_resources>
+	</resource>
+	<resultCode>0</resultCode>
+</answer>

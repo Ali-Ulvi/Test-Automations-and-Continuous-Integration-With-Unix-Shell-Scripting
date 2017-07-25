@@ -1,0 +1,4 @@
+#### sim_comlayer -f MOSMS_1 -D #########################
+InitClient reg_ngcp_event_01@/rte/orgadata/mrte1/cnf/shared/CommunicationParameters.cfg
+SendFile /export/home/mrte1/avea/USERS/zonder/call_simulation/mosms.req.charge
+WaitFile /export/home/mrte1/avea/USERS/zonder/call_simulation/mosms.rsp.charge

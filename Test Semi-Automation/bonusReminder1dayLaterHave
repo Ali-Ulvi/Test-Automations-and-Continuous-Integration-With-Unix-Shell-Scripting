@@ -1,0 +1,65 @@
+#! /usr/bin/bash
+  
+msisdn=$1
+bonusName=$2
+haveBonusName=$3
+AVEA_DIR=$ORGADATA/avea
+if [[ $# -ne 3 ]] 
+    then 
+	echo "illegal number of parameters. used for 1 day later reminder smses"
+	echo "Kullaným: $0 MSISDN bonusName mustHaveBonusName  "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 BLC_MondaySaturdayDataKazandiFlagBonus_02845 BLC_MondaySaturdayDataRegisterBonus_02844"
+	 
+
+	exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+#bonusName=$(  grep -oP "BL._.*0${bonusID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "bonusName:"$bonusName
+ sec=$(date +%Y%m%d%H%M%S)
+ tumBonusSil $msisdn
+ gold_operation_handler bonus $msisdn $haveBonusName 1.0 $(date +%Y%m%d%H%M%S) $(mu_date -2)"000000"
+gold_operation_handler bonus $msisdn $bonusName 1.0 $(date +%Y%m%d%H%M%S) $(mu_date -1)"000000"
+goldID=$(grep $bonusName $ORGADATA/cnf/cre/config_19700101000000.xml| grep -oP '(?<=<balance allow_negative="no" has_pockets="yes" id=")[^"]+')
+later=$(mu_date -31)"000000"
+ echo "#s    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+
+echo "#u  :End $ and  and = :AccountID '$aid' = :ID '$goldID' != :End '' &  '$(mu_date -1)000000' "
+echo "#u  :End $ and  and = :AccountID '$aid' = :ID '$goldID' != :End '' &  '$(mu_date -1)000000' " | idbm_adb -s CreBalance
+
+
+tonight=$(mu_date -1)"000000"
+
+
+echo -e "${red2}RopBalRem WA calistiriliyor. this may take a while"
+echo
+ bash $ORGADATA/avea/work/RopAndBalanceReminderSMS/app/rop_and_balance_reminder_sms.sh
+ 
+ 
+ dumpFile=$(ls  $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/dbdump/$(date +%Y%m%d)|grep $bonusName)
+ mu_date 1
+ mv $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/dbdump/$(date +%Y%m%d)/$dumpFile $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/dbdump/$( mu_date 1)
+ echo "#d   $ and  and = :AccountID '$aid' = :ID '$goldID' != :End '' " | idbm_adb -s CreBalance
+ smsFile=$(ls -1t $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files | head -1 )
+echo "Grep On day:"
+grep $msisdn $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile
+bash $ORGADATA/avea/work/RopAndBalanceReminderSMS/app/rop_and_balance_reminder_sms.sh
+echo "Grep after 1 day:"
+ smsFile=$(ls -1t $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files | head -1 )
+grep $msisdn $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile
+ logGrep=$(grep "9$msisdn;9333;000;" $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile|wc -l)
+ 
+ if [[ $logGrep -eq 0 ]] 
+    then 
+	 echo -e "\e[7m  generated_sms_files'a gelmedi  ${NC}"
+	
+fi
+  

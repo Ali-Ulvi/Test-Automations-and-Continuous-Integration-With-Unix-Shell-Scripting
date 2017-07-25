@@ -1,0 +1,13 @@
+#Cumlelerdeki rakamla olan sayilari, bonus tiplerini ve bonus name'leri talebe göre guncelleyiniz. *comment out a sentence by putting # at the begining of it, if it is unavailable in your demand. 
+OTF id:1098
+kayit bonusu:BLC_WoopsPstnRegisterBonus_02597
+#Kampanya suresi 364 gun - abone bazli sure.
+Kampanya 20160629 tarihine kadar.
+Kampanya bitis Kontrol bonusu:BLC_WoopsPstn1YilTakipBonus_02595
+bonus kullanim ve kazanim suresi 30 gunluk - verilen gun kadar surede bir kere kazanabilir. Kontrol bonusu:BLC_WoopsPstnKazandiFlagBonus_02596
+fayda bonuslari - boslukla ayrilmis:BLB_WoopsPstnPaketi_SinirsizPstnSesBonus_02593  
+fayda bonuslari tipleri - boslukla ayrilmis:Seconds
+fayda bonuslari Miktarlari - boslukla ayrilmis:180000
+yukleme kosulu 30 TL - tam sayi olmali. only greater or equal is supported in this script. else test manually.
+kampanya bitis reminder smsi:Sahur Kampanyasi sona ermistir. Baska kampanya/paketiniz yoksa kullanimlariniz tarifenizin standart ucretine tabidir.
+

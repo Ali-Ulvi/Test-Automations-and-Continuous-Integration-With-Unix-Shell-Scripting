@@ -1,0 +1,38 @@
+#! /usr/bin/bash
+
+#AUT Productions
+#produce Numbers till one exists in the same mrte with the script
+
+while true; do 
+msisdn0=$(cat /tmp/CI/no |head -1)
+msisdn=$(expr $msisdn0 + 1)
+echo $msisdn > /tmp/CI/no
+msisdn=0$msisdn
+
+
+gold_operation_handler terminate $msisdn 2  2>&1|grep ERROR # || sleep 3
+
+gold_operation_handler install $msisdn $1 2>&1|grep ERROR && exit
+
+
+ 
+aid=$(msisdn_to_accountid $msisdn )
+
+if [[ $(echo $aid|grep ERR|wc -l) = 1 ]]
+then
+     
+    echo trying again
+else
+	sleep 1
+	gold_operation_handler reload $msisdn 9999999
+	sleep 6
+	 gold_operation_handler package $msisdn  PP_NWS_ROAM_00003 ACT
+	 sleep 2
+	echo $msisdn
+    exit #!!!!!!!
+ 
+fi
+done
+ 
+ 
+

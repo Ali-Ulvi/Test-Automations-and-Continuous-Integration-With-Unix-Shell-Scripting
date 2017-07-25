@@ -1,0 +1,408 @@
+#! /usr/bin/bash
+ 
+# AI by AUT
+
+testBilgi="$0 $@"
+
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en '$1' '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST" 2>&1 |egrep -v "^*    "
+fi
+done < .mail
+  
+}
+
+reload()
+ 
+{
+	#$1=amount
+	sleep 3
+	echo reloading $1
+if [[ $(gold_operation_handler reload $msisdn $1 2>&1 |grep -o ERROR|head -1) = ERROR ]]
+then
+echo reload yapilamadi trying again 
+hata=$(gold_operation_handler reload $msisdn $1 2>&1 |grep  ERROR|head -1)
+	if [[ -n "$hata" ]]
+		then
+		doMail "reload yapilamadi exiting '$hata'"
+		echo "reload yapilamadi exiting '$hata'"
+		exit
+	fi
+fi
+sleep 3
+}
+
+pack()
+ {
+ 	sleep 3
+hata=$(gold_operation_handler package $msisdn  $otf ACT 2>&1 |grep  ERROR|head -1)
+	if [[ -n "$hata" ]]
+		then
+		doMail "otf alinamadi exiting '$hata'"
+		echo "$otf otf alinamadi exiting '$hata'"
+		exit
+	fi
+	sleep 3
+}
+
+bonus()
+ {
+ 	sleep 3
+hata=$(gold_operation_handler bonus $msisdn  $1 1 20121212121212 20291212000000 2>&1 |grep  ERROR|head -1)
+	if [[ -n "$hata" ]]
+		then
+		doMail "$1 bonus alinamadi exiting '$hata'"
+		echo "$1 bonus alinamadi exiting '$hata'"
+		exit
+	fi
+	sleep 3
+}
+kampanyaSuresi=$(sed -n "s|^Kampanya suresi \([0-9]*\).*|\1|p" yukleKazan.cfg)
+otf=$(sed -n "s|^OTF id:\([0-9]*\).*|\1|p" yukleKazan.cfg)
+registerB=$(sed -n "s|^kayit bonusu:\(.*\) Suresi:.*|\1|p" yukleKazan.cfg)
+registerBTarihi=$(sed -n "s|^kayit bonusu:.*Suresi:\(.*\)|\1|p" yukleKazan.cfg)
+kampanyaTarihi=$(sed -n "s|^Kampanya \([0-9]*\) tarihine kadar..*|\1|p" yukleKazan.cfg)
+kampanyaTarihiB=$(sed -n "s|^Kampanya bitis Kontrol bonusu:\(.*\)|\1|p" yukleKazan.cfg)
+kazandiFlag=$(sed -n "s|^bonus kullanim ve kazanim suresi \([0-9]*\) gunluk - verilen gun kadar surede bir kere kazanabilir. Kontrol bonusu:\(.*\)|\2|p" yukleKazan.cfg)
+gun=$(sed -n "s|^bonus kullanim ve kazanim suresi \([0-9]*\) gun.*|\1|p" yukleKazan.cfg)
+fayda=$(sed -n "s|^fayda bonuslari - boslukla ayrilmis:\(.*\)|\1|p" yukleKazan.cfg)
+faydaArr=($fayda)
+faydaTypes=$(sed -n "s|^fayda bonuslari tipleri - boslukla ayrilmis:\(.*\)|\1|p" yukleKazan.cfg)
+faydaTypeArr=($faydaTypes)
+faydaAmounts=$(sed -n "s|^fayda bonuslari Miktarlari - boslukla ayrilmis:\(.*\)|\1|p" yukleKazan.cfg)
+faydaAmountsArr=($faydaAmounts)
+reloadAmount=$(sed -n "s|^yukleme kosulu \([0-9]*\).*|\1|p" yukleKazan.cfg)
+msisdn=$(./newNo |tail -1)
+if [[ $(echo $msisdn|egrep "[0-9]{8}"|wc -l) -eq 0 ]]
+    then
+    echo msisdn olusmadi
+    doMail "'$msisdn' msisdn olusturulamadi. check the system."
+    exit
+fi
+
+if [[ $(echo $reloadAmount|egrep "[0-9]"|wc -l) -eq 0 ]]
+    then
+    echo "reloadAmount okunamadi"
+    doMail "reloadAmount okunamadi. cfg yi kontrol ediniz."
+    exit
+fi
+
+if [[ $(echo "$kampanyaSuresi"|egrep "[0-9]"|wc -l) -eq 0 && $(echo "$kampanyaTarihi"|egrep "[0-9]"|wc -l) -eq 0 ]]
+    then
+    echo "hem kampanyaSuresi hem kampanyaTarihi bos"
+    doMail "hem kampanyaSuresi hem kampanyaTarihi bos. exiting"
+    exit
+fi
+
+if [[ $(echo "$kampanyaSuresi"|egrep "[0-9]"|wc -l) -gt 0 && $(echo "$kampanyaTarihi"|egrep "[0-9]"|wc -l) -gt 0 ]]
+    then
+    echo "hem kampanyaSuresi hem kampanyaTarihi dolu"
+    doMail "hem kampanyaSuresi hem kampanyaTarihi dolu. satir basina # koyarak kapatabilirsiniz. exiting"
+    exit
+fi
+ msisdn1=$(./newNo |tail -1)
+./CI80100yukleKazan $msisdn1 $otf 2>&1 > output$msisdn1 &
+
+if [[ $(echo $registerBTarihi|grep gun|wc -l) -gt 0 ]]
+then
+    registerBTarihi=$(mu_date -$(echo $registerBTarihi|grep -oP [0-9]+))
+	echo registerBTarihi:$registerBTarihi
+fi
+file=bonuslari$msisdn
+aid=$(msisdn_to_accountid $msisdn )
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+#149 tarifesi is supported
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g > bonuslarAll$$
+bonusSayisi=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+
+echo checking Non-registered reload
+reload  $reloadAmount 
+sleep 4
+bonusSayisi2=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$bonusSayisi2" -ne "$bonusSayisi" ]]
+then
+	echo -e "\e[7m  otf almadan yukleyince bonus sayisi degisti  ${NC}"
+	doMail " otf almadan yukleyince bonus sayisi degisti. önce:$bonusSayisi sonra:$bonusSayisi2 check ifExist in /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+	echo önce:$bonusSayisi sonra:$bonusSayisi2
+fi
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+echo buying $otf
+pack
+./checkBonus  $msisdn $registerB 1 CNT 1 $gun
+echo checking FirstReloadEvent negative
+reload $(expr $reloadAmount - 1)
+sleep 5
+bonusSayisi2=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$bonusSayisi2" -ne $(expr 2 + "$bonusSayisi") ]]
+then
+	echo -e "\e[7m  $(expr $reloadAmount - 1) TL yukleyince bonus sayisi degisti  ${NC}"
+	doMail " $(expr $reloadAmount - 1) TL yukleyince bonus sayisi degisti. önce:$bonusSayisi sonra:$bonusSayisi2 check ReloadAmount in /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+	echo önce:$bonusSayisi sonra:$bonusSayisi2
+fi
+
+echo checking FirstReloadEvent pozitive boundry $reloadAmount 
+reload  $reloadAmount 
+sleep 2
+for((i=0;i<${#faydaArr[@]};i++))
+do
+    echo "$i: ${faydaArr[$i]}"
+    ./checkBonus  $msisdn ${faydaArr[$i]} ${faydaAmountsArr[$i]} ${faydaTypeArr[$i]} 1 $gun
+done
+bonusSayisi3=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+#Bunlar disinda bir bonus almamali.
+if [[ "$bonusSayisi3" -ne $(expr "$bonusSayisi2" + ${#faydaArr[@]} "*" "2" + 2 + "2") ]]
+then
+	echo -e "\e[7m $reloadAmount  TL yukleyince fazla ya da eksik bonus geldi ${NC}"
+	doMail "checking FirstReloadEvent. $reloadAmount TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi2 sonra:$bonusSayisi3 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+	echo "$reloadAmount TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi2 sonra:$bonusSayisi3 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+fi
+#######flag bonuslari check et
+./checkBonus  $msisdn $kazandiFlag 1 CNT 1 $gun
+./checkBonus  $msisdn $kampanyaTarihiB 1 CNT 1 ${kampanyaSuresi:-$kampanyaTarihi}  
+
+echo checking FirstReloadEvent pozitive boundry+1 $reloadAmount+1 
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+sleep 2
+echo buying $otf
+ 
+pack
+ 
+reload $(expr $reloadAmount + 1)
+sleep 2
+for((i=0;i<${#faydaArr[@]};i++))
+do
+    echo "$i: ${faydaArr[$i]}"
+    ./checkBonus  $msisdn ${faydaArr[$i]} ${faydaAmountsArr[$i]} ${faydaTypeArr[$i]} 1 $gun
+done
+
+#######flag bonuslari check et
+./checkBonus  $msisdn $kazandiFlag 1 CNT 1 $gun
+./checkBonus  $msisdn $kampanyaTarihiB 1 CNT 1 ${kampanyaSuresi:-$kampanyaTarihi}  
+
+bonusSayisi3=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+#Bunlar disinda bir bonus almamali.
+if [[ "$bonusSayisi3" -ne $(expr "$bonusSayisi2" + ${#faydaArr[@]} "*" 2 + 2 + "2") ]]
+then
+	echo -e "\e[7m $reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi ${NC}"
+	doMail "$reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi2 sonra:$bonusSayisi3 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+	echo "$reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi2 sonra:$bonusSayisi3 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+fi
+
+echo checking RestReloadEvent within month. -negative
+reload  $reloadAmount 
+sleep 5 
+bonusSayisi4=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$bonusSayisi3" -ne "$bonusSayisi4" ]]
+then
+	echo -e "\e[7m checking RestReloadEvent within month failed ${NC}"
+	doMail "checking RestReloadEvent within month failed. ayda bir kazanmali. önce:$bonusSayisi3 sonra:$bonusSayisi4 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+	echo "checking RestReloadEvent within month failed. ayda bir kazanmali. önce:$bonusSayisi3 sonra:$bonusSayisi4 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+fi
+
+echo checking RestReloadEvent out of month.on boundry. -pozitive
+echo deleting kazandiFlag
+bonussil $msisdn $(echo $kazandiFlag|sed 's/\(.*\)\(....\)/\2/' )  2>&1 |egrep -v "^*    "
+reload  $reloadAmount 
+bonusSayisi5=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$bonusSayisi5" -ne $(expr "$bonusSayisi4" + ${#faydaArr[@]} "*" 1 ) ]]
+then
+	echo -e "\e[7m $reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi ${NC}"
+	doMail "$reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi4 sonra:$bonusSayisi5 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+	echo "$reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi4 sonra:$bonusSayisi5 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+fi
+#bonus kontrol flag ve use bns
+./checkBonus  $msisdn $kazandiFlag 1 CNT 1 $gun
+./checkBonus  $msisdn $kampanyaTarihiB 1 CNT 1 ${kampanyaSuresi:-$kampanyaTarihi} 
+for((i=0;i<${#faydaArr[@]};i++))
+do
+    echo "$i: ${faydaArr[$i]}"
+    ./checkBonus  $msisdn ${faydaArr[$i]} ${faydaAmountsArr[$i]} ${faydaTypeArr[$i]} 2 $gun
+done
+###
+
+echo checking RestReloadEvent out of month. boundry+11. -pozitive
+echo deleting kazandiFlag
+bonussil $msisdn $(echo $kazandiFlag|sed 's/\(.*\)\(....\)/\2/' )  2>&1 |egrep -v "^*    "
+reload  $(expr $reloadAmount + 11) 
+bonusSayisi6=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$bonusSayisi6" -ne $(expr "$bonusSayisi5" + ${#faydaArr[@]} "*" 1 ) ]]
+then
+	echo -e "\e[7m $reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi ${NC}"
+	doMail "checking RestReloadEvent out of month. boundry+11. -pozitive. $reloadAmount +11 TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi4 sonra:$bonusSayisi5 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+	echo "$reloadAmount +11 TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi5 sonra:$bonusSayisi6 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+fi
+#bonus kontrol flag ve use bns
+./checkBonus  $msisdn $kazandiFlag 1 CNT 1 $gun
+./checkBonus  $msisdn $kampanyaTarihiB 1 CNT 1 ${kampanyaSuresi:-$kampanyaTarihi} 
+for((i=0;i<${#faydaArr[@]};i++))
+do
+    echo "$i: ${faydaArr[$i]}"
+    ./checkBonus  $msisdn ${faydaArr[$i]} ${faydaAmountsArr[$i]} ${faydaTypeArr[$i]} 3 $gun
+done
+
+echo checking RestReloadEvent out of month. boundry-1 -negative
+echo deleting kazandiFlag
+bonussil $msisdn $(echo $kazandiFlag|sed 's/\(.*\)\(....\)/\2/' )  2>&1 |egrep -v "^*    "
+reload  $(expr $reloadAmount - 1) 
+bonusSayisi7=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$(expr "$bonusSayisi6" - 1)" -ne "$bonusSayisi7" ]]
+then
+	echo -e "\e[7m checking RestReloadEvent out of month. boundry-1 -negative failed ${NC}"
+	doMail "checking RestReloadEvent out of month. boundry-1 -negative failed.  önce:$bonusSayisi6 sonra:$bonusSayisi7 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+	echo "checking RestReloadEvent out of month. boundry-1 -negative failed. önce:$bonusSayisi6 sonra:$bonusSayisi7 check /bas/orgadata/bas/cnf/domain-properties/basnc/reloadConfig/ConditionAction.xml  "
+fi
+
+
+############check RTEEvents. before reG
+echo checking RTEEvents start
+echo checking reload boundry-1 and register -negative
+
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+bonusSayisi1=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+reload $(expr $reloadAmount - 1)
+echo buying $otf
+pack
+./checkBonus  $msisdn $registerB 1 CNT 1 $gun
+sleep 5
+bonusSayisi2=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$bonusSayisi2" -ne $(expr 2 + "$bonusSayisi1") ]]
+then
+	echo -e "\e[7m RTEEvents: $(expr $reloadAmount - 1) TL yukleyip paketi alinca bonus sayisi degisti  ${NC}"
+	doMail " RTEEvents: $(expr $reloadAmount - 1) TL yukleyip paketi alinca bonus sayisi degisti. önce:$bonusSayisi1 sonra:$bonusSayisi2 check ReloadAmount in RTEEvents.xml  "
+	echo önce:$bonusSayisi1 sonra:$bonusSayisi2
+fi
+
+
+
+echo checking RTEEvents pozitive boundry $reloadAmount 
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+reload  $reloadAmount 
+echo buying $otf
+pack
+./checkBonus  $msisdn $registerB 1 CNT 1 $gun
+for((i=0;i<${#faydaArr[@]};i++))
+do
+    echo "$i: ${faydaArr[$i]}"
+    ./checkBonus  $msisdn ${faydaArr[$i]} ${faydaAmountsArr[$i]} ${faydaTypeArr[$i]} 1 $gun
+done
+bonusSayisi3=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+#Bunlar disinda bir bonus almamali.
+if [[ "$bonusSayisi3" -ne $(expr "$bonusSayisi1" + ${#faydaArr[@]} "*" "2" + 2 + "2" + 2) ]] #####
+then
+	echo -e "\e[7m RTEEvents $reloadAmount  TL yukleyince fazla ya da eksik bonus geldi ${NC}"
+	doMail "checking RTEEvents. $reloadAmount TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi1 sonra:$bonusSayisi3 check RTEEvents.xml  "
+	echo "checking RTEEvents $reloadAmount TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi1 sonra:$bonusSayisi3 check RTEEvents.xml  "
+fi
+#######flag bonuslari check et
+./checkBonus  $msisdn $kazandiFlag 1 CNT 1 $gun
+./checkBonus  $msisdn $kampanyaTarihiB 1 CNT 1 ${kampanyaSuresi:-$kampanyaTarihi}  
+
+echo checking RTEEvents pozitive boundry+1 $reloadAmount+1 
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+reload $(expr $reloadAmount + 1)
+echo buying $otf
+pack
+sleep 5
+for((i=0;i<${#faydaArr[@]};i++))
+do
+    echo "$i: ${faydaArr[$i]}"
+    ./checkBonus  $msisdn ${faydaArr[$i]} ${faydaAmountsArr[$i]} ${faydaTypeArr[$i]} 1 $gun
+done
+#######flag bonuslari check et
+./checkBonus  $msisdn $kazandiFlag 1 CNT 1 $gun
+./checkBonus  $msisdn $kampanyaTarihiB 1 CNT 1 ${kampanyaSuresi:-$kampanyaTarihi}  
+
+bonusSayisi3=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+#Bunlar disinda bir bonus almamali.
+if [[ "$bonusSayisi3" -ne $(expr "$bonusSayisi1" + ${#faydaArr[@]} "*" "2" + 2 + "2" + 2) ]] #####
+then
+	echo -e "\e[7m RTEEvents $reloadAmount +1  TL yukleyince fazla ya da eksik bonus geldi ${NC}"
+	doMail "checking RTEEvents. $reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi1 sonra:$bonusSayisi3 check RTEEvents.xml  "
+	echo "checking RTEEvents $reloadAmount +1 TL yukleyince fazla ya da eksik bonus geldi önce:$bonusSayisi1 sonra:$bonusSayisi3 check RTEEvents.xml  "
+fi
+
+echo checking FirstReloadEvent BalanceNotExist condition for $kampanyaTarihiB
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+bonus $kampanyaTarihiB
+bonusSayisi1=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+echo buying $otf
+pack
+sleep 1
+./checkBonus  $msisdn $registerB 1 CNT 1 $gun
+reload $reloadAmount 
+sleep 1
+for((i=0;i<${#faydaArr[@]};i++))
+do
+    echo "$i: ${faydaArr[$i]}"
+    ./checkBonus  $msisdn ${faydaArr[$i]} ${faydaAmountsArr[$i]} ${faydaTypeArr[$i]} 1 $gun
+done
+#######flag bonuslari check et
+./checkBonus  $msisdn $kazandiFlag 1 CNT 1 $gun
+./checkBonus  $msisdn $kampanyaTarihiB 1 CNT 1 20291211
+
+bonusSayisi3=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+#Bunlar disinda bir bonus almamali.
+if [[ "$bonusSayisi3" -ne $(expr "$bonusSayisi1" + ${#faydaArr[@]} "*" "2" + 2 + 2) ]] #####
+then
+	echo -e "\e[7m RTEEvents $reloadAmount +1  TL yukleyince fazla ya da eksik bonus geldi ${NC}"
+	doMail "checking FirstReloadEvent BalanceNotExist condition for $kampanyaTarihiB fazla ya da eksik bonus geldi önce:$bonusSayisi1 sonra:$bonusSayisi3 check Condition.xml  "
+	echo "checking FirstReloadEvent BalanceNotExist condition for $kampanyaTarihiB fazla ya da eksik bonus geldi önce:$bonusSayisi1 sonra:$bonusSayisi3 check Condition.xml  "
+fi
+
+echo checking FirstReloadEvent BalanceNotExist condition for $kazandiFlag
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+bonus $kazandiFlag
+bonusSayisi1=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+echo buying $otf
+pack
+sleep 3
+./checkBonus  $msisdn $registerB 1 CNT 1 $gun
+reload $reloadAmount 
+sleep 5
+bonusSayisi2=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$bonusSayisi2" -ne $(expr 2 + "$bonusSayisi1") ]]
+then
+	echo -e "\e[7m  FirstReloadEvent BalanceNotExist condition for $kazandiFlag failed  ${NC}"
+	doMail "  FirstReloadEvent BalanceNotExist condition for $kazandiFlag failed. bonus sayisi degisti. önce:$bonusSayisi1 sonra:$bonusSayisi2 check BalanceNotExist in Condition.xml"
+	echo önce:$bonusSayisi1 sonra:$bonusSayisi2
+fi
+
+
+
+echo checking RTEEvents FirstReloadEvent BalanceNotExist condition for $kazandiFlag
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance 
+bonus $kazandiFlag
+bonusSayisi1=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+reload $reloadAmount 
+echo buying $otf
+pack
+sleep 5
+./checkBonus  $msisdn $registerB 1 CNT 1 $gun
+
+bonusSayisi2=$(echo "#s :ID :Value :Start :End  $ and and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :ID '752' != :ID '1520' " | idbm_adb -s CreBalance|grep -v END|wc -l)
+if [[ "$bonusSayisi2" -ne $(expr 2 + "$bonusSayisi1") ]]
+then
+	echo -e "\e[7m RTEEvents: FirstReloadEvent BalanceNotExist condition for $kazandiFlag failed  ${NC}"
+	doMail " RTEEvents: FirstReloadEvent BalanceNotExist condition for $kazandiFlag failed. bonus sayisi degisti. önce:$bonusSayisi1 sonra:$bonusSayisi2 check BalanceNotExist in RTEEvents.xml"
+	echo önce:$bonusSayisi1 sonra:$bonusSayisi2
+fi
+
+ #notify subscribers
+ while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en \" Yukle Kazan Gold Testi Bitti. iptal ve iptal sonrasi tekrar kayit senaryolarini, kayit oncesi ve sonrasi reload olasiliklariyla manuel test ediniz. kampanya bitis bonusu:$kampanyaTarihiB  süresi: ${kampanyaSuresi:-$kampanyaTarihi}  \\n Pls check for unhandled errors \"  | mailx -s \"Yukle Kazan Testi Bitti $kazandiFlag\" $EMAIL_LIST"
+fi
+done <.mail
+

@@ -1,0 +1,79 @@
+#!/bin/bash
+# This script is written for loggers. Provides log
+#
+# Script File    : $0
+# Author         : AUT
+# Version        : v1.0
+# Date           : Ocak 22, 2015
+# Change History :
+# Version 1.0 Released By: AUT Not meant for change.
+#####################################################################################################################################
+
+if [[ $# -ne 1 ]] 
+    then 
+	echo "illegal number of parameters(not 1)"
+	echo "Usage: gimme MSISDN to grep"
+	exit
+	 
+fi
+
+cd
+
+source .profile
+
+cd -
+ msisdn=$1
+op_date=$(date +%Y%m%d)
+sec=$(date +%Y%m%d%H%M%S)
+ 
+ 
+tail -f $ORGADATA/log/RTE02_REGLOG_${op_date}.*[0-9]*[^gz]  > r2.${msisdn}.$sec.txt &
+echo $! >> pid.$sec
+tail -f $ORGADATA/log/RTE01_REGLOG_${op_date}.*[0-9]*[^gz]  > r1.${msisdn}.$sec.txt &
+echo $! >> pid.$sec
+tail -f $ORGADATA/log/RTE03_REGLOG_${op_date}.*[0-9]*[^gz]  > r3.${msisdn}.$sec.txt                           &
+echo $! >> pid.$sec                                                                                           
+tail -f $ORGADATA/log/RTE04_REGLOG_${op_date}.*[0-9]*[^gz]  > r4.${msisdn}.$sec.txt                           &
+echo $! >> pid.$sec                                                                                         
+tail -f $ORGADATA/log/RTE05_REGLOG_${op_date}.*[0-9]*[^gz]  > r5.${msisdn}.$sec.txt                           &
+echo $! >> pid.$sec                                                                                         
+tail -f $ORGADATA/log/RTE01_CRELOG_${op_date}.*[0-9]*[^gz]  > c1.${msisdn}.$sec.txt                           &
+echo $! >> pid.$sec                                                                                           
+tail -f $ORGADATA/log/RTE02_CRELOG_${op_date}.*[0-9]*[^gz]  > c2.${msisdn}.$sec.txt                           &
+echo $! >> pid.$sec                                                                                          
+tail -f $ORGADATA/log/RTE03_CRELOG_${op_date}.*[0-9]*[^gz]  > c3.${msisdn}.$sec.txt                           &
+echo $! >> pid.$sec                                                                                           
+tail -f $ORGADATA/log/RTE04_CRELOG_${op_date}.*[0-9]*[^gz]  > c4.${msisdn}.$sec.txt                           &
+echo $! >> pid.$sec                                                                                           
+tail -f $ORGADATA/log/RTE05_CRELOG_${op_date}.*[0-9]*[^gz]  > c5.${msisdn}.$sec.txt                           &
+echo $! >> pid.$sec 
+                                                                                         
+#echo "tail -f $ORGADATA/log/OUPMRTELOG_${op_date}.[0-9]*[^gz]  |  grep $msisdn > oupm.${msisdn}.${sec}.txt  "
+
+tail -f $ORGADATA/log/OUPMRTELOG_${op_date}.[0-9]*[^gz]  > tmp.${msisdn}.${sec}.txt    &
+echo $! >> pid.$sec   
+
+echo " press Enter to end grep"  
+read tmp
+   
+ 
+
+	
+   for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+  grep $msisdn tmp.${msisdn}.${sec}.txt > oupm.${msisdn}.${sec}.txt 
+cat oupm*${msisdn}.$sec.txt r*${msisdn}.$sec.txt c*${msisdn}.$sec.txt > LOGS${msisdn}.$sec.txt 
+   cat   r*${msisdn}.$sec.txt c*${msisdn}.$sec.txt > LOGS-REGandCRE${msisdn}.$sec.txt 
+ rm  r*${msisdn}.$sec.txt c*${msisdn}.$sec.txt
+  rm tmp.${msisdn}.${sec}.txt
+   echo "Birlesmis dosya LOGS${msisdn}.${sec}.txt"
+   rm pid.$sec
+   
+   ls -lh  LOGS${msisdn}.${sec}.txt
+   
+   
+   
+

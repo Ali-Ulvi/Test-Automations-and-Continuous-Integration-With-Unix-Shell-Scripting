@@ -1,0 +1,120 @@
+#! /usr/bin/bash
+  
+ #AUThor: AUT  
+msisdn=$1
+vol=$2
+other=$3
+ 
+msisdn=$1
+vol=$2
+bnumber=$3
+fiyat=$4
+tarif=$5
+retryCount=$6
+
+if [ -z "$retryCount" ]
+	then
+	retryCount=7
+fi
+
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+
+}
+
+if [[ $# -ne 5 && $# -ne 6  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN vol bnumber fiyat tarife"
+	echo "ornek kullanim:"
+	echo "$0 05011011111 60  0888901231 0.6 TP_00019"
+	exit
+fi
+  
+sec=$(mu_date -1)235959
+cnt=$(cat /tmp/ulvi/counterindata)
+aid=$(msisdn_to_accountid $msisdn )
+tarif=$(echo $tarif|sed 's/.*\(...\)/\1/')
+rnd=$(/usr/bin/python -c 'import random;print random.sample(range(1000, 9999), 1);'|sed 's/\[\(.*\)\]/\1/')
+rnd3=$(/usr/bin/python -c 'import random;print random.sample(range(100, 999), 1);'|sed 's/\[\(.*\)\]/\1/')
+cdr=MCPCDR-1${rnd3},${cnt}${rnd}_1${rnd}_16${tarif}24.cdr
+Para=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+
+sed "s|05030124017|$msisdn|" /tmp/ulvi/cdr/MCPCDR-2802,1411974557_19745_1697091.cdr.11880indata1   > tmpdata2$$
+sed "s|DURATION|$vol|" tmpdata2$$ > tmp2$$
+sed "s|11880|$other|" tmp2$$ > tmp3$$
+sed "s|START|$sec|" tmp3$$ > $ORGADATA/peg/brf_01/ready/DATA/$cdr
+rm tmpdata2$$ tmp2$$ tmp3$$
+cnt=$(expr $cnt + 1)
+echo $cnt > /tmp/ulvi/counterindata
+
+sleep 1
+Para2=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+c=0
+
+while true; do 
+	if [[ "$Para" = "$Para2" ]] 
+    then 
+	sleep 1
+	c=$(expr $c + 1)
+	Para2=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+		if [ $c -gt 11 ]
+		then
+		echo Para Dusmuyor
+				if [ $retryCount -gt 0 ]
+				then
+				echo  gonna retry. retry left: $retryCount " parameters: " $@
+				retryCount=$(expr $retryCount - 1)
+				
+				$0 $1 $2 $3 $4 $5 $retryCount
+				exit #recursive mania
+				fi
+		echo Para: "$Para"
+		echo Para2: "$Para2"
+		echo "$cdr" failed $0 $@
+		break;
+		fi
+	else
+		break;
+	fi
+
+done
+
+
+fark=$(echo "$Para - $Para2 - $fiyat" | bc )
+if [[ "$fark" != "0"    ]] 
+    then 
+    if [[ "$retryCount" = "0" ]] 
+    then 
+    echo all retries failed. is it free no'?'
+	fi
+
+        echo pid $$ FAIL
+		dusen=$(echo "$Para - $Para2" | bc )
+        #echo Para  Para2  dusen dusmesiGereken fark parametreler
+        echo   pid $$ bNumber:$bnumber volume:$vol tarif:$tarif dusenUcret:$dusen dusmesiGerekenUcret:$fiyat OncekiBakiye:$Para SonrakiBakiye:$Para2 fark:$fark
+		#echo $fiyat $dusen $mcc $vol $tarif >> indata1Hatalar
+		echo  msisdn:$msisdn bNumber:$bnumber   volume:$vol tarif:$tarif dusenUcret:$dusen dusmesiGerekenUcret:$fiyat OncekiBakiye:$Para SonrakiBakiye:$Para2 fark:$fark >> indata1Hatalar.$tarif
+		echo $0 $1 $2 $3 $4 $5  >> indata1HatalarKomutlari.$tarif
+		echo
+		else
+			#echo $c
+			echo SUCCESS
+			
+fi
+
+
+
+	 
+
+

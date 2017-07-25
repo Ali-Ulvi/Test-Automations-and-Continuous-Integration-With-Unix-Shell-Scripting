@@ -1,0 +1,43 @@
+#! /usr/bin/bash
+ 
+ #AUT Productions
+if [[ $# -ne 2 ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN   bakiye  "
+	echo "ornek kullanimlar:"
+	echo "$0 05011011111   10  "
+	 
+  
+	exit
+fi
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple   
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+msisdn=$1
+para=$2 
+aid=$(msisdn_to_accountid $msisdn )
+ortam=1
+if [[ $(echo $aid|grep ERR|wc -l) = 1 ]]
+then
+ortam=2
+aid=$(ssh mrte2@localhost "source .profile 2>&1;msisdn_to_accountid $msisdn")
+fi
+echo mrte:$ortam
+echo "AccountID:"$aid
+
+
+if [[ $ortam = 2 ]]
+then
+ 
+#komut=$(echo "#d    $ and and and and and and = :AccountID '$aid' != :End ''  = :ID '$goldID' != :ID '1' != :ID '2' != :ID '3' != :ID '7' ")
+#echo $komut
+#ssh mrte2@localhost "source .profile 2>&1;echo "$komut" | idbm_adb -s CreBalance"
+ssh mrte2@localhost "source .profile;echo \"#u  :Value  $ and   = :AccountID '$aid'    = :ID '1' & '$para'  \" | idbm_adb -s CreBalance"
+else
+
+echo "#u  :Value  $ and   = :AccountID '$aid'    = :ID '1' & '$para'  " | idbm_adb -s CreBalance
+fi
+
+

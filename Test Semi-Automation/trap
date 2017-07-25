@@ -1,0 +1,38 @@
+#!/bin/bash
+
+cleanup()
+# example cleanup function
+{
+echo "ctrl+c?"
+read tmp
+   for job in `cat apid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+#rm pid.20*
+ls -lrt
+date
+sleep 1
+echo $sec
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+
+
+op_date=$(date +%Y%m%d)
+sec=$(date +%Y%m%d%H%M%S)
+
+while true; do echo $sec ; sleep 2; done
+

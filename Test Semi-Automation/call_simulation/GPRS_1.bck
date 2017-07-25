@@ -1,0 +1,6 @@
+#### sim_comlayer -f MOSMS_1 -D #########################
+InitClient reg_ngcp_data_01@/rte/orgadata/mrte1/cnf/shared/CommunicationParameters.cfg
+SendFile /export/home/mrte1/avea/USERS/zonder/call_simulation/gprs.req.start
+WaitFile /export/home/mrte1/avea/USERS/zonder/call_simulation/gprs.rsp.start
+SendFile /export/home/mrte1/avea/USERS/zonder/call_simulation/gprs.req.end
+WaitFile /export/home/mrte1/avea/USERS/zonder/call_simulation/gprs.rsp.end

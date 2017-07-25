@@ -1,0 +1,44 @@
+#! /usr/bin/bash
+
+
+msisdn=$1
+serviceID=$2
+price=$3
+AVEA_DIR=$ORGADATA/avea
+if [[ $# -ne 2&&$# -ne 3 ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN serviceID yenilemeUcreti "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 650"
+	echo "$0 05011011111 650 17"
+
+	exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)         
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+
+#echo "#d    $   = :AccountID '$aid'  " | idbm_adb -s CreTrigger
+#echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '$price'  " | idbm_adb -s CreBalance
+
+gold_operation_handler package $msisdn $ropName  INACT   > /dev/null 2>&1
+gold_operation_handler package $msisdn $ropName  ACT  # 2>&1 |grep ERROR
+ 
+ sec=$(date +%Y%m%d%H%M%S)
+  bundleid=$(grep $ropName $ORGADATA/cnf/cre/config_19700101000000.xml|  grep -oP "(?<=<bundle id=\")[^\"]+"   )
+ echo bundleid:$bundleid  
+ ruleid=$(echo "#s  :RuleID $  and = :AccountID '$aid' = :BundleID '$bundleid'   " | idbm_adb -s CreTrigger|grep -v END|sed s/\'//g)
+echo ruleid:$ruleid 
+
+ today_isodate=$(ots_date -S `date +%'Y'%'m'%'d'000000` +31d)
+ 
+ echo -e "${red2}cre_batch kosuluyor"
+echo "$ORGAROOT/run/bin/cre_batch -e $today_isodate -r 70,$ruleid  -DID BAT.manually  -a $aid"
+

@@ -1,0 +1,189 @@
+#! /usr/bin/bash
+  
+msisdn=$1
+serviceID=$2
+gun=$3
+ 
+debtSms=$(echo "$4"|sed -e "s|)|\\\)|g"| tr 'ðüýþçöÖÇÞÝÐÜ’' "guiscoOCSIGU'")
+noDebtSms=$(echo "$5"|sed -e "s|)|\\\)|g"| tr 'ðüýþçöÖÇÞÝÐÜ’' "guiscoOCSIGU'")
+AVEA_DIR=$ORGADATA/avea
+testBilgi="$0 $@"
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+  echo -en Merhaba\\n\\n $1 '\n\nIyi Calismalar\n\nAUT\nKafein CI Solutions\n\nLoglar:\n' > tmp$msisdn
+ scp tmp$msisdn mrte1@10.248.68.122:/tmp > /dev/null
+ ssh mrte1@10.248.68.122 "source .profile; cat /tmp/tmp$msisdn| mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+#ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+if [[ $# -ne 5 ]] 
+    then 
+	echo "illegal number of parameters"
+
+	echo "Kullaným: $0 MSISDN serviceID kacGunIcindeYuklemeYapmasiGerekiyor debtsms noDebtSms  "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 650 26 borclusun eyw"
+	 doMail "illegal number of parameters"
+
+	exit
+fi
+
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)   
+bundleid=$(grep $ropName $ORGADATA/cnf/cre/config_19700101000000.xml|  grep -oP "(?<=<bundle id=\")[^\"]+"   )
+echo bundleid:$bundleid    
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+
+/tmp/ulvi/killAllPacks $msisdn
+
+#gold_operation_handler package $msisdn $ropName  INACT   > /dev/null 2>&1
+gold_operation_handler package $msisdn $ropName  FLW   2>&1 |grep ERROR
+
+tonight=$(mu_date -1)"000000"
+echo renew fail tarihi     :$(mu_date 0)001500
+echo renew fail SMSi tarihi:$(mu_date 0)090000 '(... Paketinizin tanimlanmasi icin hattinizda en az .. TL olmalidir. 29 gun icinde hattinizda yeterli TL bulundugunda paketiniz otomatik olarak yenilenecektir.)'
+
+later29=$(mu_date -29)"000000"  
+echo 29 gun Sonra:$later29
+laterGun=$(mu_date -$gun)"000000"
+echo $gun gun sonra:$laterGun
+echo Follow Debitte Reminder SMSinin gidecegi tarih:$(mu_date -$(expr 29 - $gun))"090000"
+sec=$(date +%Y%m%d%H%M%S)
+
+isUATevn=$(grep loghost /etc/hosts| grep 10.248.68.122|wc -l)
+ if [[ $isUATevn -eq 0 ]] 
+    then 
+	 echo CheckgracePeriodAgile:
+	 satir=$(ssh bas@10.248.68.128 "grep -n 0${serviceID} /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|cut -d: -f1")
+	ssh bas@10.248.68.128 "tail   +$satir  /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|head -45"
+	else
+	echo CheckgracePeriodUAT:
+	satir=$(ssh bas@10.248.68.123 "grep -n 0${serviceID} /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|cut -d: -f1")
+	ssh bas@10.248.68.123 "tail   +$satir  /bas/orgadata/bas/cnf/domain-properties/basnc/productConfig/RecurringProduct.xml|head -45"
+fi
+
+#echo 'update lc_sold_component_tbl set lc_date_from=to_date("'$laterGun'" , 'yyyymmDDhh24:MI:ss') where account_fk = "'$aid'" and lc_date_from =to_date("'$later29'" , 'yyyymmDDhh24:MI:ss');'
+
+echo "update lc_sold_component_tbl set lc_date_from=to_date('$laterGun' , 'yyyymmDDhh24:MI:ss') where account_fk = '$aid' and lc_date_from =to_date('$later29' , 'yyyymmDDhh24:MI:ss');"
+#for UAT#  sqlplus -s >> BASDB  bastst2/bas123@10.248.68.124:1529/BAS2T << EOF
+sqlplus -s >> BASDB  bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+spool basSql
+set pagesize 1000;
+set linesize 1000
+
+update lc_sold_component_tbl set lc_date_to=to_date('$laterGun' , 'yyyymmDDhh24:MI:ss')
+where account_fk = '$aid'
+and lc_date_to = to_date('$later29' , 'yyyymmDDhh24:MI:ss');
+
+update lc_sold_component_tbl set lc_date_from=to_date('$laterGun' , 'yyyymmDDhh24:MI:ss')
+where account_fk = '$aid'
+and lc_date_from = to_date('$later29' , 'yyyymmDDhh24:MI:ss');
+
+commit;
+
+EXIT;
+EOF
+cat basSql.lst
+echo -e "${red2}vergi borcu varken:${NC}"
+echo beklenen.
+echo $debtSms
+gold_operation_handler bonus $msisdn BLC_TaxDebt 1.78 20151212235959 20301212235959 2>&1|grep ERROR
+#echo -e "${red2}RopBalRem WA calistiriliyor. this may take a while"
+bash $ORGADATA/avea/work/RopAndBalanceReminderSMS/app/rop_and_balance_reminder_sms.sh
+ 
+smsFile=$(ls -1t $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files | head -1 )
+
+echo -e "${red2}Grep sonucu:"
+grep $msisdn $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile
+
+logGrep=$(egrep "9$msisdn;9333;000;\s?\s?\s?$debtSms\.?\s?\s?\s?\s?;;\$" $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile|wc -l)
+ 
+ if [[ $logGrep -eq 0 ]] 
+    then 
+	 echo -e "\e[7m  generated_sms_files'a istenen gelmedi  ${NC}"
+	 
+doMail "istenen rmder smsi gelmedi. debtSms  "
+	
+fi
+
+logGrep=$(egrep "9$msisdn;" $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile|wc -l)
+
+if [[ $logGrep -gt 1 ]] 
+    then 
+	 echo   "generated_sms_files'a 1den fazla sms geldi debtSms"
+	 
+doMail "cat $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile a 1den fazla sms geldi"
+	
+fi
+  
+
+echo
+echo -e "${red2}vergi borcu yokken:${NC}"
+echo beklenen:
+echo $noDebtSms
+gold_operation_handler package $msisdn $ropName  INACT   2>&1 |grep ERROR
+gold_operation_handler reload $msisdn 1000 2>&1|grep ERROR
+gold_operation_handler package $msisdn $ropName  FLW   2>&1 |grep ERROR
+sqlplus -s >> BASDB  bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+spool basSql
+set pagesize 1000;
+set linesize 1000
+
+update lc_sold_component_tbl set lc_date_to=to_date('$laterGun' , 'yyyymmDDhh24:MI:ss')
+where account_fk = '$aid'
+and lc_date_to = to_date('$later29' , 'yyyymmDDhh24:MI:ss');
+
+update lc_sold_component_tbl set lc_date_from=to_date('$laterGun' , 'yyyymmDDhh24:MI:ss')
+where account_fk = '$aid'
+and lc_date_from = to_date('$later29' , 'yyyymmDDhh24:MI:ss');
+
+commit;
+
+EXIT;
+EOF
+#echo -e "${red2}RopBalRem WA calistiriliyor. this may take a while"
+bash $ORGADATA/avea/work/RopAndBalanceReminderSMS/app/rop_and_balance_reminder_sms.sh
+ 
+smsFile=$(ls -1t $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files | head -1 )
+echo -e "${red2}Grep sonucu:"
+grep $msisdn $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile
+
+logGrep=$(egrep "9$msisdn;9333;000;\s?\s?\s?$noDebtSms\.?\s?\s?\s?\s?;;\$" $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile|wc -l)
+ 
+ if [[ $logGrep -eq 0 ]] 
+    then 
+	 echo -e "\e[7m  generated_sms_files'a istenen gelmedi  ${NC}"
+	 
+doMail "istenen reminder smsi gelmedi. noDebtSms    "
+	
+fi
+
+logGrep=$(egrep "9$msisdn;" $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile|wc -l)
+
+if [[ $logGrep -gt 1 ]] 
+    then 
+	 echo   "generated_sms_files'a 1den fazla sms geldi noDebtSms"
+	 
+doMail "cat $ORGADATA/avea/work/RopAndBalanceReminderSMS/data/generated_sms_files/$smsFile a 1den fazla sms geldi"
+	
+fi
+  

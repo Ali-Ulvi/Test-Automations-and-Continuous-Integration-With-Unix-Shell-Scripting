@@ -1,0 +1,87 @@
+#! /usr/bin/bash
+
+msisdn=$1
+if [[ $# -ne 1  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN   "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 "
+
+	exit
+fi
+file=killRop$msisdn
+rm $file
+#mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+while ! grep -q productName $file  ; do
+    echo checkRop loop
+        subsquery $msisdn p 2>&1 > $file
+done
+list=$(cat $file|grep PP_|grep -v NWS_|grep -v 'PP_Tax_99901'|cut -d\| -f3)
+#if [[ $mrteid -eq 2 ]] 
+#    then 
+#	list=`ssh mrte1@localhost "source .profile;subsquery $msisdn P|grep PP_|grep -v NWS_|grep -v 'PP_Tax_99901'|cut -d\| -f3" `
+#	  echo $list
+#	 
+#retry if fail:
+#if [#[ x$list = x ]]
+#then
+#echo killRopX
+#list=`ssh mrte1@localhost "source .profile;subsquery $msisdn P|grep PP_|grep -v NWS_|grep -v 'PP_Tax_99901'|cut -d\| -f3" `
+#fi
+#
+##retry if fail:
+#if [[ x$list = x ]]
+#then
+#list=`ssh mrte1@localhost "source .profile;subsquery $msisdn P|grep PP_|grep -v NWS_|grep -v 'PP_Tax_99901'|cut -d\| -f3" `
+#fi
+#
+##retry if fail:
+#if [[ x$list = x ]]
+#then
+#list=`ssh mrte1@localhost "source .profile;subsquery $msisdn P|grep PP_|grep -v NWS_|grep -v 'PP_Tax_99901'|cut -d\| -f3" `
+#fi
+#
+#if [[ x$list = x ]]
+#then
+#echo Abonenin paketi yok ya da sistemden cekilemedi. 2.si ise daha sonra tekrar deneyiniz.
+#echo Paketler cekiliyor:
+#ssh mrte1@localhost "source .profile;subsquery $msisdn P"
+#exit
+#fi
+#
+#	else
+#	#mrte1deyiz demek
+#list=`subsquery $msisdn P|grep PP_|grep -v NWS_|grep -v 'PP_Tax_99901                                      |PASSIVE/STD/DEMAND'|cut -d\| -f3`
+##retry if fail:
+#if [[ x$list = x ]]
+#then
+#list=`subsquery $msisdn P|grep PP_|grep -v NWS_|grep -v 'PP_Tax_99901                                      |PASSIVE/STD/DEMAND'|cut -d\| -f3`
+#fi
+#
+#if [[ x$list = x ]]
+#then
+#list=`subsquery $msisdn P|grep PP_|grep -v NWS_|grep -v 'PP_Tax_99901                                      |PASSIVE/STD/DEMAND'|cut -d\| -f3`
+#fi
+#
+#if [[ x$list = x ]]
+#then
+#echo Abonenin paketi yok ya da sistemden cekilemedi. 2.si ise daha sonra tekrar deneyiniz.
+#echo Paketler cekiliyor:
+#subsquery $msisdn P
+#exit
+#fi
+#	
+#fi
+
+echo Deleting:   $list
+for ropName in `echo $list`
+do
+    gold_operation_handler package $msisdn $ropName  INACT    2>&1|egrep 'SUCCESS|ERROR'
+
+done
+#echo Finished. Uzerindeki Paketler Tekrar Sistemden Cekiliyor:
+#subsquery $msisdn P
+
+rm $file

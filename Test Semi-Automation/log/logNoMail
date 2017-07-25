@@ -1,0 +1,66 @@
+#!/bin/bash
+
+cleanup()
+# example cleanup function
+{
+echo " ctrl+c?"
+
+   for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+rm pid.${sec}
+ls -lrt  
+date
+sleep 1
+
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+
+
+op_date=$(date +%Y%m%d)
+sec=$(date +%Y%m%d%H%M%S)
+
+
+
+#alias l='ls -lrt'
+tail -F -n 0 /rte/orgadata/mrte2/log/OUPMRTELOG_${op_date}.[0-9]*[^gz] > mrte2OUPMLog.txt &
+echo $! > pid.$sec   
+tail -F -n 0 /rte/orgadata/mrte1/log/OUPMRTELOG_${op_date}.[0-9]*[^gz] > mrte1OUPMLog.txt&
+echo $! >> pid.$sec   
+ ssh bas@10.248.68.128 '/usr/local/bin/tail -F -n 0 /bas/orgadata/bas/log/bascs_01_02/BASLOG' > bascs_01_02_BASLOG.txt&
+echo $! >> pid.$sec   
+ ssh bas@10.248.68.128 '/usr/local/bin/tail -F -n 0 /bas/orgadata/bas/log/bascs_01_01/BASLOG' > bascs_01_01_BASLOG.txt&
+echo $! >> pid.$sec 
+ssh bsg@10.248.68.129 '/usr/local/bin/tail -F -n 0 /export/home/bsg/BSG_HOME/data/log/diag.log ' > bsgLog.txt&
+echo $! >> pid.$sec   
+
+echo " press Enter when finish.  "  
+read tmp
+   echo " Are you sure? press Enter for yes"  
+ read tmp
+ 
+        
+   for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+rm pid.${sec}
+ls -lrt
+date
+sleep 1
+

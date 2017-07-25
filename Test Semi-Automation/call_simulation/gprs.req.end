@@ -1,0 +1,21 @@
+<input>
+	<id ctx_id="1396617949-39" ctx_tod="1396617958.326">c:080451.715:r0:internet::::05052028877:18160958</id>
+	<account compoundLocation="188.41.251.129,CGI:28603f5bcb9c05,217.174.42.18" location="286032311" username="AVEA">05052028877</account>
+	<operation type="charge" />
+	<start>20161109224626</start>
+	<reservation>end</reservation>
+	<event_data origin_id="ngcp">
+		<session_id>c:080451.715:r0:internet::::05052028877:18160958</session_id>
+		<otherParty apn="internet" />
+		<resource>
+			<service_type>GPRS</service_type>
+			<content_id>4</content_id>
+			<rat_type>3G</rat_type>
+			<consumed_resources value_indicator="absolute">
+				<total_octets>644245000</total_octets>
+			</consumed_resources>
+			<start_time>20161109224626</start_time>
+			<reporting_reason>50</reporting_reason>
+		</resource>
+	</event_data>
+</input>

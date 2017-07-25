@@ -1,0 +1,42 @@
+#! /usr/bin/bash
+
+
+cleanup()
+# example cleanup function
+{
+echo " ctrl+c?"
+cut -d' ' -f3 $file > $file.txt
+ls -lrt  
+date 
+
+ 
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit 
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+#file=`date +%m%d-%H.%M.%S`"$1"
+file=`date +"%Y%m%d%H%M%S"`"$1"
+#echo "date          sira  kayit" > $file
+for i in {1..14400}
+do
+
+	t=`date +"%Y%m%d%H%M%S"`
+	amnt=$(FIFO|grep EFD.subs-EVD.cudb\ |cut -d\| -f6)
+   
+      echo "$t Read fifo $i th times. file: $file islenmemis kayit sayisi: $amnt"|tee -a logForFifo
+     echo "$t $i $amnt" >> $file
+     sleep 60
+done
+
+cut -d' ' -f3 $file > $file.txt
+
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sleep 32400
+echo starting to run ./returnToPrevPatchWithDeployFromDir /tmp/aa/_P084_V2
+./returnToPrevPatchWithDeployFromDir /tmp/aa/_P084_V2
+echo starting to run ./installConfigPatch 085_V1
+./installConfigPatch 085_V1

@@ -1,0 +1,20 @@
+#! /usr/bin/bash
+  
+echo ./bonusReminder1dayLaterNotHave  05011021230  BLC_TuesdaySundayDataRegisterBonus_02832
+./bonusReminder1dayLaterNotHave  05011021230  BLC_TuesdaySundayDataRegisterBonus_02832
+
+echo ./bonusReminder1dayLaterNotHave  05011021230  BLC_MondayWednesdayDataRegisterBonus_02835
+./bonusReminder1dayLaterNotHave  05011021230  BLC_MondayWednesdayDataRegisterBonus_02835
+
+echo ./bonusReminder1dayLaterNotHave  05011021230  BLC_WednesdayFridayDataRegisterBonus_02838
+./bonusReminder1dayLaterNotHave  05011021230  BLC_WednesdayFridayDataRegisterBonus_02838
+
+echo ./bonusReminder1dayLaterNotHave  05011021230  BLC_TuesdayThursdayDataRegisterBonus_02841
+./bonusReminder1dayLaterNotHave  05011021230  BLC_TuesdayThursdayDataRegisterBonus_02841
+
+echo ./bonusReminder1dayLaterNotHave  05011021230  BLC_ThursdaySaturdayDataRegisterBonus_02847
+./bonusReminder1dayLaterNotHave  05011021230  BLC_ThursdaySaturdayDataRegisterBonus_02847
+
+echo ./bonusReminder1dayLaterNotHave  05011021230  BLC_FridaySundayDataRegisterBonus_02850
+./bonusReminder1dayLaterNotHave  05011021230  BLC_FridaySundayDataRegisterBonus_02850
+

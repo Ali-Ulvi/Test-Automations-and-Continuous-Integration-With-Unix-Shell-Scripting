@@ -1,0 +1,36 @@
+#! /bin/sh
+
+ENDPOINT="http://10.248.68.129:10003/updateSubscriptionAttributes"
+
+#VALUE=05011021344
+if [ -n "${1}" ]; then
+    VALUE=${1}
+fi
+
+curl --silent \
+     --data \
+     @- \
+     --header 'Content-Type: application/soap+xml; charset=utf-8' \
+     --user-agent "" \
+     ${ENDPOINT} <<EOF | xmllint --format -
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avea="http://oslee.orga.com/bsg/ra/ws/avea">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <avea:UpdateSubscriptionAttributesRequest>
+               <keyName>MSISDN</keyName>
+         <keyValue>${VALUE}</keyValue>
+         <attributesValue>
+            <entry>
+               <key>IS_DATA_ALLOWED</key>
+               <value>
+                  <integer>3</integer>
+               </value>
+
+            </entry>
+         </attributesValue>
+         <!--Optional:-->
+         <opCost>0</opCost>
+      </avea:UpdateSubscriptionAttributesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+EOF

@@ -1,0 +1,101 @@
+#! /usr/bin/bash
+ 
+if [[ $# -ne 4 && $# -ne 3  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN ROPID bonusid callTipi"
+	echo "ornek kullanimlar:"
+	echo "$0 05011011111 650 2260 sms"
+	echo "$0 05011011111 650 2261 dk"
+	echo "$0 05011011111 650 2262 data"
+	echo "$0 05011011111 650 2262 datayuvarla"
+  
+	exit
+fi
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple   
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+msisdn=$1
+serviceID=$2
+bonusID=$3 #BONUS ID
+calltype=$4
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+bonusName=$(  grep -oP "BLB_.*0${bonusID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "bonusName:"$bonusName
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "ROPName:"$ropName
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '1000'  " | idbm_adb -s CreBalance
+gold_operation_handler package $msisdn $ropName  INACT   > /dev/null 2>&1
+gold_operation_handler package $msisdn $ropName  ACT   2>&1 |grep ERROR
+ 
+goldID=$(grep $bonusName $ORGADATA/cnf/cre/config_19700101000000.xml| grep -oP '(?<=<balance allow_negative="no" has_pockets="yes" id=")[^"]+')
+later=$(mu_date -31)"000000"
+ sonuc=$( echo "#s  :Value :End :Start $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'   " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+
+bonusAmount=$(echo $sonuc|cut   -f1 -d' ')
+end=$(echo $sonuc|cut   -f2 -d' ')
+start=$(echo $sonuc|cut   -f3 -d' ')
+
+if [[ -n $bonusAmount ]]
+then
+	echo "Bonus amount: $bonusAmount " #$start $end
+else
+	echo "Bonus ID ya da Amount bulunamadý. Thanks for using."
+	exit
+fi
+
+case "$calltype" in
+
+data|DATA)  
+ 
+esik=$(echo  "$bonusAmount/1024/1024/5"|bc -l| perl -nl -MPOSIX -e 'print ceil($_);')
+echo "1:"$esik
+esik=$(echo "$esik*1024*1024+10"|bc -l)
+echo "2:"$esik
+echo "#u  :Value   $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later' & '$esik'  " | idbm_adb -s CreBalance
+		gold_operation_handler bonus $msisdn $bonusName -10485771 $start $end 2>&1 |grep ERROR
+    ;;
+
+datayuvarla|DATAYUVARLA)  
+
+esik=$(echo  "$bonusAmount/1024/1024/5"|bc -l| perl -nl -MPOSIX -e 'print ceil($_);')
+echo "1:"$esik
+esik=$(echo "$esik*1024*1024+10"|bc -l)
+echo "2:"$esik
+echo "#u  :Value   $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later' & '$esik'  " | idbm_adb -s CreBalance
+		gold_operation_handler bonus $msisdn $bonusName -31457311 $start $end 2>&1 |grep ERROR
+    ;;
+	
+*) 
+esik=$(echo  "$bonusAmount/5+1"|bc -l)
+echo "#u  :Value   $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later' & '101'  " | idbm_adb -s CreBalance
+gold_operation_handler bonus $msisdn $bonusName -2 $start $end 2>&1 |grep ERROR
+   ;;
+esac
+echo "SMS9333 loglarýna bakýnýz 107 veya 108 ip'de.SMS9333te Loglarý gormek icin komut:"
+		echo "tail -93 /argela/APSA/deploy/logs/APSA_CORE_H107_I0.log | grep ${msisdn}"
+		echo "tail -93 /argela/APSA/deploy/logs/APSA_CORE_H108_I0.log | grep ${msisdn}"
+		echo "#s  :Value   $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'  " | idbm_adb -s CreBalance
+		#expr `echo "#s  :Value   $  and and   = :AccountID '$aid'   = :ID '$goldID' = :End '$later'  " | idbm_adb -s CreBalance|head -1` / 1024 / 1024
+		
+		echo CheckThreshld
+		line=$(grep -n $bonusName $ORGADATA/cnf/crp/CrpBalCfg.xml|cut -d: -f1)
+		tail  -n +$line $ORGADATA/cnf/crp/CrpBalCfg.xml|head -6
+		#esik=$(tail  -n +$line $ORGADATA/cnf/crp/CrpBalCfg.xml|head -6 > tmp.ulvi;grep -oPm 1 '(?<=level name="L2" pocket_threshold_value=")[^"]+' tmp.ulvi)
+		esik=$(tail  -n +$line $ORGADATA/cnf/crp/CrpBalCfg.xml|head -4 > tmp.ulvi;grep -oP '(?<=level name="L." pocket_threshold_value=")[^"]+' tmp.ulvi|egrep -v '^1048576$|^0$')
+		echo $esik
+		oran=$(echo  "1-$esik/$bonusAmount"|bc -l)
+oran=$(echo  "${oran}*100"|bc -l)
+echo "Oran:  ${oran} "
+if [[ $oran = 80.00000000000000000000 ]]
+then
+	echo -e " Oran dogru (80) "
+else
+   echo -e "\e[0;31m\e[7mOran tam %80 degil ($oran)$NC"
+fi
+
+		

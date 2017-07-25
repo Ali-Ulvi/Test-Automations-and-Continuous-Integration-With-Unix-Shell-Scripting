@@ -1,0 +1,13 @@
+Start Wed Oct 5 15:27:09 EEST 2016
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |90127   |
+./datausage.whereverRoam 5070007450 10241     90127    0.2148   TP_00151
+
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |90117   |
+./datausage.whereverRoam 5070007450 10241     90117    0.2148   TP_00151
+
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |90116   |
+./datausage.whereverRoam 5070007450 10241     90116    0.2148   TP_00151
+
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |90115   |
+./datausage.whereverRoam 5070007450 10241     90115    0.2148   TP_00151
+

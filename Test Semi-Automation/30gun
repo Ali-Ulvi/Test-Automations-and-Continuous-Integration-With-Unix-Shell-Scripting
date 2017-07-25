@@ -1,0 +1,49 @@
+#! /usr/bin/bash
+
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+echo pls run script again to ensure a commit to db
+}
+
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+msisdn=$1
+if [[ $# -ne 1 ]]
+    then
+        echo "illegal number of parameters"
+        echo "Kullan\375m: $0 MSISDN   "
+        echo "ornek kullanim:"
+        echo ""
+        echo "$0 05011011111  "
+
+
+        exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+AVEA_DIR=$ORGADATA/avea
+aid=$(msisdn_to_accountid $msisdn )
+echo accID:$aid
+echo Pls note the old install date for a rollback scenario:
+read pp < $AVEA_DIR/dbLogin
+
+#for UAT#  sqlplus -s >> BASDB  bastst2/bas123@10.248.68.124:1529/BAS2T << EOF
+#for agile# sqlplus -s >> BASDB  bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+sqlplus -s   bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+whenever sqlerror exit sql.sqlcode
+set feedback off;
+set head off;
+set pagesize 0;
+set linesize 1000
+
+select DEPLOY_DATE from   ACCOUNT_TBL     where account_id=$aid;
+update  ACCOUNT_TBL set  DEPLOY_DATE=sysdate-1 where account_id=$aid;
+commit;
+
+EXIT;
+EOF

@@ -1,0 +1,17 @@
+<input>
+	<id>192.168.3.172;18057464;06161056255625</id>
+	<requestId>41da322c-2d98-4cb5-93f7-ce1125cb511a:06161056255625</requestId>
+	<operation type="charge" />
+	<reservation type="end" timeout="60" timeout_mode="delete" />
+	<account ton="int" npi="isdn" imsi="05012347879">05023001010</account>
+	<start>20160819111219</start>
+	<event_data origin_id="scp">
+		<trafficCase type="moc" />
+		<teleServiceCode type="vid" />
+		<location>
+			<vlr ton="int" npi="isdn">LAC_E164:90551111111</vlr>
+		</location>
+		<otherParty ton="nat" npi="isdn">05023001011</otherParty>
+		<callDuration>60</callDuration>
+	</event_data>
+</input>

@@ -1,0 +1,749 @@
+#!/bin/bash
+
+#AUThor 07(10000+200+4)
+
+ver=$1 #patch version to be installed. 
+
+DIRECTORY=patchDirFor"$ver"
+
+cleanup()
+# example cleanup function
+{
+echo " ctrl+c?"
+
+for job in `cat pid.${sec}`
+	do
+    /usr/bin/kill -9 $job 
+
+	done
+rm pid.${sec}
+rm locked
+ls -lrt  
+date
+sleep 1
+
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\nHata anlasilmiyorsa manuel kurmayi deneyiniz.\\n\\nIyi Calismalar\\nAUT' | mailx -s 'Deploy Patch Hata - Agile Ortami' $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+if [[ $# -ne 2&&$# -ne 1 ]] 
+    then 
+        echo "illegal number of parameters"
+        echo "Kullaným: $0 patchismi [-tam]"
+        echo "ornek kullanim:"
+        echo ""
+        echo "$0 82_V1"
+        
+
+        exit
+fi
+
+mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+if [[ $mrteid -eq 2 ]] 
+    then 
+	echo mrte1 useriyla calistiriniz
+	exit
+	
+fi
+#if [[ -s locked ]]
+#then
+#echo "script zaten calisiyor."
+#exit
+#fi
+#
+
+if [[ $(ps -ef|grep installConfigPatch|grep -v grep|grep -v $$|grep -v /bin/bash|wc -l) -ne 0 ]]
+then
+ps -ef|grep installConfigPatch|grep -v grep
+	echo "script zaten calisiyor ya da edit ediliyor"
+	exit
+fi
+
+echo locked > locked
+ cat maillist.txt |xargs echo > .mail
+echo script baslangic: > log
+date >> log
+echo script baslangic:
+date
+
+cd /tmp/patch/
+ 
+if [ ! -d "$DIRECTORY" ]; then
+  # Control will enter here if $DIRECTORY doesn't exist.
+  mkdir "$DIRECTORY"
+fi
+
+rm -rf /tmp/patch/$DIRECTORY/*
+#take patch from DEV environment i.e 10.248.68.134
+scp mrte1@10.248.68.134:/rte/orgadata/mrte1/avea/gold_config_patch_repository/avea_patches/*$ver* ./$DIRECTORY  
+if  [[ $? -ne 0 ]]
+	then
+	echo FTP hata verdi.
+fi	
+#echo sleep 48600
+#sleep 48600
+if [[ $# -eq 1 ]] 
+then
+	if [[ $(ls ./$DIRECTORY/*$ver* |wc -l) -gt 1 ]]
+	then
+		echo
+		echo Birden fazla dosya eslesti. patch ismini tam verip scripti $0 patchismi -tam  seklinde 2 parametreli calistiriniz. dosyalarin alindigi yer: mrte1@10.248.68.134:/rte/orgadata/mrte1/avea/gold_config_patch_repository/avea_patches/
+		echo
+		ls -lrt ./$DIRECTORY/*$ver*
+		exit
+	elif [[  $(ls ./$DIRECTORY/*$ver* |wc -l) -eq 0 ]]
+		then
+		echo
+		echo patch dosyasi bulunamadi ya da erisilemedi. ismini kontrol ediniz. dosyalarin alindigi yer: mrte1@10.248.68.134:/rte/orgadata/mrte1/avea/gold_config_patch_repository/avea_patches/
+		exit
+	fi
+	file=$(ls -rt ./$DIRECTORY/*$ver*|cut -d/ -f3 |tail -1)
+ #notify subscribers
+ while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en \"Starting to install Config Patch $file to Agile Environment  -_- \\n Restart sirasinda 4 dakika kesinti bekleniyor.\"  | mailx -s 'Agile ortamina Patch Kurulumu Basliyor ^_^' $EMAIL_LIST"
+fi
+done <.mail
+
+	#patch distrubution via scp
+	if ! scp ./$DIRECTORY/*$ver* cbf@10.248.68.121:/export/home/cbf/tar ; then echo cbf e kopyalanamadi. ; doMail "cbf e kopyalanamadi."; exit;fi;
+	if ! scp ./$DIRECTORY/*$ver* goldadm@10.248.68.128:/export/home/goldadm/tar ; then echo goldadm e kopyalanamadi. ; doMail "goldadm e kopyalanamadi."; exit;fi;
+	if ! scp ./$DIRECTORY/*$ver* bas@10.248.68.128:/export/home/bas/tar ; then echo bas a kopyalanamadi. ; doMail "bas a kopyalanamadi."; exit;fi;
+	if ! scp ./$DIRECTORY/*$ver* mrte2@localhost:/export/home/mrte2/tar ; then echo bas a kopyalanamadi. ; doMail "bas a kopyalanamadi."; exit;fi;
+	cp ./$DIRECTORY/*$ver* $HOME/tar
+fi
+
+if [[ $# -eq 2 ]] 
+then
+	if [[  $(ls ./$DIRECTORY/$ver |wc -l) -ne 1 ]]
+	then
+		echo
+		echo patch dosyasi bulunamadi ya da erisilemedi. ismini kontrol ediniz. dosyalarin alindigi yer: mrte1@10.248.68.134:/rte/orgadata/mrte1/avea/gold_config_patch_repository/avea_patches/
+		echo
+		ls -lrt ./$DIRECTORY/$ver
+		exit
+	fi
+file=$ver
+ #notify subscribers
+ while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en \"Starting to install Config Patch $file to Agile Environment  ô_ô  \\n Restart sirasinda 4 dakika kesinti bekleniyor.\"  | mailx -s 'Agile ortamina Deployment Basliyor ^_^' $EMAIL_LIST"
+fi
+done <.mail
+
+	#patch distrubution via scp when full name is provided as the 1st parameter
+	if ! scp ./$DIRECTORY/$ver cbf@10.248.68.121:/export/home/cbf/tar ; then echo cbf e kopyalanamadi. ; doMail "cbf e kopyalanamadi."; exit;fi;
+	if ! scp ./$DIRECTORY/$ver goldadm@10.248.68.128:/export/home/goldadm/tar ; then echo goldadm e kopyalanamadi. ; doMail "goldadm e kopyalanamadi."; exit;fi;
+	if ! scp ./$DIRECTORY/$ver bas@10.248.68.128:/export/home/bas/tar ; then echo bas a kopyalanamadi. ; doMail "bas a kopyalanamadi."; exit;fi;
+	if ! scp ./$DIRECTORY/$ver mrte2@localhost:/export/home/mrte2/tar ; then echo bas a kopyalanamadi. ; doMail "bas a kopyalanamadi."; exit;fi;
+	cp ./$DIRECTORY/$ver $HOME/tar
+fi
+
+ sec=$(date +%Y%m%d%H%M%S)
+op_date=$(date +%Y%m%d)
+#alias l='ls -lrt'
+tail -F /rte/orgadata/mrte2/log/OUPMRTELOG_${op_date}.[0-9]*[^gz] > mrte2OUPMLog.txt &
+echo $! > pid.$sec   
+tail -F /rte/orgadata/mrte1/log/OUPMRTELOG_${op_date}.[0-9]*[^gz] > mrte1OUPMLog.txt&
+echo $! >> pid.$sec   
+ ssh bas@10.248.68.128 '/usr/local/bin/tail -F /bas/orgadata/bas/log/bascs_01_02/CSLOG' > bascs_01_02_CSLOG.txt&
+echo $! >> pid.$sec   
+ ssh bas@10.248.68.128 '/usr/local/bin/tail -F /bas/orgadata/bas/log/bascs_01_01/CSLOG' > bascs_01_01_CSLOG.txt&
+echo $! >> pid.$sec 
+tail -F /rte/orgadata/mrte2/log/*_REGLOG_${op_date}.[0-9]*[^gz] > mrte2REGLOG.txt &
+echo $! > pid.$sec   
+tail -F /rte/orgadata/mrte1/log/*_REGLOG_${op_date}.[0-9]*[^gz] > mrte1REGLOG.txt&
+echo $! >> pid.$sec 
+
+
+
+
+echo Cikti ve loglari kontrol ediniz: >out
+echo   installing to cbf: | tee -a out
+#installing to cbf <*>_<*> (*)_(*) ._. ¨_¨ ~_~
+ssh cbf@10.248.68.121 'source .profile;si-check-processes' 2>&1 |grep :P: > si-check-processesCBF
+if [[ -s si-check-processesCBF ]]
+then
+doMail "CBFde si-check-processes hatasi: ilk hata:   $(ssh cbf@10.248.68.121 'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ). kontrol ediniz. devam ediliyor deploya"
+echo "cbfde si-check-processes hatasi:    $(ssh cbf@10.248.68.121 'source .profile;si-check-processes'  ).   deploya baslanacak. kontrol ediniz"
+sleep 1
+fi
+
+file1=$(echo $file|sed 's/\(.*\)\.tar.gz/\1/')
+ssh cbf@10.248.68.121 "source .profile;oupm_stop;cd;si-patch-tool tar/$file"  > si-patch-toolCBF 2>&1
+hata2=$(grep ":I:Patch $file1 installed successfully." si-patch-toolCBF|wc -l)
+hata=$(egrep ':E:|:P:' si-patch-toolCBF|wc -l)
+
+if [[ $hata -ne 0||$hata2 -ne 1 ]]
+then
+	echo   "si-patch-tool cbfde hata verdi galiba. kontrol ediniz"
+	cat si-patch-toolCBF
+	doMail "si-patch-tool cbfde hata verdi galiba. kontrol ediniz"
+	ssh cbf@10.248.68.121 "source .profile;oupm_start -N" 
+	cleanup;exit
+fi
+
+ssh cbf@10.248.68.121 "source .profile;si-check-orgadata --fix-data --fix-conf --fix-env --fix-struct;oupm_start -N "   > si-check-orgadataCBF 2>&1
+ 
+hata=$(egrep ':E:|:P:' si-check-orgadataCBF|grep -v ':P:Errors occured in checking $ORGADATA.'|grep -v 'that do not belong here'|wc -l)
+hata2=$(grep 'I:No error found except:' si-check-orgadataCBF|wc -l)
+if [[ $hata -ne 0||$hata2 -ne 1 ]]
+then
+	echo   "si-check-orgadata cbfde hata verdi galiba. kontrol ediniz"
+	cat si-check-orgadataCBF
+	doMail "si-check-orgadata cbfde hata verdi galiba. kontrol ediniz"
+	cleanup;exit
+fi
+### cbf finito
+
+### goldadm start
+echo   installing to goldadm: | tee -a out
+#installing to goldadm  
+ssh goldadm@10.248.68.128 'source .profile;si-check-processes' 2>&1 |grep :P: > si-check-processesGoldAdm
+if [[ -s si-check-processesGoldAdm ]]
+then
+doMail "GoldAdmde si-check-processes hatasi: ilk hata:   $(ssh goldadm@10.248.68.128  'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ).  deploya baslanacak. "
+echo "GoldAdmde si-check-processes hatasi: $(ssh goldadm@10.248.68.128  'source .profile;si-check-processes'  ).  3 dakika icinde unixde ctrl+c basilmazsa deploya baslanacak. Sleeping 3mins"
+#sleep 180
+fi
+
+ssh goldadm@10.248.68.128 "source .profile;oupm_stop;cd;si-patch-tool tar/$file"  > si-patch-toolGoldAdm 2>&1
+hata2=$(grep ":I:Patch $file1 installed successfully." si-patch-toolGoldAdm|wc -l)
+hata=$(egrep ':E:|:P:' si-patch-toolGoldAdm|wc -l)
+
+if [[ $hata -ne 0||$hata2 -ne 1 ]]
+then
+	echo   "si-patch-tool GoldAdmde hata verdi galiba. kontrol ediniz"
+	cat si-patch-toolGoldAdm
+	doMail "si-patch-tool GoldAdmde hata verdi galiba. kontrol ediniz"
+	ssh goldadm@10.248.68.128 "source .profile;oupm_start -N" 
+	cleanup;exit
+fi
+
+ssh goldadm@10.248.68.128 "source .profile;si-check-orgadata --fix-data --fix-conf --fix-env --fix-struct;oupm_start -N "   > si-check-orgadataGoldAdm 2>&1
+ 
+hata=$(egrep ':E:|:P:' si-check-orgadataGoldAdm|grep -v ':P:Errors occured in checking $ORGADATA.'|grep -v 'that do not belong here'|wc -l)
+hata2=$(grep 'I:No error found except:' si-check-orgadataGoldAdm|wc -l)
+if [[ $hata -ne 0||$hata2 -ne 1  ]]
+then
+	echo   "si-check-orgadata GoldAdmde hata verdi galiba. kontrol ediniz"
+	cat si-check-orgadataGoldAdm
+	doMail "si-check-orgadata GoldAdmde hata verdi galiba. kontrol ediniz"
+	cleanup;exit
+fi
+### goldadm  finito
+
+
+### mrte1 start
+echo   installing to mrte1: | tee -a out
+#installing to mrte1  
+si-check-processes 2>&1 |grep :P: > si-check-processesmrte1
+if [[ -s si-check-processesmrte1 ]]
+then
+doMail "mrte1de si-check-processes hatasi: son hata:   $(si-check-processes 2>&1|grep :E:|tail -1 ).  3 dakika icinde unixde ctrl+c basilmazsa ya da kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+echo "mrte1de si-check-processes hatasi: $(si-check-processes).  3 dakika icinde unixde ctrl+c basilmazsa yada kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+sleep 180
+fi
+cp $ORGADATA/cnf/extComm/config.cfg $ORGADATA/cnf/extComm/config.cfg.$file1
+si-patch-tool $HOME/tar/$file   > si-patch-toolmrte1 2>&1
+hata2=$(grep ":I:Patch $file1 installed successfully." si-patch-toolmrte1|wc -l)
+hata=$(egrep ':E:|:P:' si-patch-toolmrte1|wc -l)
+
+if [[ $hata -ne 0||$hata2 -ne 1 ]]
+then
+	echo   "si-patch-tool mrte1de hata verdi galiba. kontrol ediniz"
+	cat si-patch-toolmrte1
+	doMail "si-patch-tool mrte1de hata verdi galiba. kontrol ediniz"
+	 
+	cleanup;exit
+fi
+
+si-check-orgadata --fix-data --fix-conf --fix-env --fix-struct > si-check-orgadatamrte1 2>&1
+ 
+hata=$(egrep ':E:|:P:' si-check-orgadatamrte1|grep -v ':P:Errors occured in checking $ORGADATA.'|grep -v 'that do not belong here'|wc -l)
+hata2=$(grep 'I:No error found except:' si-check-orgadatamrte1|wc -l)
+if [[ $hata -ne 0||$hata2 -ne 1  ]]
+then
+	echo   "si-check-orgadata mrte1de hata verdi galiba. kontrol ediniz"
+	cat si-check-orgadatamrte1
+	doMail "si-check-orgadata mrte1de hata verdi galiba. kontrol ediniz"
+	cleanup;exit
+fi
+cp $ORGADATA/cnf/extComm/config.cfg.$file1 $ORGADATA/cnf/extComm/config.cfg
+echo ls before giving perm
+echo ls -l $ORGADATA/CmRoot/config-no_renew_status_oz81548.py  $ORGADATA/CmRoot/config-no_renew_status_oz81548_ET.py
+ls -lrt $ORGADATA/CmRoot/config-no_renew_status_oz81548.py  $ORGADATA/CmRoot/config-no_renew_status_oz81548_ET.py
+chmod 740 $ORGADATA/CmRoot/config-no_renew_status_oz81548.py  $ORGADATA/CmRoot/config-no_renew_status_oz81548_ET.py
+echo after perm:
+ls -lrt $ORGADATA/CmRoot/config-no_renew_status_oz81548.py  $ORGADATA/CmRoot/config-no_renew_status_oz81548_ET.py
+bash mrte_Restart_Komutlari.txt  
+### mrte1  finito
+
+### mrte2 start
+echo   installing to mrte2: | tee -a out
+#installing to mrte2  
+ssh mrte2@localhost 'source .profile;si-check-processes' 2>&1 |grep :P: > si-check-processesmrte2
+if [[ -s si-check-processesmrte2 ]]
+then
+doMail "mrte2de si-check-processes hatasi: ilk hata:   $(ssh mrte2@localhost  'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ).  3 dakika icinde unixde ctrl+c basilmazsa ya da kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+echo "mrte2de si-check-processes hatasi: $(ssh mrte2@localhost  'source .profile;si-check-processes'  ).  3 dakika icinde unixde ctrl+c basilmazsa yada kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+sleep 180
+fi
+
+ssh mrte2@localhost "source .profile;cd;si-patch-tool tar/$file"  > si-patch-toolmrte2 2>&1
+hata2=$(grep ":I:Patch $file1 installed successfully." si-patch-toolmrte2|wc -l)
+hata=$(egrep ':E:|:P:' si-patch-toolmrte2|wc -l)
+
+if [[ $hata -ne 0||$hata2 -ne 1 ]]
+then
+	echo   "si-patch-tool mrte2de hata verdi galiba. kontrol ediniz"
+	cat si-patch-toolmrte2
+	doMail "si-patch-tool mrte2de hata verdi galiba. kontrol ediniz"
+	 
+	cleanup;exit
+fi
+
+ssh mrte2@localhost "source .profile;si-check-orgadata --fix-data --fix-conf --fix-env --fix-struct"   > si-check-orgadatamrte2 2>&1
+ 
+hata=$(egrep ':E:|:P:' si-check-orgadatamrte2|grep -v ':P:Errors occured in checking $ORGADATA.'|grep -v 'that do not belong here'|wc -l)
+hata2=$(grep 'I:No error found except:' si-check-orgadatamrte2|wc -l)
+if [[ $hata -ne 0||$hata2 -ne 1  ]]
+then
+	echo   "si-check-orgadata mrte2de hata verdi galiba. kontrol ediniz"
+	cat si-check-orgadatamrte2
+	doMail "si-check-orgadata mrte2de hata verdi galiba. kontrol ediniz"
+	cleanup;exit
+fi
+ssh mrte2@localhost "source .profile;cd /tmp/patch;bash mrte_Restart_Komutlari.txt" 
+
+echo mrte2 perm. :
+ssh mrte2@localhost 'source .profile;ls -lrt $ORGADATA/CmRoot/config-no_renew_status_oz81548.py  $ORGADATA/CmRoot/config-no_renew_status_oz81548_ET.py;chmod 740 $ORGADATA/CmRoot/config-no_renew_status_oz81548.py  $ORGADATA/CmRoot/config-no_renew_status_oz81548_ET.py;echo mrte2 after perm. --- :;ls -lrt $ORGADATA/CmRoot/config-no_renew_status_oz81548.py  $ORGADATA/CmRoot/config-no_renew_status_oz81548_ET.py' 
+ 
+### mrte2  finito
+sleep 60
+
+
+#installing to BAS
+### bas start
+echo   installing to bas: | tee -a out
+#installing to bas  
+ssh bas@10.248.68.128 'source .profile;si-check-processes' 2>&1 |grep :P: > si-check-processesbas
+if [[ -s si-check-processesbas ]]
+then
+doMail "basda si-check-processes hatasi: ilk hata:   $(ssh bas@10.248.68.128  'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ).  3 dakika icinde unixde ctrl+c ilmazsa deploya lanacak. Sleeping 3mins"
+echo "basda si-check-processes hatasi: $(ssh bas@10.248.68.128  'source .profile;si-check-processes'  ).  3 dakika icinde unixde ctrl+c ilmazsa deploya lanacak. Sleeping 3mins"
+sleep 180
+fi
+
+ssh bas@10.248.68.128 "source .profile;cd;si-patch-tool tar/$file"  > si-patch-toolbas 2>&1
+hata2=$(grep ":I:Patch $file1 installed successfully." si-patch-toolbas|wc -l)
+hata=$(egrep ':E:|:P:' si-patch-toolbas|wc -l)
+
+if [[ $hata -ne 0||$hata2 -ne 1 ]]
+then
+  echo   "si-patch-tool basda hata verdi galiba. kontrol ediniz"
+  cat si-patch-toolbas
+  doMail "si-patch-tool basda hata verdi galiba. kontrol ediniz"
+  cleanup;exit
+fi
+
+ssh bas@10.248.68.128 "source .profile;si-check-orgadata --fix-data --fix-conf --fix-env --fix-struct"   > si-check-orgadatabas 2>&1
+ sleep 120
+hata=$(egrep ':E:|:P:' si-check-orgadatabas|grep -v ':P:Errors occured in checking $ORGADATA.'|grep -v 'that do not belong here'|wc -l)
+hata2=$(grep 'I:No error found except:' si-check-orgadatabas|wc -l)
+if [[ $hata -ne 0||$hata2 -ne 1  ]]
+then
+  echo   "si-check-orgadata basda hata verdi galiba. kontrol ediniz"
+  cat si-check-orgadatabas
+  doMail "si-check-orgadata basda hata verdi galiba. kontrol ediniz"
+  cleanup;exit
+fi
+sleep 120
+ssh bas@10.248.68.128 "source .profile;si-check-orgadata --fix-svn;cs_client \"Update to $file1\" submit"   
+sleep 120
+echo refreshing domain-properties
+date
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_01 domain-properties 2>&1;echo bitti' 2>&1  > bas01  
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_02 domain-properties 2>&1;echo bitti' 2>&1  > bas02
+#echo sleep for 360 seconds For Bas to Start
+
+hata=$(grep :P: bas02 |wc -l)
+if [[ $hata -ne 0 ]]
+then
+grep :P: bas02
+echo bas02 domain-properties refresh olamadi. may be an orga defect. trying again.
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_02 domain-properties 2>&1;echo bitti' 2>&1  > bas02 
+fi
+c=0
+while [ true ]; do
+bitti=$(grep bitti bas01 |wc -l)
+if [[ $bitti -gt 0 ]]; then
+break
+fi
+c=$(expr $c + 1);if [[ c -gt 32 ]];then echo bas01 domain-properties refresh olmuyor;date;doMail "bas01 domain-properties refresh olmuyor. output icin bas01 isimli dosyaya bakiniz";cleanup;exit; fi;
+sleep 15
+done
+
+
+hata=$(grep :P: bas01 |wc -l)
+if [[ $hata -ne 0 ]]
+then
+grep :P: bas01
+echo bas01 domain-properties refresh olamadi. may be an orga defect. trying again.
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_01 domain-properties 2>&1;echo bitti' 2>&1  > bas01 
+fi
+
+c=0
+while [ true ]; do
+bitti=$(grep bitti bas02 |wc -l)
+if [[ $bitti -gt 0 ]]; then
+break
+fi
+c=$(expr $c + 1);if [[ c -gt 32 ]];then echo bas02 domain-properties refresh olmuyor;date;doMail "bas02 domain-properties refresh olmuyor. output icin bas02 isimli dosyaya bakiniz";cleanup;exit; fi;
+sleep 15
+done
+
+
+hata=$(grep :P: bas02 |wc -l)
+if [[ $hata -ne 0 ]]
+then
+grep :P: bas02
+echo bas02 domain-properties refresh olamadi. may be an orga defect. trying again.
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_02 domain-properties 2>&1;echo bitti' 2>&1  > bas02 
+fi
+
+c=0
+while [ true ]; do
+bitti=$(grep bitti bas01 |wc -l)
+if [[ $bitti -gt 0 ]]; then
+break
+fi
+c=$(expr $c + 1);if [[ c -gt 32 ]];then echo bas01 domain-properties refresh olmuyor;date;doMail "bas01 domain-properties refresh olmuyor. output icin bas01 isimli dosyaya bakiniz";cleanup;exit; fi;
+sleep 15
+done
+
+
+hata=$(grep :P: bas01 |wc -l)
+if [[ $hata -ne 0 ]]
+then
+grep :P: bas01
+echo bas01 domain-properties refresh olamadi. may be an orga defect. trying again.
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_01 domain-properties 2>&1;echo bitti' 2>&1  > bas01 
+fi
+
+
+c=0
+while [ true ]; do
+bitti=$(grep bitti bas02 |wc -l)
+if [[ $bitti -gt 0 ]]; then
+break
+fi
+c=$(expr $c + 1);if [[ c -gt 32 ]];then echo bas02 domain-properties refresh olmuyor;date;doMail "bas02 domain-properties refresh olmuyor. output icin bas02 isimli dosyaya bakiniz";cleanup;exit; fi;
+sleep 15
+done
+
+
+hata=$(grep :P: bas02 |wc -l)
+if [[ $hata -ne 0 ]]
+then
+grep :P: bas02
+echo bas02 domain-properties refresh olamadi. may be an orga defect. trying again.
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_02 domain-properties 2>&1;echo bitti' 2>&1  > bas02 &
+fi
+
+
+c=0
+while [ true ]; do
+bitti=$(grep bitti bas01 |wc -l)
+if [[ $bitti -gt 0 ]]; then
+break
+fi
+c=$(expr $c + 1);if [[ c -gt 32 ]];then echo bas01 domain-properties refresh olmuyor;date;doMail "bas01 domain-properties refresh olmuyor. output icin bas01 isimli dosyaya bakiniz";cleanup;exit; fi;
+sleep 15
+done
+
+
+hata=$(grep :P: bas01 |wc -l)
+if [[ $hata -ne 0 ]]
+then
+grep :P: bas01
+echo bas01 domain-properties refresh olamadi. may be an orga defect. trying again.
+ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_01 domain-properties 2>&1;echo bitti' 2>&1  > bas01 &
+fi
+
+
+c=0
+while [ true ]; do
+bitti=$(grep bitti bas01 |wc -l)
+if [[ $bitti -gt 0 ]]; then
+break
+fi
+c=$(expr $c + 1);if [[ c -gt 32 ]];then echo bas01 domain-properties refresh olmuyor;date;doMail "bas01 domain-properties refresh olmuyor. output icin bas01 isimli dosyaya bakiniz";cleanup;exit; fi;
+sleep 15
+done
+
+
+c=0
+while [ true ]; do
+bitti=$(grep bitti bas02 |wc -l)
+if [[ $bitti -gt 0 ]]; then
+break
+fi
+c=$(expr $c + 1);if [[ c -gt 32 ]];then echo bas02 domain-properties refresh olmuyor;date;doMail "bas02 domain-properties refresh olmuyor. output icin bas02 isimli dosyaya bakiniz";cleanup;exit; fi;
+sleep 15
+done
+
+
+hata=$(grep :P: bas01 |wc -l)
+if [[ $hata -ne 0 ]]
+then
+grep :P: bas01
+echo bas01 domain-properties refresh olamadi.exiting
+doMail "bas01 domain-properties refresh olamadi.exiting. output icin bas01 isimli dosyaya bakiniz"
+cleanup;exit
+fi
+
+
+hata=$(grep :P: bas02 |wc -l)
+if [[ $hata -ne 0 ]]
+then
+grep :P: bas02
+echo bas02 domain-properties refresh olamadi. exiting
+doMail "bas02 domain-properties refresh olamadi.exiting. output icin bas02 isimli dosyaya bakiniz"
+cleanup;exit
+fi
+
+ssh cbf@10.248.68.121 'source .profile;si-check-processes' 2>&1 |grep :P: > si-check-processesCBF
+if [[ -s si-check-processesCBF ]]
+then
+doMail "Patch sonrasi CBFde si-check-processes hatasi: ilk hata:   $(ssh cbf@10.248.68.121 'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ).  deploya baslanacak. Sleeping 3mins"
+echo "Patch sonrasi cbfde si-check-processes hatasi:    $(ssh cbf@10.248.68.121 'source .profile;si-check-processes'  ).  3 dakika icinde unixde ctrl+c basilmazsa deploya baslanacak. Sleeping 3mins"
+#sleep 180
+fi
+
+ssh goldadm@10.248.68.128 'source .profile;si-check-processes' 2>&1 |grep :P: > si-check-processesGoldAdm
+if [[ -s si-check-processesGoldAdm ]]
+then
+doMail "Patch sonrasi GoldAdmde si-check-processes hatasi: ilk hata:   $(ssh goldadm@10.248.68.128  'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ).  3 dakika icinde unixde ctrl+c basilmazsa deploya baslanacak. Sleeping 3mins"
+echo "Patch sonrasi GoldAdmde si-check-processes hatasi: $(ssh goldadm@10.248.68.128  'source .profile;si-check-processes'  ).  3 dakika icinde unixde ctrl+c basilmazsa deploya baslanacak. Sleeping 3mins"
+sleep 180
+fi
+
+ssh bas@10.248.68.128 'source .profile;c=0;while [ true ]; do   level=$(OUPMclient -R  2>&1|grep "Run-Level: Run"|wc -l);  if [[ $level -eq 1 ]]; then echo bas:;OUPMclient -R ; break; fi; echo waiting bas to open successfully..$level;echo ' 'cnt:$c;c=$(expr $c + 1);if [[ c -gt 2 ]];then echo bas acilmiyor;date;exit; fi; sleep 60; done '
+
+date
+level=$(ssh bas@10.248.68.128 'source .profile;   OUPMclient -R  2>&1|grep "Run-Level: Run"|wc -l   '|tail -1)
+
+
+if [[ $level -ne 1 ]]
+then
+echo bas level run degil
+date
+doMail "BAS acilmiyor. Loglara bakiniz. .1. restarting bas now."
+#cleanup;exit
+fi
+ssh bas@10.248.68.128 'source .profile;/bas/orgadata/bas/bascs_01_01/bin/jbossopsc -W 120 stop;sleep 180;/bas/orgadata/bas/bascs_01_02/bin/jbossopsc -W 120 stop '
+        
+sleep 180
+ssh bas@10.248.68.128 'source .profile;c=0;while [ true ]; do   level=$(OUPMclient -R  2>&1|grep "Run-Level: Run"|wc -l);  if [[ $level -eq 1 ]]; then echo bas:;OUPMclient -R ; break; fi; echo waiting bas to open successfully..$level;echo ' 'cnt:$c;c=$(expr $c + 1);if [[ c -gt 12 ]];then echo bas acilmiyor;date;exit; fi; sleep 60; done ' 
+
+level=$(ssh bas@10.248.68.128 'source .profile;   OUPMclient -R  2>&1|grep "Run-Level: Run"|wc -l   '|tail -1)
+
+
+if [[ $level -ne 1 ]]
+then
+echo bas level run degil
+date
+doMail "BAS acilmiyor. Loglara bakiniz. .1.2.  4 dakika icinde unixde ctrl+c basilmazsa ya da kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+sleep 240
+#cleanup;exit
+fi
+
+level=$(OUPMclient -R  2>&1|grep "Run-Level: Run"|wc -l) #;  if [[ $level -ne 1 ]]; then OUPMclient -R ; break; fi; 
+
+
+if [[ $level -ne 1 ]]
+then
+sleep 70
+level=$(OUPMclient -R  2>&1|grep "Run-Level: Run"|wc -l)
+	if [[ $level -ne 1 ]]
+	then
+	echo mrte1 hala acilmamis retrying
+
+	oupm_stop
+	oupm_start -N
+	echo sleep420
+	sleep 420
+	fi
+fi
+
+echo mrte1:
+si-check-processes
+si-check-processes 2>&1 |grep :P: > chk1
+if [[ -s chk1 ]]
+then
+doMail "mrte1de si-check-processes hatasi: ilk hata:  $(si-check-processes 2>&1|grep :E:|head -1).  3 dakika icinde unixde ctrl+c basilmazsa ya da kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+echo "mrte1de si-check-processes hatasi:    $(si-check-processes 2>&1).  3 dakika icinde unixde ctrl+c basilmazsa ya da kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+sleep 180
+fi
+echo bas:
+ssh bas@10.248.68.128 'source .profile;si-check-processes' 
+ssh bas@10.248.68.128 'source .profile;si-check-processes' 2>&1 |grep :P: > chk1
+if [[ -s chk1 ]]
+then
+doMail "basda si-check-processes hatasi: ilk hata:   $(ssh bas@10.248.68.128 'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ).  3 dakika icinde unixde ctrl+c basilmazsa deploya baslanacak. Sleeping 3mins"
+echo "basda si-check-processes hatasi:    $(ssh bas@10.248.68.128 'source .profile;si-check-processes'  ).  3 dakika icinde unixde ctrl+c basilmazsa deploya baslanacak. Sleeping 3mins"
+sleep 180
+fi
+
+echo mrte2:
+ssh mrte2@localhost 'source .profile;si-check-processes' 
+ssh mrte2@localhost 'source .profile;si-check-processes' 2>&1 |grep :P: > chk1
+if [[ -s chk1 ]]
+then
+
+doMail "mrte2de si-check-processes hatasi:  son hata:  $(ssh mrte2@localhost 'source .profile;si-check-processes' 2>&1|grep :E:|tail -1)  3 dakika icinde unixde ctrl+c basilmazsa ya da kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+echo "mrte2de si-check-processes hatasi:    $(ssh mrte2@localhost 'source .profile;si-check-processes' 2>&1).  3 dakika icinde unixde ctrl+c basilmazsa ya da kill yapilmazsa deploya baslanacak. Sleeping 3mins"
+sleep 180
+fi
+
+echo mrte1:;OUPMclient -R
+level=$(OUPMclient -R  2>&1|grep "Run-Level: Run"|wc -l)
+if [[ $level -ne 1 ]]
+then
+echo MRTE1 acilmiyor. OUPM Loglara bakiniz.
+doMail "MRTE1 acilmiyor. Loglara bakiniz. deploya baslaniyor."
+#cleanup;exit
+fi
+
+
+level=$(ssh mrte2@localhost 'source .profile;OUPMclient -R  2>&1|grep "Run-Level: Run"|wc -l')
+if [[ $level -ne 1 ]]
+then
+echo MRTE2 acilmiyor. OUPM Loglara bakiniz.
+doMail "MRTE2 acilmiyor. Loglara bakiniz. deploya baslaniyor."
+#cleanup;exit
+fi
+
+
+echo -e Merhaba\\n\\nLoglar "/tmp/deploy" klasorunde. Hata varsa acil mudahele ediniz > out.txt
+echo komut: "ssh bas@10.248.68.128 'source .profile;cs_client cluster_01/bascs_01 -D -c Avea_r242 --force --clean -s REFDB,RTE,CBF -p deploy' 2>&1|tee out.txt"
+#ORGA piton:  ssh bas@10.248.68.128 'source .profile;cs_client cluster_01/bascs_01 -D -c Avea_r242 --force --clean -s REFDB,RTE,CBF -p deploy;sleep 5' 2>&1|tee -a out.txt
+ssh bas@10.248.68.128 'source .profile;cs_client cluster_01/bascs_01 -D -c Avea_r242 --force --clean -s REFDB,RTE,CBF -p deploy;sleep 3' 2>&1|tee -a out.txt
+echo >>out.txt
+echo  After successful product catalog deployment regenerate product catalog cache for all jboss instances like: bas_client cluster_01/bascs_01 product-cache 
+
+		ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_01 product-cache;bas_client cluster_01/bascs_02 product-cache;sleep 3' 2>&1 #|tee -a out.txt
+echo script bitis zamani:>> log
+date >> log
+date
+echo
+echo ---
+echo -en "\n---" >>out.txt
+ls -lrt $ORGADATA/cnf >>out.txt
+ls -lrt ~/orgadata/cnf/cre/config_19700101000000.xml>>out.txt
+echo >>out.txt
+echo Terminate a subscriber for test:
+gold_operation_handler terminate 05551234567 1 >>out.txt 2>&1
+gold_operation_handler terminate 05551234568 1 
+echo >>out.txt
+echo Install Subscriber for test:
+echo Install Subscriber for test: >>out.txt
+ gold_operation_handler install 05551234568 TP_00019
+ gold_operation_handler install 05551234567 TP_00019 >>out.txt 2>&1
+ echo  >> out.txt
+ #echo chk db: >>out.txt 
+ #echo "idbm_print MrteSubscriberLookup 2>&1| grep 05551234567"  >>out.txt
+ idbm_print MrteSubscriberLookup | grep 05551234567 >>out.txt 2>&1
+ 
+ grep -oP ":SERVICE .DeployConfigBundle.IO.Output: \[Deployed=true" bascs_01_0?_CSLOG.txt
+ 
+ grep -oP ":SERVICE .DeployConfigBundle.IO.Output: \[Deployed=true" bascs_01_0?_CSLOG.txt >> out.txt
+ echo  Finished >> out.txt
+
+ #check processes after deploy
+
+ ssh mrte2@localhost 'source .profile;si-check-processes' 2>&1 |grep :P: > si-check-processesmrte2
+if [[ -s si-check-processesmrte2 ]]
+then
+doMail "deploy sonrasi mrte2de si-check-processes hatasi: ilk hata:   $(ssh mrte2@localhost  'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ).  loglari kontrol ediniz"
+echo "deploy sonrasi mrte2de si-check-processes hatasi  $(cat si-check-processesmrte2)  "
+fi
+
+si-check-processes 2>&1 |grep :P: > si-check-processesmrte1
+if [[ -s si-check-processesmrte1 ]]
+then
+doMail "deploy sonrasi mrte1de si-check-processes hatasi: son hata:   $(si-check-processes 2>&1|grep :E:|tail -1 ). loglari kontrol ediniz  "
+echo "deploy sonrasi mrte1de si-check-processes hatasi: $(si-check-processes).  "
+ 
+fi
+
+ssh bas@10.248.68.128 'source .profile;si-check-processes' 2>&1 |grep :P: > si-check-processesbas
+if [[ -s si-check-processesbas ]]
+then
+doMail "deploy sonrasi basda si-check-processes hatasi: ilk hata:   $(ssh bas@10.248.68.128  'source .profile;si-check-processes' 2>&1|grep :E:|head -1 ).  loglari kontrol ediniz"
+echo "basda si-check-processes hatasi: $(ssh bas@10.248.68.128  'source .profile;si-check-processes'  ). pls chck logs"
+fi
+
+ scp out.txt mrte1@10.248.68.122:/tmp
+ cat maillist.txt |xargs echo > .mail
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;cat  /tmp/out.txt| mailx -s 'Patch Deployment sonucu - Agile Ortami' $EMAIL_LIST"
+fi
+done < .mail
+
+for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+rm pid.${sec}
+ls -lrt  
+ 
+sleep 1
+echo
+echo ---
+echo grep -i cmdeployed mrte2OUPMLog.txt mrte1OUPMLog.txt 
+grep -i cmdeployed mrte2OUPMLog.txt mrte1OUPMLog.txt 
+ls -lrt $ORGADATA/cnf 
+ls -lrt ~/orgadata/cnf/cre/config_19700101000000.xml
+echo chk db:
+idbm_print MrteSubscriberLookup | grep 05551234568
+#echo running bas refresh in background
+#ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_01 domain-properties  '&
+#ssh bas@10.248.68.128 'source .profile;bas_client cluster_01/bascs_02 domain-properties  '&
+
+rm locked
+

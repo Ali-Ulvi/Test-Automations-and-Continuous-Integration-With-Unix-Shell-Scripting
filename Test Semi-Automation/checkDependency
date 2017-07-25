@@ -1,0 +1,131 @@
+#! /usr/bin/bash
+ 
+#AUTech
+
+testBilgi="$0 $@"
+
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST" 2>&1 |grep -v '*'
+fi
+done < .mail
+  
+}
+
+#if [[ $# -ne 1  ]] 
+#   then 
+#       echo "illegal number of parameters"
+#       echo "Kullanim: $0 msisdn   "
+#       echo "ornek kullanim:"
+#       echo ""
+#       echo "$0  05551155111   "
+#
+#       
+#       exit
+#fi
+msisdn=$1
+file=rop$msisdn
+
+
+#list=`subsquery $msisdn P|grep PP_|grep -v 'PP_Tax_99901'|cut -d\| -f3`
+##retry if fail:
+#if [[ x$list = x ]]
+#then
+#list=`subsquery $msisdn P|grep PP_|grep -v 'PP_Tax_99901'|cut -d\| -f3`
+#fi
+#
+#if [[ x$list = x ]]
+#then
+#list=`subsquery $msisdn P|grep PP_|grep -v 'PP_Tax_99901'|cut -d\| -f3`
+#fi
+#
+#if [[ x$list = x ]]
+#then
+#echo Abonenin paketi yok ya da sistemden cekilemedi. 2.si ise daha sonra tekrar deneyiniz.
+#echo Paketler cekiliyor:
+#subsquery $msisdn P
+#exit
+#fi
+#echo Deleting:   $list
+#for ropName in `echo $list`
+#do
+#    gold_operation_handler package $msisdn $ropName  INACT    2>&1|egrep 'SUCCESS|ERROR'
+#
+#done
+msisdn=$(./newNoMrteFree |tail -1)
+sleep 3
+ gold_operation_handler package $msisdn 4  ACT    2>&1|egrep 'SUCCESS|ERROR'
+for ropName in `cat servisler`
+do
+    gold_operation_handler package $msisdn $ropName  ACT    2>&1|egrep 'SUCCESS|ERROR'
+    sleep 5
+	./checkRop  $msisdn PP_NWS_LTE_00008
+	./checkRop  $msisdn PP_NWS_3G_00005
+	./checkRop  $msisdn PP_NWS_GPRS_00004
+	gold_operation_handler package $msisdn $ropName  INACT    2>&1|egrep 'SUCCESS|ERROR'
+	  gold_operation_handler package $msisdn $ropName  ACT    2>&1|egrep 'SUCCESS|ERROR'
+	  sleep 5
+	  	./checkRop  $msisdn PP_NWS_LTE_00008
+	./checkRop  $msisdn PP_NWS_3G_00005
+	./checkRop  $msisdn PP_NWS_GPRS_00004
+	  gold_operation_handler package $msisdn $ropName  INACT    2>&1|egrep 'SUCCESS|ERROR'
+	  gold_operation_handler package $msisdn PP_NWS_GPRS_00004  INACT    2>&1|egrep 'SUCCESS|ERROR'
+	    gold_operation_handler package $msisdn $ropName  ACT    2>&1|egrep 'SUCCESS|ERROR'
+	    sleep 5
+	    	./checkRop  $msisdn PP_NWS_LTE_00008
+	./checkRop  $msisdn PP_NWS_3G_00005
+	./checkRop  $msisdn PP_NWS_GPRS_00004
+	break
+done
+rm isDataAllowedEklenmemisler
+for ropName in `cat servisler`
+do
+msisdn=$(./newNoMrteFree |tail -1)
+sleep 3
+	 if [[ $( gold_operation_handler query $msisdn true "//entry[key='IS_DATA_ALLOWED']/value[1]/integer[1]/text()" 2>&1 |grep -oP 'result: \[.*\]') != 'result: [0]' ]]
+	 then
+	 echo  " IS_DATA_ALLOWED 0 degil. whyy"
+	 doMail "$ropName IS_DATA_ALLOWED 0 degil. whyy"
+	 fi
+echo giving test subject $ropName
+    gold_operation_handler package $msisdn $ropName  ACT    2>&1|egrep 'SUCCESS|ERROR' |tee sonuc
+	if [[ $(grep ERROR sonuc|wc -l) -gt 0 ]]
+	then
+			 echo "$ropName alinamadi. $(grep ERROR sonuc|wc -l) ERROR  $(grep ERROR sonuc|tail -1)"
+			 doMail "$ropName alinamadi. $(grep ERROR sonuc|wc -l) ERROR  $(grep ERROR sonuc|tail -1)"
+			 continue
+	fi
+	echo checking dependent pkg 8 5 4
+	sleep 5
+	./checkRop  $msisdn PP_NWS_LTE_00008
+		./checkRop  $msisdn PP_NWS_3G_00005
+	./checkRop  $msisdn PP_NWS_GPRS_00004
+	sleep 2
+	echo checking allowance
+	 alw=$( gold_operation_handler query $msisdn true "//entry[key='IS_DATA_ALLOWED']/value[1]/integer[1]/text()" 2>&1 |grep -oP 'result: \[.*\]' || gold_operation_handler query $msisdn true "//entry[key='IS_DATA_ALLOWED']/value[1]/integer[1]/text()" 2>&1 |grep -oP 'result: \[.*\]')
+	 echo "$alw"
+	 if [[ "$alw" != 'result: [3]' ]]
+		then
+		alw=$( gold_operation_handler query $msisdn true "//entry[key='IS_DATA_ALLOWED']/value[1]/integer[1]/text()" 2>&1 |grep -oP 'result: \[.*\]' || gold_operation_handler query $msisdn true "//entry[key='IS_DATA_ALLOWED']/value[1]/integer[1]/text()" 2>&1 |grep -oP 'result: \[.*\]')
+		if [[ "$alw" != 'result: [3]' ]]
+			then
+			echo  "$ropName icin IS_DATA_ALLOWED eklenmemis"|tee -a isDataAllowedEklenmemisler
+			doMail "$ropName icin IS_DATA_ALLOWED eklenmemis"
+		fi
+	 fi
+	#echo inacting lte again:
+	#gold_operation_handler package $msisdn PP_NWS_LTE_00008  INACT    2>&1|egrep 'SUCCESS|ERROR'
+	echo ----------_-----------\'_\'-----------_------------
+	echo
+	 
+done
+	#./checkRop  $msisdn PP_NWS_3G_00005
+	#./checkRop  $msisdn PP_NWS_GPRS_00004
+echo finished

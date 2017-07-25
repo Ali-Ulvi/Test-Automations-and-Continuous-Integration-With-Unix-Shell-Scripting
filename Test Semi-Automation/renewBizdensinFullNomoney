@@ -1,0 +1,150 @@
+#! /usr/bin/bash
+ 
+ 
+msisdn=$1
+serviceID=$2
+price=$3
+
+if [[ $# -ne 2&&$# -ne 3 ]] 
+    then 
+        echo "illegal number of parameters"
+        echo "Kullaným: $0 MSISDN serviceID yenilemeUcreti "
+        echo "ornek kullanim:"
+        echo ""
+        echo "$0 05011011111 650"
+        echo "$0 05011011111 650 17"
+
+        exit
+fi
+
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)         
+aid=$(msisdn_to_accountid $msisdn )
+
+echo "AccountID:"$aid
+echo "#d    $ and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' " | idbm_adb -s CreBalance
+#echo "#d    $   = :AccountID '$aid'  " | idbm_adb -s CreTrigger
+echo "#u  :Value   $  and     = :AccountID '$aid'   = :ID '1'   & '60'  " | idbm_adb -s CreBalance
+
+#gold_operation_handler package $msisdn $ropName  INACT   > /dev/null 2>&1
+/tmp/ulvi/killAllPacks $msisdn
+gold_operation_handler package $msisdn $ropName  ACT   2>&1 |grep ERROR
+kalanPara=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g|perl -nl -MPOSIX -e 'print ceil($_);') 
+ sec=$(date +%Y%m%d%H%M%S)
+ bundleid=$(grep $ropName $ORGADATA/cnf/cre/config_19700101000000.xml|  grep -oP "(?<=<bundle id=\")[^\"]+"   )
+ echo bundleid:$bundleid  
+ ruleid=$(echo "#s  :RuleID $  and = :AccountID '$aid' = :BundleID '$bundleid'   " | idbm_adb -s CreTrigger|grep -v END|sed s/\'//g)
+echo ruleid:$ruleid
+if [[ $kalanPara -ne `expr 1000 - $price` ]]
+then
+        echo -e "\e[7m Kayit ucreti yanlis.  ${NC}"
+        echo $kalanPara
+fi
+
+        echo -e "******----------------RENEW TEST EDILIYO--------------------******${NC}"
+
+ today_isodate=$(ots_date -S `date +%'Y'%'m'%'d'000000` +31d)
+ gece=`date +%'Y'%'m'%'d'000000`
+echo change Trigger date
+ echo "#u  :ChargedToDate :NextTriggerDate $  and = :AccountID '$aid' = :BundleID '$bundleid' & '$gece' '$gece'" | idbm_adb -s CreTrigger 
+ echo change Trigger date finished
+  echo -e "${red2}cre_batch kosuluyor"
+#$ORGAROOT/run/bin/cre_batch -e $today_isodate -r 70,$ruleid  -DID BAT.manually  -a $aid > /dev/null 2>&1
+ cre_batch -DID BAT.manually
+kalanPara=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g|perl -nl -MPOSIX -e 'print ceil($_);') 
+if [[ $kalanPara -ne `expr 1000 - 2 \* $price` ]]
+then
+        echo -e "\e[7m Yenileme ucreti yanlis.  ${NC}"
+        echo $kalanPara
+fi
+mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+sleep 3
+ if [[ $mrteid -eq 2 ]] 
+    then 
+        ssh mrte1@localhost "source .profile;subsquery $msisdn b || subsquery $msisdn b || subsquery $msisdn b"   
+        ssh mrte1@localhost "source .profile;subsquery $msisdn p || subsquery $msisdn p || subsquery $msisdn p"   
+        else
+        subsquery $msisdn b || subsquery $msisdn b || subsquery $msisdn b
+        subsquery $msisdn p || subsquery $msisdn p || subsquery $msisdn p
+        
+fi
+ 
+echo "#s :ID :Value :Start :End  $ and and and and and = :AccountID '$aid' != :ID '1' != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance
+
+
+ today_isodate=$(ots_date -S `date +%'Y'%'m'%'d'000000` +61d)
+ 
+ echo change Trigger date
+ echo "#u  :ChargedToDate :NextTriggerDate $  and = :AccountID '$aid' = :BundleID '$bundleid' & '$gece' '$gece'" | idbm_adb -s CreTrigger 
+ echo change Trigger date finished
+ 
+ echo -e "${red2}cre_batch kosuluyor2 $today_isodate"
+#$ORGAROOT/run/bin/cre_batch -e $today_isodate -r 70,$ruleid  -DID BAT.manually  -a $aid > /dev/null 2>&1
+ cre_batch   -DID BAT.manually
+ sleep 3
+gold_operation_handler reload $msisdn 30
+
+ sleep 3
+ if [[ $mrteid -eq 2 ]] 
+    then 
+        ssh mrte1@localhost "source .profile;subsquery $msisdn b || subsquery $msisdn b || subsquery $msisdn b"   
+        ssh mrte1@localhost "source .profile;subsquery $msisdn p || subsquery $msisdn p || subsquery $msisdn p"   
+        else
+        subsquery $msisdn b || subsquery $msisdn b || subsquery $msisdn b
+        subsquery $msisdn p || subsquery $msisdn p || subsquery $msisdn p
+        
+fi
+echo press enter for scheduler part
+read a
+later=$(mu_date -31)"000000"
+
+
+sec=$(date +%Y%m%d%H%M%S)
+ 
+sleep 3
+rm BASDB
+
+
+echo 'update lc_sold_component_tbl set lc_date_from=to_date("'$sec'" , 'yyyymmDDhh24:MI:ss') where account_fk = "'$aid'" and lc_date_from =to_date("'$later'" , 'yyyymmDDhh24:MI:ss');'
+#for Agile#sqlplus -s >> BASDB  bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+#for uat sqlplus  >> BASDB  bastst2/bas123@10.248.68.124:1529/BAS2T << EOF
+sqlplus -s >> BASDB  bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+spool basSql
+set pagesize 1000;
+set linesize 1000
+
+update lc_sold_component_tbl set lc_date_to=to_date('$sec' , 'yyyymmDDhh24:MI:ss')
+where account_fk = '$aid'
+and lc_date_to = to_date('$later' , 'yyyymmDDhh24:MI:ss');
+
+update lc_sold_component_tbl set lc_date_from=to_date('$sec' , 'yyyymmDDhh24:MI:ss')
+where account_fk = '$aid'
+and lc_date_from = to_date('$later' , 'yyyymmDDhh24:MI:ss');
+
+commit;
+
+EXIT;
+EOF
+
+ssh bas@10.248.68.128 'source .profile; OUPMclient -Q scheduler'
+echo sleep 90 seconds for the scheduler
+sleep 90
+ 
+ 
+echo
+if [[ $mrteid -eq 2 ]] 
+    then 
+        echo ssh mrte1: subsquery $msisdn B -- subsquery $msisdn P
+        ssh mrte1@localhost "source .profile  > /dev/null 2>&1;subsquery $msisdn B;echo ---;subsquery $msisdn P"   
+        else
+        echo subsquery $msisdn B -- subsquery $msisdn P
+        subsquery $msisdn B;echo ---;subsquery $msisdn P
+        
+fi
+echo
+echo "#s :ID :Value :Start :End  $ and  and and and = :AccountID '$aid'  != :ID '2' != :ID '3' != :ID '7' != :Value '0' " | idbm_adb -s CreBalance
+
+echo yenilenmediyse 1dk daha bekleyin. goodbye.

@@ -1,0 +1,15 @@
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.2148|36301   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.2148|36291   |
+|${MY_TARIFF_MSISDN_1}|internet|15  |10241 |INTERNET|BLP_Main|0.2148|36011   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.2148|35811   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.2148|35611   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.0792  |20205   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.0792  |20201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.0792  |18981   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.0792  |18979   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.0792  |90127   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.1815  |42604   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.1815  |42602   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.1815  |42601   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.1815  |42021   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.1815  |42007   |

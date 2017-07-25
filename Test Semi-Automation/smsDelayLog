@@ -1,0 +1,21 @@
+20161109 225241:I:START
+20161109 225242:I:Processing the records for 20161109
+20161109 225242:I:0:PP_OzelFirsat_300Dk1000SMS1GBService_01430:05011230992 has not been notified about renewal since renew failed, but renewal occured successfully during night.
+20161109 225242:I:0:PP_OzelFirsat_300Dk1000SMS1GBService_01430:05012327893 has not been notified about renewal since renew failed, but renewal occured successfully during night.
+20161109 225242:I:0:PP_OzelFirsat_500Dk1000SMS2GBService_01431:05012327891 has not been notified about renewal since renew failed, but renewal occured successfully during night.
+20161109 225242:I:0:PP_OzelFirsat23_Service_01435:05052028877 has not been notified about renewal since renew failed, but renewal occured successfully during night.
+20161109 225242:I:Moved the SMSDELAY_OutputFile_01_20161109225241.dat to backup for 20161109
+20161109 225242:I:Finished processing the records for 20161109
+20161109 225242:I:No Notification for 20161109 has been found
+20161109 225242:I:END
+20161109 225300:I:START
+20161109 225300:I:Processing the records for 20161109
+20161109 225301:I:0:PP_OzelFirsat_300Dk1000SMS1GBService_01430:05011230992 has not been notified about renewal since renew failed, but renewal occured successfully during night.
+20161109 225301:I:0:PP_OzelFirsat_300Dk1000SMS1GBService_01430:05012327893 has been notified about renewal since renew failed and no renewal occured during night.
+20161109 225301:I:0:PP_OzelFirsat_500Dk1000SMS2GBService_01431:05012327891 has not been notified about renewal since renew failed, but renewal occured successfully during night.
+20161109 225301:I:0:PP_OzelFirsat23_Service_01435:05052028877 has not been notified about renewal since renew failed, but renewal occured successfully during night.
+20161109 225301:I:Moved the SMSDELAY_OutputFile_01_20161109225300.dat to backup for 20161109
+20161109 225301:I:Finished processing the records for 20161109
+20161109 225301:I:The Notifications for 20161109 has been put to  OHPQ/EFD.smsdelay_01-EFD.sms9333_01
+20161109 225301:I:Process is going to sleep for 2 sec before sending the next file
+20161109 225303:I:END

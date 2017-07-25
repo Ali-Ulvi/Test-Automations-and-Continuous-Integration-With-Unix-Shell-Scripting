@@ -1,0 +1,11 @@
+#! /usr/bin/bash
+
+cd /tmp/deploy
+./deploy.shSleep
+echo deploy biter
+date
+cd /tmp/CI
+./startCI
+echo bitti CI
+date
+

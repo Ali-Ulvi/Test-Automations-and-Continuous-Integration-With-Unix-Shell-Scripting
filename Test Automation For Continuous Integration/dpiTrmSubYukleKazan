@@ -1,0 +1,104 @@
+#! /usr/bin/bash
+ 
+ #All rights reserved AUT Productions
+msisdn1=$1
+bonusID=$2
+ropid=$3
+ testBilgi="$0 $@"
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+  echo -en Merhaba\\n\\n $1 '\n\nIyi Calismalar\n\nAUT\nKafein CI Solutions\n\n' > tmp$msisdn1
+
+cat output$msisdn1 >> tmp$msisdn1
+ scp tmp$msisdn1 mrte1@10.248.68.122:/tmp
+ ssh mrte1@10.248.68.122 "source .profile; cat /tmp/tmp$msisdn1| mailx -s \"$testBilgi $(cat .servisIDler$msisdn1.txt|grep [0-9]|egrep -v '^#' |xargs echo)\" $EMAIL_LIST"
+#ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+if [[ $# -ne 3  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullanim: $0 MSISDN bonusID ropid   "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05019144950 2537 688"
+    doMail "illegal number of parameters Kullanim: $0 MSISDN bonusID ropid" 
+	exit
+fi
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+
+msisdn=$(./newNo |tail -1)
+echo $msisdn |grep ERROR &&  doMail ":FATALITY: Abone olusturulamadi. sistem hatasi. Dpi abone silme casei kosulamadi." && echo could not create msisdn. && exit
+	 
+	 sec=$(date +%Y%m%d%H%M%S)
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+bonusName=$(  grep -oP "BLB_.*0${bonusID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)
+echo "bonusName:"$bonusName
+gold_operation_handler package $msisdn $ropid  ACT   2>&1 |grep ERROR
+#tail -f -n 0 /rte/orgadata/mrte?/OHPQ/*dpi*/data.*&
+#	echo $! >> pid.$sec
+gold_operation_handler reload $msisdn 100   2>&1 |grep ERROR
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/*dpi*/data.* > dpiOHPQHarvestTrm$msisdn&
+	echo $! >> pid.$sec
+	sleep 1
+	gold_operation_handler terminate $msisdn 2  ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!! killa
+	echo waiting 10 sec for dpi ohpq
+	sleep 10
+	for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+
+ rm pid.$sec
+ echo
+ echo -e "$red2 GREP RESULT:"
+ echo
+egrep '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId>(<ns1:GUID/>|<ns1:GUID>.*</ns1:GUID>)</ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>P'RE_9${msisdn}_B_'[0]{0,1}'0${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>' dpiOHPQHarvestTrm$msisdn
+ 
+ echo
+ 
+ if [[ $(egrep '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId>(<ns1:GUID/>|<ns1:GUID>.*</ns1:GUID>)</ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>P'RE_9${msisdn}_B_'[0]{0,1}'0${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>' dpiOHPQHarvestTrm$msisdn|wc -l) -eq 0  ]] 
+    then 
+	echo -e "$red2 DPI FAIL!!!!!!!!!!!!!!!!"
+	echo -e "OHPQ record not found$NC"
+	echo 'Beklenen: <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><updateSubscriptionStatusRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriptionServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId>(<ns1:GUID/>|<ns1:GUID>.*</ns1:GUID>)</ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><subscriptionId>P'RE_9${msisdn}_B_'[0]{0,1}'0${bonusID}'</subscriptionId><status>TERMINATED</status><channelCode>BC</channelCode></body></updateSubscriptionStatusRequest></soapenv:Body></soapenv:Envelope>' 
+    doMail "DPI OHPQ record not found. abone TRM oldugunda DPI trm istegi atilmali. bonus id:${bonusID} no:$msisdn  "
+else 
+ echo "Mission is ***SUCCESS***"
+fi
+
+echo -e $NC
+
+#check <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><inactivateSubscriberRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriberServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId><ns1:GUID>DEMAND2016-05-12T09:54:19.958+03:00TRMSTDACTSTD050</ns1:GUID></ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><msisdn>905070000555</msisdn><channelCode>BC</channelCode></body></inactivateSubscriberRequest></soapenv:Body></soapenv:Envelope>
+#
+# if [[ $(egrep '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><inactivateSubscriberRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriberServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId>(<ns1:GUID/>|<ns1:GUID>.*</ns1:GUID>)</ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><msisdn>9'${msisdn}'</msisdn><channelCode>BC</channelCode></body></inactivateSubscriberRequest></soapenv:Body></soapenv:Envelope>' dpiOHPQHarvestTrm$msisdn|wc -l) -eq 0  ]] 
+#    then 
+#	echo -e "$red2 DPI inactivateSubscriberRequest FAIL!!!!!!!!!!!!!!!!"
+#	echo -e "OHPQ record not found$NC"
+#	echo Beklenen: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><inactivateSubscriberRequest xmlns="http://www.avea.com.tr/om/VSME/SubscriberServices/Object"><ns1:RequestHeader xmlns:ns1="http://www.avea.com.tr/AveaFrameWork"><ns1:RequestId>(<ns1:GUID/>|<ns1:GUID>.*</ns1:GUID>)</ns1:RequestId><ns1:CallingSystem>OPSC</ns1:CallingSystem><ns1:BusinessProcessId>0123456789</ns1:BusinessProcessId></ns1:RequestHeader><body><msisdn>9'${msisdn}'</msisdn><channelCode>BC</channelCode></body></inactivateSubscriberRequest></soapenv:Body></soapenv:Envelope>'
+#    doMail "DPI OHPQ record not found. abone TRM oldugunda DPI inactivateSubscriberRequest istegi atilmali. bonus id:${bonusID} no:$msisdn  "
+#else 
+# echo "Mission 2 inactivateSubscriberRequest is ***SUCCESS***"
+#fi
+#
+#echo -e $NC
+
+mv dpiOHPQHarvestTrm$msisdn log
+ 
+

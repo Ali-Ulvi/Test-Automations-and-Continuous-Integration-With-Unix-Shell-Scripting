@@ -1,0 +1,85 @@
+#! /usr/bin/bash
+  
+ #Copyright: AUT Productions
+msisdn=$1
+vol=$2
+mcc=$3
+fiyat=$4
+tarif=$5
+ 
+
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+
+}
+
+if [[ $# -ne 4 && $# -ne 5  ]] 
+    then 
+        echo "illegal number of parameters"
+        echo "Kullanim: $0 MSISDN miktar mccmncCode BeklenenUcret [-s] "
+        echo "-s means silent and returning back to caller"
+        echo "ornek kullanim:"
+        echo ""
+        echo "$0 5019144950 10240 42007 0.1074"
+doMail "illegal number of parameters Kullanim: $0 MSISDN miktar mccmncCode BeklenenUcret tarif" 
+        exit
+fi
+
+
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+#cnt=$(cat counter)
+cnt2=$(cat counter2)
+aid=$(msisdn_to_accountid 0$msisdn )
+ sed "s|SERVEDPART|$msisdn|" /tmp/ulvi/cdr/MCPCDR-4385,1423781729_21644_1984446.cdr.internetauto.whereever  > tmpdata
+sed "s|DURATION|$vol|" tmpdata > tmp2
+#sec=$(date +%Y%m%d%H%M%S)
+sed "s|LOC|$mcc|g" tmp2 > tmpdata
+Para=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+
+sec=$(mu_date -1)235959
+tarif=$(echo $tarif |sed  's/.*\(...\)$/\1/')
+sed "s|START|$sec|" tmpdata > $ORGADATA/peg/brf_01/ready/DATA/MCPCDR-1111,${cnt2}${tarif}_21644_1984446.cdr
+
+#cnt=$(expr $cnt + 1)
+cnt2=$(expr $cnt2 + 1)
+#echo $cnt > counter
+echo $cnt2 > counter2
+
+if [[ $# -ne 5    ]] 
+    then 
+        find $ORGADATA/log/ /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0* | egrep 'RTE0|data.0' | egrep -v 'CRELOG|logger|gz'  | xargs tail -f -n 0 | egrep "$msisdn|MCPCDR-$cnt"
+fi
+sleep 10
+Para2=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+
+fark=$(echo "$Para - $Para2 - $fiyat" | bc )
+if [[ "$fark" != "0"    ]] 
+    then 
+        echo FAIL
+		dusen=$(echo "$Para - $Para2" | bc )
+        #echo Para  Para2  dusen dusmesiGereken fark parametreler
+        echo    MCCmnc:$mcc vol:$vol tarif:$tarif dusenUcret:$dusen dusmesiGerekenUcret:$fiyat OncekiBakiye:$Para SonrakiBakiye:$Para2 fark:$fark
+		#echo $fiyat $dusen $mcc $vol $tarif >> roamHatalar
+		echo    MCCmnc:$mcc vol:$vol tarif:$tarif dusenUcret:$dusen dusmesiGerekenUcret:$fiyat OncekiBakiye:$Para SonrakiBakiye:$Para2 fark:$fark >> roamHatalar.$tarif
+		echo $0 $@ >> roamHatalarKomutlari.$tarif
+		echo
+		else
+			echo SUCCESS
+			echo
+fi
+#sifir kesen echo 05070005830|sed 's/.\(.*\)/\1/'
+
+

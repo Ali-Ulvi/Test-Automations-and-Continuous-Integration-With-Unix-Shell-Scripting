@@ -1,0 +1,12 @@
+#! /usr/bin/bash
+
+ 
+
+for i in $(cat no)
+
+do
+echo $i:
+gold_operation_handler reload $i 9000000 2>&1|egrep SUCCESS\|ERROR
+
+done
+

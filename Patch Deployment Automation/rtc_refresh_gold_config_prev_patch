@@ -1,0 +1,162 @@
+#!/usr/bin/bash
+
+####################################################################
+# Author        : AUT
+# Version       : V1.0
+# Creation Date : 2016
+ 
+# Description   : This script is used to refresh ORGA GOLD Config from the given Dir
+#
+# Synopsis      : rtc_refresh_gold_config.sh dizinYolu
+#
+####################################################################
+
+
+####################################################################
+# Utility functions
+####################################################################
+
+log() {
+        echo "$1        :$(date +'%Y%m%d %H%M%S'): $2"
+}
+
+logerror() {
+        log "ERROR" "$*"
+        exit 1
+}
+
+loginfo() {
+        log "INFO" "$1"
+}
+
+logdebug() {
+        log "DEBUG" "$1"
+}
+
+break_point() {
+        loginfo "Escape to subshell"
+        (bash)
+        loginfo "Exit from subshell"
+}
+
+####################################################################
+# MAIN FLOW (Start point for the execution)
+####################################################################
+APP_ROOT=$ORGADATA/avea/work/AveaRtcScmTools
+
+rtc_synchronize_accdata_and_si_dir=$APP_ROOT/scripts/rtc_synchronize_accdata_and_si_dir.sh
+rtc_refresh_gold_config_properties=$APP_ROOT/scripts/rtc_refresh_gold_config.properties
+      
+
+#RTCBuild
+
+#Sagopa4567
+
+
+if [[ $# -ne 1 ]] 
+    then 
+        echo "illegal number of parameters"
+        echo "Kullaným: $0 directoryOfSi "
+        echo "ornek kullanim:"
+        echo ""
+        echo "$0 /tmp/aa/P083_V2 "
+
+        exit
+fi
+
+RTC_WS=/tmp/rtc_tmp_wrk_$$
+#RTC_GoldConf_WS=RTC_Prepaid_GOLDConfig_Stream_WS_$$
+#RTC_GoldConf_WS_LOCAL=$RTC_WS/$RTC_GoldConf_WS
+RTC_GoldConf_WS_LOCAL=$1
+RTC_GoldConf_Component='Prepaid-GoldConfig'
+GoldConfRootDir=$RTC_GoldConf_WS_LOCAL/$RTC_GoldConf_Component
+
+if [ ! -d $GoldConfRootDir ]
+then
+        loginfo "$GoldConfRootDir Bulunamadi"
+        exit 1
+fi
+
+loginfo "Retrieving site key..."
+GOLD_SITE=$(sed -n 's/^SITE=\(.*\)/\1/p' $ORGADATA/site-config/profile.cfg)
+if [ -z "$GOLD_SITE" ]
+then
+        logerror "GOLD SITE could not be determinded!"
+fi
+
+
+loginfo "Reading config parameters for site: $GOLD_SITE"
+RTC_GoldConf_Stream=$(grep "RTC_${GOLD_SITE}_STREAM"  $rtc_refresh_gold_config_properties | awk -F= '{print $2}')
+if [ -z "$RTC_GoldConf_Stream" ]
+then
+        logerror "RTC_${GOLD_SITE}_STREAM variable is not configured in $rtc_refresh_gold_config_properties file"
+fi
+
+loginfo "START"
+
+if [ ! -d $RTC_WS ]
+then
+        loginfo "Creating local working space"
+        mkdir -p $RTC_WS
+else 
+  loginfo " rm -rf $RTC_WS"
+  rm -rf $RTC_WS
+fi
+
+
+
+loginfo "Syncronizing ACC Workspace and si directory..."
+$rtc_synchronize_accdata_and_si_dir ${GoldConfRootDir} "fix_si"
+if [ $?  -ne 0 ]; then logerror "Could not synchronize si directory with ACC directory."; fi
+
+cd ${GoldConfRootDir}
+loginfo "Current working directory: $(pwd)"
+today=$(date +"%Y%m%d%H%M%S")
+new_si_archive=$RTC_WS/new_si_${today}.tar.gz
+
+#REMARK: opscgold.keystore and opscgold.truststore must be skipped otherwise their content changes!
+loginfo "Now sanitizing files in si/ directory before delivering changes to subsytems"
+while read fname
+do
+        #logdebug "dos2unix $fname"
+        tmp_fname=/tmp/$(basename $fname).$$    
+        dos2unix $fname $tmp_fname 2> /dev/null
+        mv $tmp_fname $fname
+done < <(find si -type f | egrep -v 'keystore|truststore')
+
+#REMARK: In case post deployment scripts modified make them executable
+chmod 740 si/rte/orgadata/CmRoot/*.sh
+ls -lrt si/rte/orgadata/CmRoot/*py
+echo giving permission to py.
+chmod 740 si/rte/orgadata/CmRoot/*.py
+ls -lrt si/rte/orgadata/CmRoot/*py
+
+
+loginfo "Creating archive file named $new_si_archive from si directory."
+tar -czf $new_si_archive si
+
+loginfo "Start syncronizing remote GOLD site..."
+while read host_name host_ip host_username
+do 
+        {
+                loginfo "Synchronizing GOLD $GOLD_SITE subsystem: host_name=$host_name host_ip=$host_ip host_username=$host_username"
+                remote_dir=/tmp
+                loginfo "Copying $new_si_archive via: /usr/bin/scp -r $new_si_archive $host_username@$host_ip:$remote_dir/"
+                /usr/bin/scp $new_si_archive $host_username@$host_ip:$remote_dir/
+
+                #TODO: no need to backup after this script is verified and it doesn't corrupt si directory of remote $ORGAROOT
+                loginfo "Executing following actions in remote server: 1. backup old si dir 2. extract si archive..."
+                /usr/bin/ssh $host_username@$host_ip ". ~/.profile; \
+                        cd \$ORGAROOT; \
+                        if [ ! -d si_backup ]; \
+                                then mkdir si_backup; \
+                        fi; \
+                        mv si si_backup/si_${today}; \
+                        gunzip -c $remote_dir/$(basename $new_si_archive) | tar xf -;\
+                        rm $remote_dir/$(basename $new_si_archive)"
+        } < /dev/null
+done < <(grep "^GOLD_${GOLD_SITE}" $rtc_refresh_gold_config_properties)
+
+
+loginfo "EXIT"
+

@@ -1,0 +1,41 @@
+#! /usr/bin/bash
+  
+ #Copyright: AUT Productions
+msisdn=$1
+vol=$2
+aranan=$3
+ 
+if [[ $# -ne 3 && $# -ne 4  ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN miktar aranan [-s] "
+	echo "-s means silent and returning back to caller"
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05019144950 60 0501231414 "
+
+	exit
+fi
+
+
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+cnt=$(cat roamcounter)
+aid=$(msisdn_to_accountid $msisdn )
+ sed "s|05030104025|$msisdn|" /tmp/ulvi/cdr/MCPCDR-6350,1213946315830_329202_28540779.cdr.old   > tmpdata
+sed "s|DURATION1|$vol|" tmpdata > tmp2
+sec=$(date +%Y%m%d%H%M%S)
+sed "s|20150328160808|$sec|" tmp2 > tmp3
+sed "s|05552553664|$aranan|" tmp3 > $ORGADATA/peg/brf_01/ready/DATA/MCPCDR-${cnt},1310037109_667_34363.cdr
+
+cnt=$(expr $cnt + 1)
+echo $cnt > roamcounter
+
+if [[ $# -ne 4    ]] 
+    then 
+	find $ORGADATA/log/ /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0* | egrep 'RTE0|data.0' | egrep -v 'CRELOG|logger|gz'  | xargs tail -f -n 0 | egrep "$aid|$msisdn|MCPCDR-$cnt"
+fi
+
+	 

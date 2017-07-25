@@ -1,0 +1,13 @@
+Start Fri Nov 11 14:35:27 TRT 2016
+|${MY_TARIFF_MSISDN_1}|08882320000     |61    ||BLP_Main|  40  |
+./useIndata1Auto 05070007609 61     08882320000        40   TP_00147
+
+|${MY_TARIFF_MSISDN_1}|08882320000     |61    ||BLP_Main|  40  |
+./useIndata1Auto 05070007610 61     08882320000        40   TP_00147
+
+|${MY_TARIFF_MSISDN_1}|08882320101     |60    ||BLP_Main|  20  |
+./useIndata1Auto 05070007610 60     08882320101        20   TP_00147
+
+|${MY_TARIFF_MSISDN_1}|08882320101     |6    ||BLP_Main|  3  |
+./useIndata1Auto 05070007610 6     08882320101        3   TP_00147
+

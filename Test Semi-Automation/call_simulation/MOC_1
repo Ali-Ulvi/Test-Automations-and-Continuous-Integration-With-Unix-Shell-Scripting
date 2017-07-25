@@ -1,0 +1,8 @@
+#### sim_comlayer -f MOC_1 -D #########################
+InitClient reg_scp_01@/rte/orgadata/mrte1/cnf/shared/CommunicationParameters.cfg
+SendFile /tmp/ulvi/call_simulation/moc.req.start
+WaitFile /tmp/ulvi/call_simulation/moc.rsp.start
+SendFile /tmp/ulvi/call_simulation/moc.req.extend
+WaitFile /tmp/ulvi/call_simulation/moc.rsp.extend
+SendFile /tmp/ulvi/call_simulation/moc.req.end
+WaitFile /tmp/ulvi/call_simulation/moc.rsp.end

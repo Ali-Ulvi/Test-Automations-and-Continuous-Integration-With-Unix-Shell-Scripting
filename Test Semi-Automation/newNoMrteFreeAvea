@@ -1,0 +1,32 @@
+#! /usr/bin/bash
+
+#AUT Productions
+#produce Number
+
+ 
+msisdn0=$(cat nomA |head -1)
+msisdn=$(expr $msisdn0 + 1)
+echo $msisdn > nomA
+msisdn=0$msisdn
+
+
+ 
+echo trying to install the number 
+if [[ -z "$1" ]]
+then
+gold_operation_handler install $msisdn TP_00149 2>&1|grep ERROR && gold_operation_handler install $msisdn TP_00149 2>&1|grep ERROR && gold_operation_handler install $msisdn TP_00149 2>&1|grep ERROR && exit
+else
+gold_operation_handler install $msisdn TP_00$1 2>&1|grep ERROR && gold_operation_handler install $msisdn TP_00$1 2>&1|grep ERROR && gold_operation_handler install $msisdn TP_00$1 2>&1|grep ERROR && exit
+fi
+echo reloading
+	sleep 2
+	gold_operation_handler reload $msisdn 1000  2>&1 |grep ERROR && gold_operation_handler reload $msisdn 1000
+	sleep 2
+#	echo IS_DATA_ALLOWED:
+#	 gold_operation_handler query $msisdn true "//entry[key='IS_DATA_ALLOWED']/value[1]/valueString[1]/text()" 2>&1 |grep -oP 'result: \[.*\]'
+	echo $msisdn
+  
+ 
+ 
+ 
+

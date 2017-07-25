@@ -1,0 +1,104 @@
+#! /usr/bin/bash
+  
+ #perfection by AUT
+msisdn=$1
+vol=$2
+other=$3
+ucret=$4 #-s ise ucret kontrol edilmez log basilmaz
+ 
+  
+         
+cleanup()
+# example cleanup function
+{
+echo sleep 10 sec
+sleep 10
+
+  egrep "$aid|$msisdn|MCPCDR-$cnt" /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*/data*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0*/data* |grep "<CallDuration>$vol</CallDuration>"|grep "<OtherParty>$other</OtherParty>"|grep "<ServedParty>$msisdn</ServedParty>"|grep $sec|tail -1 > ind 
+  
+    /usr/local/bin/grep -oP '<ServedParty>[^\s]*</ServedParty>'  ind
+
+ 
+   /usr/local/bin/grep -oP '<OtherParty>[^\s]*</OtherParty>'  ind
+      /usr/local/bin/grep -oP '<CallDuration>[^\s]*</CallDuration>'  ind
+           /usr/local/bin/grep -oP '<duration>[^\s]*</duration><allowed>[^\s]*</allowed>'  ind
+           
+                 /usr/local/bin/grep -oP '"charge"/><start>[^\s]*</start>'  ind
+           /usr/local/bin/grep -o 'delta_source="[0-9.]*"'  ind
+           echo Bunlarin toplami kadar ucretlendi:
+           echo
+         /usr/local/bin/grep -oP 'charged_target="[0-9.]*" code="[^\s]*"'  ind|tee sum
+         echo Toplam:
+         sum=0.000000
+         for para in $(sed 's/charged_target=\"\([0-9.]*\)\".*/\1/'  sum)
+do
+           
+          sum=$(echo  "${sum}+$para"|bc -l)
+          done
+echo $sum|sed 's/\(.*\)\(0*$\)/\1/'
+sum=$(echo $sum|sed 's/\(.*\)\(0*$\)/\1/')
+          ucret=$(echo  "${ucret}+0.000000"|bc -l)
+
+if [[ $ucret != $sum   ]] 
+    then 
+        echo "Yanlis ucret **************************"
+        echo olmasi gereken: $ucret olan: $sum
+
+fi
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+
+if [[ $# -ne 3 && $# -ne 4  ]] 
+    then 
+        echo "illegal number of parameters"
+        echo "Kullaným: $0 MSISDN  saniye digerNo [-s] "
+        echo "-s means silent and returning back to caller"
+        echo "ornek kullanim:"
+        echo ""
+        echo "$0 05019144950 60  08888121341"
+
+        exit
+fi
+
+
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+sec=$(date +%Y%m%d%H%M%S)
+cnt=$(cat counterindata2)
+aid=$(msisdn_to_accountid $msisdn )
+ sed "s|05552552664|$msisdn|" /tmp/ulvi/cdr/MCPCDR-4656,1426774795_20048_1721668.cdr.indata2   > tmpdata2
+sed "s|DURATION|$vol|" tmpdata2 > tmp2
+sed "s|05551500500|$other|" tmp2 > tmp3
+sed "s|20150723161343|$sec|" tmp3 > $ORGADATA/peg/brf_01/ready/DATA/MCPCDR-${cnt},1426774795_20048_1721668.cdr
+
+cnt=$(expr $cnt + 1)
+echo $cnt > counterindata2
+
+if [[ $4 = '-d'    ]] 
+    then 
+        find $ORGADATA/log/ /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0* | egrep 'RTE0|data.0' | egrep -v 'CRELOG|logger|gz'  | xargs tail -f -n 0 | egrep "$aid|$msisdn|MCPCDR-$cnt" 
+        #dead area
+        sleep 120
+         egrep "$aid|$msisdn|MCPCDR-$cnt" /export/home/mrte2/orgadata/OHPQ/CRE-EFD.cre_0*/data*  /export/home/mrte1/orgadata/OHPQ/CRE-EFD.cre_0*/data* |grep $3|grep $2|tail -1 > ind 
+         /usr/local/bin/grep -oPP 'delta_target="[0-9.]*"'  ind
+        #grep -o 'delta_target=".*"' logindata1
+        
+fi
+
+         
+cleanup
+

@@ -1,0 +1,150 @@
+#! /usr/bin/bash
+#AUT Telecommunications 
+msisdn=$1
+vol=$2
+bnumber=$3
+fiyat=$4
+tarif=$5
+retryCount=$6
+if [ -z "$retryCount" ]
+	then
+	retryCount=7
+fi
+
+
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+
+}
+
+if [[ $# -ne 5 && $# -ne 6  ]] 
+    then 
+    doMail "illegal number of parameters Kullanim: $0 MSISDN vol bnumber fiyat tarife" 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN vol bnumber fiyat tarife"
+	echo "ornek kullanim:"
+	echo "$0 05011011111 60  0888901231 0.6 19"
+
+
+	exit
+fi
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple   
+
+#cd /export/home/mrte1/avea/USERS/zonder/call_simulation
+
+cd /tmp/ulvi/call_simulation
+
+#tarih=$(date +%Y%m%d%H%M%S)
+
+tarih=$(mu_date -1)235959
+aid=$(msisdn_to_accountid $msisdn )
+Para=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+
+ESC=$(echo '\033')
+vi moc.req.start_tmp >/dev/null <<END
+:%s/ANUM/$msisdn/g
+:%s/BNUM/$bnumber/g
+:%s/CALLSTART/$tarih/g
+:wq! moc.req.start$$_$tarif
+END
+
+ESC=$(echo '\033')
+vi moc.req.extend_tmp >/dev/null <<END
+:%s/ANUM/$msisdn/g    
+:%s/BNUM/$bnumber/g       
+:%s/CALLSTART/$tarih/g
+:%s/CDURATION/$vol/g
+:wq! moc.req.extend$$_$tarif
+END
+
+ESC=$(echo '\033')
+vi moc.req.end_tmp >/dev/null <<END
+:%s/ANUM/$msisdn/g    
+:%s/BNUM/$bnumber/g       
+:%s/CALLSTART/$tarih/g
+:%s/CDURATION/$vol/g 
+:wq! moc.req.end$$_$tarif
+END
+
+ESC=$(echo '\033')
+vi MOC_1 >/dev/null <<END
+:%s/moc.req.start/moc.req.start$$_$tarif/g    
+:%s/moc.req.extend/moc.req.extend$$_$tarif/g       
+:%s/moc.req.end/moc.req.end$$_$tarif/g
+:wq! MOC_1$$_$tarif
+END
+ 
+
+./sim_comlayer -f MOC_1$$_$tarif -D  2>&1 |egrep 'ERROR|:E:|:P:'
+
+cd /tmp/ulvi
+Para2=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+c=0
+
+while true; do 
+	if [[ "$Para" = "$Para2" ]] 
+    then 
+	echo sleep 1
+	sleep 1
+	c=$(expr $c + 1)
+	Para2=$(echo "#s  :Value   $  and     = :AccountID '$aid'   = :ID '1'      " | idbm_adb -s CreBalance|grep -v END|sed s/\'//g)
+		if [ $c -gt 11 ]
+		then
+		echo Para Dusmuyor
+				if [ $retryCount -gt 0 ]
+				then
+				echo  gonna retry. retry left: $retryCount parameters: $@
+				retryCount=$(expr $retryCount - 1)
+				sleep 1
+				$0 $1 $2 $3 $4 $5 $retryCount
+				cd /tmp/ulvi/call_simulation
+				rm  MOC_1$$_$tarif moc.req.start$$_$tarif moc.req.extend$$_$tarif moc.req.end$$_$tarif
+				exit #recursive mania
+				fi
+		echo Para: "$Para"
+		echo Para2: "$Para2"
+		echo "$cdr" failed $0 $@
+		break;
+		fi
+	else
+		break;
+	fi
+
+done
+
+
+fark=$(echo "$Para - $Para2 - $fiyat" | bc )
+if [[ "$fark" != "0"    ]] 
+    then 
+    if [[ "$retryCount" = "0" ]] 
+    then 
+    echo all retries failed. is it free no'?'
+	fi
+
+        echo pid $$_$tarif FAIL
+		dusen=$(echo "$Para - $Para2" | bc )
+        #echo Para  Para2  dusen dusmesiGereken fark parametreler
+        echo   pid $$_$tarif msisdn:$msisdn bNumber:$bnumber volume:$vol tarif:$tarif dusenUcret:$dusen dusmesiGerekenUcret:$fiyat OncekiBakiye:$Para SonrakiBakiye:$Para2 fark:$fark
+		#echo $fiyat $dusen $mcc $vol $tarif >> sesHatalar
+		echo    msisdn:$msisdn bNumber:$bnumber volume:$vol tarif:$tarif dusenUcret:$dusen dusmesiGerekenUcret:$fiyat OncekiBakiye:$Para SonrakiBakiye:$Para2 fark:$fark >> sesHatalar.$tarif
+		echo $0 $1 $2 $3 $4 $5  >> sesHatalarKomutlari.$tarif
+		echo
+		else
+			#echo $c
+			echo SUCCESS
+			
+fi
+cd /tmp/ulvi/call_simulation
+rm  MOC_1$$_$tarif moc.req.start$$_$tarif moc.req.extend$$_$tarif moc.req.end$$_$tarif

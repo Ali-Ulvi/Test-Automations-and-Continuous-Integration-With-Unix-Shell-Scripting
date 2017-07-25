@@ -1,0 +1,23 @@
+<input>
+	<account compoundLocation="-,,-" location="9050599100091" username="AVEA">ANUM</account>
+	<operation type="charge" />
+	<id>c:ANUM:r0:sms::::ANUM:18151849</id>
+	<start>CALLSTART</start>
+	<reservation>end</reservation>
+	<event_data origin_id="ngcp">
+		<session_id>c:ANUM:r0:sms::::ANUM:18151849</session_id>
+		<otherParty ton="int">BNUM</otherParty>
+		<resource>
+			<service_type>MOSMS</service_type>
+			<content_id/>
+			<start_time>CALLSTART</start_time>
+			<consumed_resources>
+				<service_specific_units>1</service_specific_units>
+			</consumed_resources>
+			<reporting_reason>50</reporting_reason>
+		</resource>
+		<suppData>
+			<ServiceId>12345</ServiceId>
+		</suppData>
+	</event_data>
+</input>

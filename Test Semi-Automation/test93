@@ -1,0 +1,17 @@
+#! /usr/bin/bash
+ 
+ 
+
+./start93LogFor.sh $$ 
+
+echo sleep 5
+sleep 5
+cp sms9333Log.$$* logged93
+
+./close93LogFor.sh $$ #do not forget this line. Cleaning has been left to user.
+
+echo Checking SMS9333 logs
+./check93.sh $sms
+
+./clean93LogFor.sh $$ #do not forget this line. Cleaning has been left to user.
+  

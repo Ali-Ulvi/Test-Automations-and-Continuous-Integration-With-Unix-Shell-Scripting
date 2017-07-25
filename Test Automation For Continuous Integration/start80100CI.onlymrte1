@@ -1,0 +1,49 @@
+#! /usr/bin/bash
+
+
+#Here CI80100 is Wrapped by AUT
+serviceIDlerDosyasi=$1
+workdir=/tmp/CI
+cd $workdir
+
+msisdn=$(./newNo |tail -1)
+
+cleanup()
+
+{
+echo " ctrl+c?"
+
+   for job in `cat pid80.*`
+do
+    /usr/bin/kill -9 $job 
+	echo please ignore if it gives permission errors. no problem.
+	ssh mrte2@localhost "/usr/bin/kill -9 $job "
+
+done
+rm pid80.* 
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+
+gold_operation_handler reload $msisdn 9000000  
+sleep 1
+
+
+echo abone bu mrtede
+  ./CI80100 $msisdn $serviceIDlerDosyasi 2>&1|tee output$msisdn
+  
+  mv *$msisdn* log
+ 
+ 
+

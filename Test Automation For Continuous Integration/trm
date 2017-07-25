@@ -1,0 +1,218 @@
+#! /usr/bin/bash
+
+#this script only trm 
+#AUT  Planned, Created, Analysed, Developed, Tested, Rolled out this script.
+
+cleanup()
+
+{
+echo " ctrl+c?"
+
+   for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+rm pid.${sec} evdSMS9333$$
+./close93LogFor.sh $$
+./clean93LogFor.sh $$
+  return $?
+}
+ 
+control_c()
+# run if user hits control-c
+{
+  #echo -en "\n*** Ouch! Exiting ***\n"
+  cleanup
+  exit $?
+}
+ 
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
+msisdn=$1
+serviceID=$2
+sms=$3
+
+work_dir=/tmp/ulvi/CI
+testBilgi="$0 $@"
+doMail()
+# run to send mail notifications
+{
+cat maillist.txt |xargs echo > .mail
+  echo -en "\n*** Mailing ***\n"
+while read EMAIL_LIST
+do
+if [ ! -z "$EMAIL_LIST" ]
+then
+  echo -en Merhaba\\n\\n $1 '\n\nIyi Calismalar\n\nAUT\nKafein CI Solutions\n\nLoglar:\n' > tmp$msisdn
+  echo ${0}Log$msisdn
+cat output$msisdn|egrep -v '^\*' >> tmp$msisdn 
+
+ scp tmp$msisdn mrte1@10.248.68.122:/tmp
+ ssh mrte1@10.248.68.122 "source .profile; cat /tmp/tmp$msisdn| mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+#ssh mrte1@10.248.68.122 "source .profile;echo -en $1 '\\n\\nIyi Calismalar\\nAUT' | mailx -s \"Defect: $testBilgi\" $EMAIL_LIST"
+fi
+done < .mail
+  
+}
+
+AVEA_DIR=$ORGADATA/avea
+if [[ $# -ne 3 ]] 
+    then 
+	echo "illegal number of parameters"
+	echo "Kullaným: $0 MSISDN serviceID 'sms metni' "
+	echo "ornek kullanim:"
+	echo ""
+	echo "$0 05011011111 650"
+	echo "$0 05011011111 650 'degerli must.'"
+doMail "$# -ne \'3\'. scripte eksik ya da fazla sayida parametre verildi. Kullaným: $0 MSISDN serviceID \\\"sms metni\\\"   örnek kullanim: $0 05011011111 650 \\\"degerli musterimiz..\\\""
+	exit
+fi
+
+
+
+sec=$(date +%Y%m%d%H%M%S)
+#export ORACLE_HOME=/export/home/mrte1/orgaroot/OracleClient11.2/client
+red='\e[0;33m' #33m sari :)
+NC='\e[0m' # No Color
+red2='\e[1;35m' #purple
+
+ropName=$(  grep -oP "PP_.*0${serviceID}" $ORGADATA/cnf/cre/config_19700101000000.xml|head -1)         
+aid=$(msisdn_to_accountid $msisdn )
+echo "AccountID:"$aid
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/BAS-EFD.bas/data.* > BAS-EFD.bas.smsohpqdata&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.smsdelay_0?-WA.smsdelay_spreader_0?/data.*&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/WA.smsdelay_spreader_0?-WA.smsdelay_0?/data.*&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.smsdelay_0?-EFD.sms9333_0?/data.*&
+	echo $! >> pid.$sec
+	tail -f -n 0 /rte/orgadata/mrte?/OHPQ/EFD.sms9333_0?-EVD.sms9333_0?/data.* > evdSMS9333$$&
+	echo $! >> pid.$sec
+
+
+	
+rm smsDelayLog
+logFile=$(ls -1t $ORGADATA/avea/work/SMS_DELAY/log/$(date +%Y%m)/smsdelay*log|head -1)
+tail -f -n 0 $logFile > smsDelayLog &
+echo $! >> pid.$sec
+mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+
+#echo 29 Gun TRM testi icin ENTER a basiniz. 
+#read aa
+echo testing TRM..
+ 
+rm BASDBtrm
+read pp < $AVEA_DIR/dbLogin  
+
+#for uat#  sqlplus -s >> BASDBtrm  bastst2/bas123@10.248.68.124:1529/BAS2T << EOF
+sqlplus -s >> BASDBtrm  bastst1/bas123@10.248.68.135:1529/BAS1T << EOF
+whenever sqlerror exit sql.sqlcode
+set feedback off;
+set head off;
+set pagesize 0;
+set linesize 1000
+
+select b.lc_state|| '|' || to_char(B.LC_DATE_FROM,'YYYY-MM-DD')|| '|' ||to_char(B.LC_DATE_TO,'YYYYMMDDHH24MISS') from SOLD_COMPONENT_TBL a, LC_SOLD_COMPONENT_TBL b where a.account_fk=${aid} and  A.SOLD_COMPONENT_ID=B.SOLD_COMPONENT_FK and a.SOLD_COMPONENT_NAME like '%0${serviceID}%' and (b.LC_STATE='PAS' or b.LC_STATE='TRM' )  and a.SOLD_COMPONENT_ID=b.SOLD_COMPONENT_FK and B.LC_DATE_TO>sysdate and  ( CASE WHEN  b.lc_state='TRM' THEN B.LC_DATE_FROM ELSE B.LC_DATE_TO END ) > sysdate order by 1 desc;
+
+EXIT;
+EOF
+
+
+pasTO=$(grep PAS BASDBtrm|head -1|cut -d'|' -f3)
+TRMFROM=$(grep TRM BASDBtrm|head -1|cut -d'|' -f2)
+
+aidt=$(expr $aid - 1)
+echo ". \$ORGADATA/site-config/pw.cfg; eval 'exec \$ORGAROOT/run/bin/si-jbossopsc --skipmissing cluster_01/bascs_01 scheduler -u GoldScheduler-TST1 -p GoldScheduler --retries 1 --delay 1 --maxThreads 10 --maxAccounts 1 --accountIdList $aidt -d ${TRMFROM}T15:00:00.000+03:00'"
+ssh bas@10.248.68.128 "source .profile; . \$ORGADATA/site-config/pw.cfg; eval 'exec \$ORGAROOT/run/bin/si-jbossopsc --skipmissing cluster_01/bascs_01 scheduler -u GoldScheduler-TST1 -p GoldScheduler --retries 1 --delay 1 --maxThreads 10 --maxAccounts 1 --accountIdList $aidt -d ${TRMFROM}T15:00:00.000+03:00'"
+
+
+echo -e "${red2}SMS'in kendiliðinden gitmediðini görmek için 11 saniye bekliyoruz. SMS9333 loglarýna bir þey gelmemeli.${NC}"
+sleep 11
+echo -e "${red2}11 saniye bitti. SMS_DELAY WA calistiriliyor"
+	./start93LogFor.sh $$	
+OUPMclient -Q smsdelay_spreader_01 >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01   >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01       >> /dev/null       2>&1
+sleep 5
+OUPMclient -Q sms_delay_01  >> /dev/null       2>&1
+
+mrteid=$(echo $ORGADATA|sed 's/\(.*\)\(.\)/\2/')
+
+if [[ $mrteid -eq 2 ]] 
+    then 
+	ssh mrte1@localhost 'source .profile;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01 ;sleep 5;OUPMclient -Q sms_delay_01'   > /dev/null       2>&1
+	else
+	ssh mrte2@localhost 'source .profile;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01;sleep 2;OUPMclient -Q smsdelay_spreader_01 ;sleep 5;OUPMclient -Q sms_delay_01' > /dev/null       2>&1
+	
+fi
+
+OUPMclient -Q smsdelay_spreader_01 >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01   >> /dev/null       2>&1
+sleep 2
+OUPMclient -Q smsdelay_spreader_01       >> /dev/null       2>&1
+sleep 5
+OUPMclient -Q sms_delay_01  >> /dev/null       2>&1
+sleep 6
+
+
+ 
+smsid=`egrep -v '==|^$|><MSGID>3</MSGID>'  evdSMS9333$$|grep $msisdn|grep -oP "(?<=<MSGID>)[^<]+"|tail -1`
+echo -e "${red}******--------------OHPQ'daki MSGID'nin SMS metni:--------------------******${NC}"
+		result=$(sqlplus -s APSATl/apsatl234@"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=sms9333t_cluster)(PORT=1529))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=VAS93T)))"  << EOF
+		set heading off
+		select distinct sms_text from apsatl.sms_text where sms_id=${smsid};
+		EXIT;
+		EOF)
+	echo -e "\e[7m$result"
+echo -e "${red}******--------------------------------------------------------------******${NC}"
+
+
+ 
+echo "SMS_DELAY Log:"
+ echo ""
+ grep "I:0:$ropName:$msisdn has been notified about package delete." smsDelayLog
+ 
+ echo ""
+ logGrep=$(grep "I:0:$ropName:$msisdn has been notified about package delete." smsDelayLog|wc -l)
+ 
+ if [[ $logGrep -eq 0 ]] 
+    then 
+	 echo -e "\e[7m  SMS_DELAY WA Loguna gereken gelmedi  ${NC}"
+	 cat smsDelayLog
+	 grep $msisdn smsDelayLog
+	 echo "beklenen: I:0:$ropName:$msisdn has been notified about renewal since renew failed and no renewal occured during night."
+	 	 doMail "SMS_DELAY WA Loguna gereken gelmedi. beklenen: I:0:$ropName:$msisdn has been notified about renewal since renew failed and no renewal occured during night."
+	
+fi
+
+ 
+ 
+for job in `cat pid.${sec}`
+do
+    /usr/bin/kill -9 $job 
+
+done
+ rm pid.$sec evdSMS9333$$
+ 
+ 
+./close93LogFor.sh $$
+echo Checking SMS9333 logs
+./check93.sh $$ $msisdn "$sms"
+
+./check93.sh $$ $msisdn "$sms" |tail -1 > 93sonuc$$
+
+if [[ $(cat 93sonuc$$) != 'BASARILI' ]] 
+    then 
+	 echo -e "\e[7m  Beklenen Yenileme SMSi gelmedi: $0 $* ${NC}"
+	 doMail "Beklenen Yenileme SMSi gelmedi. "
+	
+fi
+
+rm 93sonuc$$
+./clean93LogFor.sh $$

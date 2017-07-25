@@ -1,0 +1,8 @@
+#### sim_comlayer -f MTC_1 -D #########################
+InitClient reg_scp_01@/rte/orgadata/mrte1/cnf/shared/CommunicationParameters.cfg
+SendFile /export/home/mrte1/avea/USERS/zonder/call_simulation/mtc.req.start
+WaitFile /export/home/mrte1/avea/USERS/zonder/call_simulation/mtc.rsp.start
+SendFile /export/home/mrte1/avea/USERS/zonder/call_simulation/mtc.req.extend
+WaitFile /export/home/mrte1/avea/USERS/zonder/call_simulation/mtc.rsp.extend
+SendFile /export/home/mrte1/avea/USERS/zonder/call_simulation/mtc.req.end
+WaitFile /export/home/mrte1/avea/USERS/zonder/call_simulation/mtc.rsp.end

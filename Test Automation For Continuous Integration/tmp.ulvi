@@ -1,0 +1,4 @@
+  <balance name="BLB_Woops30TLYukleHediye1GB_1GBBonus_03348" threshold_name="TH_BLB_Woops30TLYukleHediye1GB_1GBBonus_03348">
+    <level name="L3" pocket_threshold_value="1073741824" compare_function="eq" message_id="7791"/>
+    <level name="L2" pocket_threshold_value="214748364" compare_function="le" message_id="7789"/>
+    <level name="L1" pocket_threshold_value="2097152" compare_function="le" message_id="7790"/>

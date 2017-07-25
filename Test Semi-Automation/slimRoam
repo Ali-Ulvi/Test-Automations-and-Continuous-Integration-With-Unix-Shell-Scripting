@@ -1,0 +1,1143 @@
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |90127   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |90117   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |90116   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |90115   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |90114   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |90108   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |90103   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |88888   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |88887   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |88886   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |88885   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |31901   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |31601   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |31126   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31117   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |31109   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |31104   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31098   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31096   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31089   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31087   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31084   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31080   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |31077   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |31074   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31072   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31069   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31068   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31066   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |31065   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |31064   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |31059   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |31058   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |31056   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31050   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |31049   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |31046   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31042   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31041   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31039   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31038   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31034   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31032   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |31031   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |31027   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31026   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31025   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31024   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31023   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |31022   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |31021   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |31020   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |31019   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |31017   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31016   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |31015   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |31014   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31009   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31008   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31007   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31004   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31003   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |31002   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |29703   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |29702   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |29701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |29577   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |29544   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |29505   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |29502   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |29403   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |29402   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |29401   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |29370   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |29341   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |29340   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |29201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |28602   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |28601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |28405   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |28403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |28401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27892   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |27821   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |27801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27604   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27603   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27602   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27601   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |27499   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |27467   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |27444   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |27411   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |27407   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27404   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |27403   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |27402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27211   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27205   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27203   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27201   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |27099   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |27077   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |27001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26899   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26806   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26805   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |26803   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |26801   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |265566   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |26299   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |26298   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26296   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |26290   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |26289   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26288   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26243   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26217   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26216   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26214   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26213   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |26210   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |26208   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26207   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26203   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |26201   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |26006   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |26003   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |26002   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |26001   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |25902   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25901   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |25704   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |25702   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25507   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25506   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25505   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25503   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25502   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |25501   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |25099   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25092   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25091   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25044   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25039   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |25035   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |25028   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |25020   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |25019   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |25017   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25016   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |25015   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |25014   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25013   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25012   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25011   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25010   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25007   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25005   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |25004   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |25003   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |25001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24803   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24802   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |24801   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |24705   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |24702   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |24701   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |24603   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24602   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |24601   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |24499   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24498   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24491   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24421   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24414   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24412   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24405   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |24403   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |24205   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24203   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24097   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |24010   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |24008   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |24007   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |24005   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |24002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |24001   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |23899   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |23877   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23830   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23820   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23806   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23802   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23499   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |23498   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |23497   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23495   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23494   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23490   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23489   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |23488   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |23470   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |23469   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |23458   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |23455   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23450   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |23433   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |23430   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23420   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23418   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23415   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23410   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23400   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23299   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |23212   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |23211   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23210   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23209   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23207   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23205   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |23203   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |23201   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |23106   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |23102   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |23101   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |23003   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |23002   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |23001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22899   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22897   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22896   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22895   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22879   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22809   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |22808   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |22807   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22806   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22803   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22802   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22801   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |22610   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |22603   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |22601   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |22299   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |22298   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22295   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |22288   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |22210   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22005   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22004   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22003   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |22001   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |21910   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |21902   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21901   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21890   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21805   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21803   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |21670   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |21630   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |21601   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |21499   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |21419   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21409   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |21407   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |21406   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21405   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21404   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21303   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |21210   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |21201   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |20899   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20898   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20897   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20896   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20895   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |20894   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |20893   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |20892   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |20890   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |20889   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20888   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |20887   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |20885   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20884   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20882   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20877   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20876   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20875   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20873   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |20871   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |20868   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20866   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20865   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20864   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20863   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |20861   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |20858   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |20857   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |20856   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |20855   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20820   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |20815   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |20810   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20807   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20799   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20620   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20610   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20601   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |20499   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |20497   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20494   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20421   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20420   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20416   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |20412   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |20410   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |20408   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |20404   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |20402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20210   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |20209   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |20205   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |20201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18981   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18979   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18977   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18976   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18975   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |18974   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |18973   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18972   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18971   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18969   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18968   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |18967   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |18966   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |18965   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |18962   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |18961   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18959   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |18958   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |18957   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18956   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18954   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18953   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18952   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |18951   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |16161   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |12971   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |12862   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |12781   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |12631   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |12552   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |12505   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |12423   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |12142   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |12043   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |10826   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |10825   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10823   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |10819   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |10815   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10814   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10811   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10810   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10809   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10808   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10807   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |10804   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |10796   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10795   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10790   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10787   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10785   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |10775   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |10771   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |10770   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |10767   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |10765   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10763   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |10755   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |10750   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10747   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10745   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10743   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10719   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10715   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10713   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |10709   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |10708   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10702   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10376   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10373   |
+|${MY_TARIFF_MSISDN_1}|wap     |12     |10241    |WAP     |BLP_Main                                 |0.2148  |10371   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.2148  |10367   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.2148  |10365   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.2148  |10364   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.2148  |10363   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10327   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.2148  |10326   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.2148  |10325   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10323   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |10321   |
+|${MY_TARIFF_MSISDN_1}|internet|15  |10241    |INTERNET|BLP_Main                                    |0.2148  |10311   |
+|${MY_TARIFF_MSISDN_1}|other|401/4  |10241    |OTHER|BLP_Main                                       |0.2148  |10013   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.2148  |99999   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241    |WAP     |BLP_Main                                 |0.4882  |42604   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241    |INTERNET|BLP_Main                                 |0.4882  |42602   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241    |INTERNET|BLP_Main                                 |0.4882  |42601   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241    |INTERNET|BLP_Main                                 |0.4882  |42021   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.4882  |42007   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241    |WAP     |BLP_Main                                 |0.4882  |42004   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241    |WAP     |BLP_Main                                 |0.4882  |42003   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.4882  |42001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.4882  |41904   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.4882  |41903   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241    |INTERNET|BLP_Main                                 |0.4882  |41902   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|90128   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|90126   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|90121   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|90119   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|90112   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|90105   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|75000   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|74810   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|74807   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|74801   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|74800   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|74603   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|74602   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|74601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|74405   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|74404   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|74402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|74401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|74400   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|74001   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|74000   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73802   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|73801   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|73800   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73603   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73602   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73433   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|73415   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|73404   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|73403   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|73402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73401   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|73212   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|73211   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73210   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73208   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73010   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73003   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|73001   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|73000   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72499   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|72488   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|72436   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72434   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72433   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72432   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72431   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|72424   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|72423   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|72416   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|72415   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72411   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|72410   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|72406   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72405   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72404   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72400   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72286   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|72282   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72275   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|72274   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|72273   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72272   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72271   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72265   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72264   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|72263   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|72262   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|72261   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|72234   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72231   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|72207   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|72204   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72203   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|72202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71610   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71607   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71606   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71601   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|71403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71402   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|71401   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|71202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71073   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71030   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|71021   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|71002   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|70802   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|70800   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|70604   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|70603   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|70602   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|70601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|70403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|70402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|70401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|70267   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|65510   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|65507   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|65501   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|65401   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|65310   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|65202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|65201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|65102   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|65101   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|65010   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|65001   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|64903   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|64901   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|64804   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64803   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|64801   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|64710   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64702   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64700   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64604   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64602   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64503   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|64502   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64501   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|64304   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|64301   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64282   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64122   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64114   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64111   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|64110   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|64101   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|64005   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|64004   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|64003   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|64002   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|64001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63907   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63903   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63902   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63704   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63601   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|63510   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63492   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|63402   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|63401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63310   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63301   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63203   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63202   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|63201   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|63102   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|63089   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|63002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|63001   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|62910   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|62901   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62803   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62802   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62502   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|62501   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62402   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|62401   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|62303   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62302   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62301   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62203   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62201   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|62150   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|62140   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|62130   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|62120   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62103   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|62003   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|62002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|62001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61905   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61904   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61902   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61901   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61807   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|61804   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61801   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|61710   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|61701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61603   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61602   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61503   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|61501   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|61404   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|61403   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|61402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61303   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|61302   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|61301   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61205   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61204   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61203   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61104   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|61103   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61102   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|61101   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|61002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|61001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60910   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60901   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60803   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|60802   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|60801   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|60702   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|60701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60601   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|60600   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|60503   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60502   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60501   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60400   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60303   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|60302   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60301   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|60203   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|60202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|60201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|55280   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|54801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|54720   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|54601   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|54202   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|54201   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|54101   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|54001   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|53901   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|53703   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|53701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|53024   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|53001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|52811   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|52802   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|52801   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|52505   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|52504   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|52503   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|52502   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|52501   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|52099   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|52023   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|52018   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|52001   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|51588   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|51518   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|51505   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|51503   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|51502   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|51501   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|51402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|51089   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|51028   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|51021   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|51011   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|51010   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|51008   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|51001   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|51000   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|50599   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|50508   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|50506   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|50503   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|50502   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|50501   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|50500   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|50219   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|50218   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|50217   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|50216   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|50213   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|50212   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|47202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|47201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|47007   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|47004   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|47003   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|47002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|47001   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|46699   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|46697   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|46693   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|46692   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|46689   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|46688   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|46606   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|46601   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|46002   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|46001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|46000   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|45708   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|45702   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45618   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45608   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45604   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45602   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45601   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|45503   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45501   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|45500   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|45499   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45497   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45496   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45450   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45422   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|45419   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|45416   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|45412   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|45410   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45406   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|45404   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|45403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45400   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45204   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45099   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45008   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|45005   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|45002   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|45001   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|44020   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|44010   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43802   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43709   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|43708   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|43705   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|43702   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|43701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43605   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|43604   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|43603   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43602   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43407   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43405   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43404   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43402   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|43401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43235   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|43232   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|43214   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|43211   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42902   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42901   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42899   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|42888   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|42701   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|42599   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|42585   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42577   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|42505   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|42503   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42502   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42501   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42203   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42202   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|42102   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|42101   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|41840   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|41830   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41820   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41805   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41702   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41701   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|41677   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|41603   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|41602   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|41601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41503   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|41501   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|41308   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41303   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41302   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41301   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41250   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41240   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41220   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|41201   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41007   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|41006   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|41004   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41003   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|41001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405929   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405927   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|405926   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|405925   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|405880   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|405879   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405878   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|405876   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40585   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40584   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40582   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405819   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405818   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405811   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405810   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40580   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405799   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|40570   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|405047   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405046   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405045   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405044   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405043   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|405042   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|405041   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|405039   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|405038   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405037   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|405036   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|405035   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405034   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405032   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405031   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405030   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405027   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|405025   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40498   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40497   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|40496   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40495   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40494   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40493   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40492   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40491   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|40490   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|40489   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|40487   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|40486   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40485   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|40484   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40482   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40478   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40474   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40473   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40470   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40469   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40468   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40467   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40460   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|40456   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40452   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40450   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40449   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40446   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40445   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|40444   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|40443   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|40442   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|40441   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40440   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|40437   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40436   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40435   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40433   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40431   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40430   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40428   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40427   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40425   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40424   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|40422   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40421   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40420   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40419   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40418   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40417   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|40415   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|40414   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|40413   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|40412   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40411   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|40410   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40409   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40407   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40405   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40404   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40401   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40211   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40177   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|40102   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|40101   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40004   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40002   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|40001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|37635   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|37413   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|37412   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|37201   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|37004   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|37002   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|37001   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|36801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|36611   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|36605   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|36604   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|36584   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|36439   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|36302   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|36301   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|36291   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|36269   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|36251   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|36011   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|35811   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|35611   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|35486   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|35211   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|35002   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|35001   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|34857   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|34817   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|34614   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|34492   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|34403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|34275   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|34260   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|34020   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|34008   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|34002   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|34001   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|33818   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|33805   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|33403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|33402   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|33401   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|33400   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|33011   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|31055   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|31047   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|31000   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|30801   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|30299   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|30297   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|30272   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|302610   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|30250   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|30237   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|30222   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|30200   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|29001   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|28802   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|28801   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|28305   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|28304   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|28301   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|28204   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|28202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|28201   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|28010   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|28001   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|27408   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|26601   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|26134   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|25021   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|24400   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|23403   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|22894   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|22250   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|22202   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|20805   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|18978   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|18970   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|18964   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|18963   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|18960   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|18955   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|16191   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|16181   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|16171   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|16151   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|16149   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|16148   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|16147   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|16131   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|13721   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|12553   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|12506   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|12504   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|12503   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|12502   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|12501   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10827   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10824   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10822   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10821   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10820   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10818   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10817   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10816   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10813   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|10812   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|10806   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|10805   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|10803   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10802   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10801   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10800   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10799   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10798   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10794   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10793   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10792   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10791   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10789   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10788   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10786   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10784   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10783   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10782   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10781   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10780   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|10779   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|10778   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|10777   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|10776   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10774   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10773   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10772   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10769   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10768   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10766   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10764   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10762   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10761   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10760   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10759   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10758   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10757   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10756   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10754   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10753   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10752   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|10751   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|10749   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|10748   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|10746   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10744   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10742   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10741   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10740   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10739   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10738   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10737   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10736   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10735   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10734   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10733   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10732   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10731   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10730   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10729   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10728   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10727   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|10726   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|10725   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|10724   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|10723   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10722   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10721   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10720   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10718   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10717   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10716   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10714   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10712   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10711   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10710   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10707   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10706   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10705   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10704   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10703   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10701   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10501   |
+|${MY_TARIFF_MSISDN_1}|wap     |11     |10241 |WAP     |BLP_Main|0.4882|10375   |
+|${MY_TARIFF_MSISDN_1}|internet|12     |10241 |INTERNET|BLP_Main|0.4882|10324   |
+|${MY_TARIFF_MSISDN_1}|internet|4      |10241 |INTERNET|BLP_Main|0.4882|10061   |
+|${MY_TARIFF_MSISDN_1}|internet|11     |10241 |INTERNET|BLP_Main|0.4882|10018   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10017   |
+|${MY_TARIFF_MSISDN_1}|wap     |4      |10241 |WAP     |BLP_Main|0.4882|10016   |
+|${MY_TARIFF_MSISDN_1}|wap     |401/4  |10241 |WAP     |BLP_Main|0.4882|10015   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10014   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10012   |
+|${MY_TARIFF_MSISDN_1}|internet|401/4  |10241 |INTERNET|BLP_Main|0.4882|10011   |
