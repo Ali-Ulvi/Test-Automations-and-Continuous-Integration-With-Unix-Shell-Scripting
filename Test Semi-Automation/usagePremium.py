@@ -53,8 +53,12 @@ def printUsagePrice(cntv):
             for a in p:
                 str = str + "\tPremium Zone: " + a.text
                 break
-        else:
-            globalOptionRef = usageRule.find('.//globalOptionRef')
+        globalOptionRef = usageRule.find('.//globalOptionRef')
+        if (globalOptionRef is not None):
+            p = tre.xpath("//globalOptionDefs[@id='" + globalOptionRef.text[1:] + "']//matchValue", namespaces=NSMAP);
+            for a in p:
+                str = str + "\tGlobal Zone: " + a.text
+                break
 
         print str
         # print '-------------------------------------'
@@ -66,10 +70,10 @@ if __name__ == "__main__":
 parser = et.XMLParser(remove_blank_text=True)
 tree = et.parse(open(
     "/rte/orgaroot/mrte1/si/cs/subversion/branches/OPSC-CONF-Avea_r242/LOGICAL/ProductCatalog/ProductCatalogPreTariffs.xml"),
-                parser)
+    parser)
 tre = et.parse(open(
     "/rte/orgaroot/mrte1/si/cs/subversion/branches/OPSC-CONF-Avea_r242/LOGICAL/ProductCatalog/ProductCatalogCore.xml"),
-               parser)
+    parser)
 if (usageName) and (not tariffName):
     cntv = tree.xpath(
         "/productcatalog:ProductCatalog/TariffElements/usageTariffs/usageRules[@name='" + usageName + "']/revisions/prices/costPerUnit",
@@ -90,3 +94,6 @@ elif (not usageName) and (not tariffName):
         "/productcatalog:ProductCatalog/TariffElements/usageTariffs/usageRules/revisions/prices/costPerUnit",
         namespaces=NSMAP);
     printUsagePrice(cntv)
+
+
+
